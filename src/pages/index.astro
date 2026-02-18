@@ -58,18 +58,6 @@ const recentNews = allNews
         </div>
       </div>
     </div>
-    <!-- ロゴ（スクロール行の間に配置・最前面） -->
-    <div class="hero-logo-area">
-      <a href="/2026/" class="hero-logo-link">
-        <img src="/images/genki_festa_logo.png" alt="げんきフェスタ2026 5/24 SUN" class="hero-logo" />
-        <span class="hero-logo-btn">
-          特設ページはこちら
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </span>
-      </a>
-    </div>
     <!-- 雲のオーバーレイ -->
     <div class="hero-clouds">
       <div class="cloud cloud--1"></div>
@@ -77,16 +65,30 @@ const recentNews = allNews
       <div class="cloud cloud--3"></div>
       <div class="cloud cloud--4"></div>
     </div>
-    <!-- 楽しむ・楽しませるカード -->
-    <div class="hero-action-cards">
-      <a href="/events/" class="hero-action-card hero-action-card--enjoy">
-        <span class="hero-action-label">楽しむ</span>
-        <span class="hero-action-desc">イベントを確認する</span>
-      </a>
-      <a href="/about/" class="hero-action-card hero-action-card--entertain">
-        <span class="hero-action-label">出店・参加方法</span>
-        <span class="hero-action-desc">出展・参加について</span>
-      </a>
+    <!-- ヒーローコンテンツ（ロゴ＋カード） -->
+    <div class="hero-content">
+      <div class="hero-logo-area">
+        <a href="/2026/" class="hero-logo-link">
+          <img src="/images/genki_festa_logo.png" alt="げんきフェスタ2026 5/24 SUN" class="hero-logo" />
+          <span class="hero-logo-btn">
+            特設ページはこちら
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+      <!-- 楽しむ・楽しませるカード -->
+      <div class="hero-action-cards">
+        <a href="/events/" class="hero-action-card hero-action-card--enjoy">
+          <span class="hero-action-label">楽しむ</span>
+          <span class="hero-action-desc">イベントを確認する</span>
+        </a>
+        <a href="/about/" class="hero-action-card hero-action-card--entertain">
+          <span class="hero-action-label">出店・参加方法</span>
+          <span class="hero-action-desc">出展・参加について</span>
+        </a>
+      </div>
     </div>
     <!-- hero-logo-linkがあるときは非表示 -->
     <!-- <div class="hero-inner">
@@ -243,7 +245,8 @@ const recentNews = allNews
   /* ========== ヒーロー ========== */
   .hero {
     position: relative;
-    min-height: 85svh;
+    min-height: auto;
+    padding-bottom: var(--space-lg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -336,16 +339,23 @@ const recentNews = allNews
     flex-shrink: 0;
   }
 
-  /* ロゴエリア（スクロール行の間に配置・最前面） */
-  .hero-logo-area {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
+  /* ヒーローコンテンツ */
+  .hero-content {
+    position: relative;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 56px;
+    width: 100%;
+  }
+
+  /* ロゴエリア */
+  .hero-logo-area {
+    width: 90%;
     text-align: center;
-    top: -5%;
+    margin-bottom: var(--space-md);
+    margin-top: -100px;
   }
 
   /* 雲のアニメーション */
@@ -472,11 +482,6 @@ const recentNews = allNews
 
   /* ========== 楽しむ・楽しませるカード ========== */
   .hero-action-cards {
-    position: absolute;
-    bottom: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 6;
     display: flex;
     gap: var(--space-sm);
     width: 90%;
@@ -594,7 +599,7 @@ const recentNews = allNews
   }
 
   .hero-logo {
-    width: 400px;
+    width: 320px;
     max-width: 100%;
     height: auto;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
@@ -905,10 +910,6 @@ const recentNews = allNews
 
     .scroll-row--2 {
       top: 35%;
-    }
-
-    .hero-logo-area {
-      top: -5%;
     }
 
     .cloud--1 {
