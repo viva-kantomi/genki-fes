@@ -1,4 +1,6 @@
 ---
+import { getPath, getAssetPath } from '../lib/path';
+
 interface Props {
   title: string;
   description?: string;
@@ -70,16 +72,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           <!-- ヘッダー -->
           <header class="header">
             <div class="header-inner">
-              <a href="/" class="logo">
+              <a href={getPath('/')} class="logo">
                 <span class="logo-text">げんき塾チーム</span>
               </a>
               <nav class="nav-desktop">
-                <a href="/" class="nav-link">HOME</a>
-                <a href="/events/" class="nav-link">EVENTS</a>
-                <a href="/history/" class="nav-link">HISTORY</a>
-                <a href="/2026/" class="nav-link">2026</a>
-                <a href="/news/" class="nav-link">NEWS</a>
-                <a href="/about/" class="nav-link">ABOUT</a>
+                <a href={getPath('/')} class="nav-link">HOME</a>
+                <a href={getPath('/events/')} class="nav-link">EVENTS</a>
+                <a href={getPath('/history/')} class="nav-link">HISTORY</a>
+                <a href={getPath('/2026/')} class="nav-link">2026</a>
+                <a href={getPath('/news/')} class="nav-link">NEWS</a>
+                <a href={getPath('/about/')} class="nav-link">ABOUT</a>
               </nav>
               <button class="menu-btn" id="menuBtn" aria-label="メニューを開く">
                 <span></span>
@@ -90,12 +92,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
           <!-- モバイルナビゲーション -->
           <nav class="nav-mobile" id="nav">
-            <a href="/" class="nav-mobile-link nav-blue">トップ</a>
-            <a href="/events/" class="nav-mobile-link nav-yellow">イベント一覧</a>
-            <a href="/history/" class="nav-mobile-link nav-red">HISTORY</a>
-            <a href="/2026/" class="nav-mobile-link nav-blue">2026 げんきフェスタ 特設ページ</a>
-            <a href="/news/" class="nav-mobile-link nav-yellow">NEWS</a>
-            <a href="/about/" class="nav-mobile-link nav-red">ABOUT</a>
+            <a href={getPath('/')} class="nav-mobile-link nav-blue">トップ</a>
+            <a href={getPath('/events/')} class="nav-mobile-link nav-yellow">イベント一覧</a>
+            <a href={getPath('/history/')} class="nav-mobile-link nav-red">HISTORY</a>
+            <a href={getPath('/2026/')} class="nav-mobile-link nav-blue">2026 げんきフェスタ 特設ページ</a>
+            <a href={getPath('/news/')} class="nav-mobile-link nav-yellow">NEWS</a>
+            <a href={getPath('/about/')} class="nav-mobile-link nav-red">ABOUT</a>
           </nav>
 
           <main>
@@ -109,11 +111,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                 <span class="logo-text">げんき塾チーム</span>
               </div>
               <nav class="footer-nav">
-                <a href="/">トップ</a>
-                <a href="/events/">イベント一覧</a>
-                <a href="/history/">HISTORY</a>
-                <a href="/news/">NEWS</a>
-                <a href="/about/">ABOUT</a>
+                <a href={getPath('/')}>トップ</a>
+                <a href={getPath('/events/')}>イベント一覧</a>
+                <a href={getPath('/history/')}>HISTORY</a>
+                <a href={getPath('/news/')}>NEWS</a>
+                <a href={getPath('/about/')}>ABOUT</a>
               </nav>
               <p class="copyright">&copy; 2026 げんき塾チーム</p>
               <p class="credits">icon by <a target="_blank" href="https://icons8.com">Icons8</a></p>
@@ -127,12 +129,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <div class="sidebar-right-menu">
           <p class="sidebar-menu-title">メニュー</p>
           <nav class="sidebar-nav">
-            <a href="/" class="sidebar-nav-link sidebar-nav-blue">トップ</a>
-            <a href="/events/" class="sidebar-nav-link sidebar-nav-yellow">イベント一覧</a>
-            <a href="/history/" class="sidebar-nav-link sidebar-nav-red">HISTORY</a>
-            <a href="/2026/" class="sidebar-nav-link sidebar-nav-blue">げんきフェスタ2026<br>特設ページ</a>
-            <a href="/news/" class="sidebar-nav-link sidebar-nav-yellow">NEWS</a>
-            <a href="/about/" class="sidebar-nav-link sidebar-nav-red">ABOUT</a>
+            <a href={getPath('/')} class="sidebar-nav-link sidebar-nav-blue">トップ</a>
+            <a href={getPath('/events/')} class="sidebar-nav-link sidebar-nav-yellow">イベント一覧</a>
+            <a href={getPath('/history/')} class="sidebar-nav-link sidebar-nav-red">HISTORY</a>
+            <a href={getPath('/2026/')} class="sidebar-nav-link sidebar-nav-blue">げんきフェスタ2026<br>特設ページ</a>
+            <a href={getPath('/news/')} class="sidebar-nav-link sidebar-nav-yellow">NEWS</a>
+            <a href={getPath('/about/')} class="sidebar-nav-link sidebar-nav-red">ABOUT</a>
           </nav>
         </div>
         <div class="sidebar-right-sns">

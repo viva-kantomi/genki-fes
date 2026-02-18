@@ -1,7 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
+import { fetchNoteArticles, getNoteDetailPath } from '../lib/note';
+import { getPath } from '../lib/path';
 
 import img10 from '../../public/images/top_images/10.png';
 import img11 from '../../public/images/top_images/11.png';
@@ -13,10 +14,7 @@ import img16 from '../../public/images/top_images/16.png';
 import img17 from '../../public/images/top_images/17.png';
 import img18 from '../../public/images/top_images/18.png';
 
-const allNews = await getCollection('news');
-const recentNews = allNews
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+const noteArticles = await fetchNoteArticles(3);
 ---
 
 <Layout title="げんき塾チーム - 地域を元気にするイベント企画チーム">
@@ -68,7 +66,7 @@ const recentNews = allNews
     <!-- ヒーローコンテンツ（ロゴ＋カード） -->
     <div class="hero-content">
       <div class="hero-logo-area">
-        <a href="/2026/" class="hero-logo-link">
+        <a href={getPath('/2026/')} class="hero-logo-link">
           <img src={`${import.meta.env.BASE_URL}images/genki_festa_logo.png`} alt="げんきフェスタ2026 5/24 SUN" class="hero-logo" />
           <span class="hero-logo-btn">
             特設ページはこちら
@@ -80,11 +78,11 @@ const recentNews = allNews
       </div>
       <!-- 楽しむ・楽しませるカード -->
       <div class="hero-action-cards">
-        <a href="/events/" class="hero-action-card hero-action-card--enjoy">
+        <a href={getPath('/events/')} class="hero-action-card hero-action-card--enjoy">
           <span class="hero-action-label">楽しむ</span>
           <span class="hero-action-desc">イベント一覧</span>
         </a>
-        <a href="/about/" class="hero-action-card hero-action-card--entertain">
+        <a href={getPath('/about/')} class="hero-action-card hero-action-card--entertain">
           <span class="hero-action-label">楽しませる</span>
           <span class="hero-action-desc">出店・参加方法</span>
         </a>
@@ -162,19 +160,19 @@ const recentNews = allNews
       <p class="section-label">EVENTS</p>
       <h2 class="section-title">主なイベント</h2>
       <div class="event-cards">
-        <a href="/2026/" class="event-card event-card--featured">
+        <a href={getPath('/2026/')} class="event-card event-card--featured">
           <div class="event-card-badge">NOW</div>
           <h3 class="event-card-title">げんきフェスタ2026</h3>
           <p class="event-card-date">2026年8月15日（土）</p>
           <p class="event-card-desc">今年のテーマは「元気、無限大！」</p>
         </a>
-        <a href="/events/" class="event-card">
+        <a href={getPath('/events/')} class="event-card">
           <h3 class="event-card-title">その他のイベント</h3>
           <p class="event-card-desc">げんきマルシェ、キッズフェス など</p>
         </a>
       </div>
       <div class="section-action">
-        <a href="/events/" class="btn-outline">
+        <a href={getPath('/events/')} class="btn-outline">
           イベント一覧を見る
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -184,19 +182,19 @@ const recentNews = allNews
     </div>
   </section>
 
-  <!-- お知らせ -->
+  <!-- お知らせ（noteから取得） -->
   <section class="section">
     <div class="container">
       <p class="section-label">NEWS</p>
       <h2 class="section-title">お知らせ</h2>
       <ul class="news-list">
-        {recentNews.map((news) => (
+        {noteArticles.map((article) => (
           <li>
-            <a href={`/news/${news.id}/`} class="news-card">
-              <time datetime={news.data.pubDate.toISOString()}>
-                {news.data.pubDate.toLocaleDateString('ja-JP', { month: '2-digit', day: '2-digit' })}
+            <a href={`${import.meta.env.BASE_URL}${getNoteDetailPath(article.key)}`} class="news-card">
+              <time datetime={new Date(article.publishedAt).toISOString()}>
+                {new Date(article.publishedAt).toLocaleDateString('ja-JP', { month: '2-digit', day: '2-digit' })}
               </time>
-              <span class="news-title">{news.data.title}</span>
+              <span class="news-title">{article.title}</span>
               <svg class="news-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M9 18l6-6-6-6"/>
               </svg>
@@ -205,7 +203,7 @@ const recentNews = allNews
         ))}
       </ul>
       <div class="section-action">
-        <a href="/news/" class="btn-outline">
+        <a href="https://note.com/viva_kantomi" target="_blank" rel="noopener noreferrer" class="btn-outline">
           お知らせ一覧
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -620,7 +618,7 @@ const recentNews = allNews
     align-items: center;
     gap: var(--space-xs);
     padding: var(--space-sm) var(--space-md);
-    background: var(--color-secondary);
+    background: var(--color-primary);
     color: #FFFFFF;
     font-size: 1rem;
     font-weight: 700;
@@ -653,7 +651,7 @@ const recentNews = allNews
   }
 
   .section--accent {
-    background: var(--color-secondary);
+    background: var(--color-primary);
     color: white;
     padding: var(--space-lg) 0;
   }

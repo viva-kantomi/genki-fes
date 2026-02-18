@@ -10,7 +10,8 @@
       "Bash(ls:*)",
       "Bash(npm run dev:*)",
       "Bash(npx astro build:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(cd:*)"
     ]
   }
 }

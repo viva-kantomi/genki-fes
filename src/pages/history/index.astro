@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getPath } from '../../lib/path';
 
 const pastEvents = [
   {
@@ -103,7 +104,7 @@ const pastEvents = [
     <div class="container">
       <h2 class="cta-title">げんきフェスタ2026</h2>
       <p class="cta-lead">今年の開催情報をチェック！</p>
-      <a href="/2026/" class="cta-btn">
+      <a href={getPath('/2026/')} class="cta-btn">
         2026特設ページへ
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -151,7 +152,7 @@ const pastEvents = [
   }
 
   .section--accent {
-    background: var(--color-secondary);
+    background: var(--color-primary);
     color: white;
     text-align: center;
   }
