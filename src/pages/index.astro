@@ -82,11 +82,11 @@ const recentNews = allNews
       <div class="hero-action-cards">
         <a href="/events/" class="hero-action-card hero-action-card--enjoy">
           <span class="hero-action-label">楽しむ</span>
-          <span class="hero-action-desc">イベントを確認する</span>
+          <span class="hero-action-desc">イベント一覧</span>
         </a>
         <a href="/about/" class="hero-action-card hero-action-card--entertain">
-          <span class="hero-action-label">出店・参加方法</span>
-          <span class="hero-action-desc">出展・参加について</span>
+          <span class="hero-action-label">楽しませる</span>
+          <span class="hero-action-desc">出店・参加方法</span>
         </a>
       </div>
     </div>
@@ -121,11 +121,11 @@ const recentNews = allNews
     </div>
   </section>
 
-  <!-- トップページコンテンツ -->
-  <section class="section">
+  <!-- ABOUT US セクション -->
+  <section id="about" class="section">
     <div class="container">
       <p class="section-label">ABOUT US</p>
-      <h2 class="section-title">私たちについて</h2>
+      <h2 class="section-title section-title--btn">私たちについて</h2>
       <p class="section-lead">
         げんきフェスタチームは、地域のみんなが笑顔になれるイベントを企画・運営する有志のチームです。
         「げんきフェスタ」をはじめ、様々なイベントを通じて地域の絆を深める活動をしています。
@@ -486,7 +486,7 @@ const recentNews = allNews
     gap: var(--space-sm);
     width: 90%;
     max-width: 400px;
-    font-family: 'Zen Maru Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-main);
   }
 
   .hero-action-card {
@@ -503,7 +503,7 @@ const recentNews = allNews
     box-shadow: 4px 4px 0 var(--color-border);
     transition: all 0.2s;
     backdrop-filter: blur(8px);
-    font-family: 'Zen Maru Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-main);
   }
 
   .hero-action-card:hover {
@@ -675,6 +675,16 @@ const recentNews = allNews
     font-weight: 900;
     line-height: 1.5;
     margin-bottom: var(--space-md);
+  }
+
+  .section-title--btn {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--color-primary);
+    color: white;
+    border: 3px solid var(--color-border);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 var(--color-border);
   }
 
   .section-lead {

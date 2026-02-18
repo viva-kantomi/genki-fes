@@ -20,7 +20,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
 
     <!-- SEO -->
     <title>{title}</title>
@@ -261,6 +261,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     /* 例: 5〜8に配置 → left:4, right:2 */
     --layout-left: 5;      /* SP枠の左側の余白 (50%) */
     --layout-right: 1;     /* SP枠の右側の余白 (10%) */
+
+    /* フォント */
+    --font-main: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   * {
@@ -270,7 +273,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   }
 
   html {
-    font-family: 'Zen Maru Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-main);
     background: var(--color-bg);
     color: var(--color-text);
     font-size: 16px;
@@ -303,7 +306,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     top: 0;
     bottom: 0;
     overflow: hidden;
-    font-family: 'Zen Maru Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-main);
   }
 
   .sidebar-left {
@@ -319,7 +322,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     padding: var(--space-xl) var(--space-md);
     text-align: center;
     border-bottom: 2px solid var(--color-border);
-    font-family: 'Zen Maru Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-main);
   }
 
   .sidebar-left-title {
@@ -455,7 +458,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     gap: var(--space-md);
     flex: 1;
     justify-content: center;
-    font-family: 'Zen Maru Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-main);
   }
 
   /* 左サイドバー */
