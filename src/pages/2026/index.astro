@@ -21,7 +21,7 @@ const areas = [
 ];
 ---
 
-<Layout title="げんきフェスタ2026 | げんきフェスタチーム">
+<Layout title="げんきフェスタ2026 | げんき塾チーム">
   <section class="hero-2026">
     <div class="hero-inner">
       <p class="hero-date">2026.8.15 SAT</p>
@@ -284,10 +284,22 @@ const areas = [
   }
 
   .section-title {
+    display: inline-block;
     font-size: 1.5rem;
     font-weight: 900;
     line-height: 1.4;
     margin-bottom: var(--space-md);
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--color-primary);
+    color: white;
+    border: 3px solid var(--color-border);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 var(--color-border);
+  }
+
+  .section--blue .section-title {
+    background: var(--color-yellow);
+    color: var(--color-text);
   }
 
   .section-lead {

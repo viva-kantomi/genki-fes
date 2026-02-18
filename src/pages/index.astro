@@ -19,7 +19,7 @@ const recentNews = allNews
   .slice(0, 3);
 ---
 
-<Layout title="げんきフェスタチーム - 地域を元気にするイベント企画チーム">
+<Layout title="げんき塾チーム - 地域を元気にするイベント企画チーム">
   <!-- ヒーロー -->
   <section class="hero">
     <!-- 背景画像（無限スクロール） -->
@@ -95,7 +95,7 @@ const recentNews = allNews
       <div class="hero-text-group">
         <p class="hero-label">GENKI FESTA TEAM</p>
         <h1 class="hero-title">
-          <span class="title-main">げんきフェスタチーム</span>
+          <span class="title-main">げんき塾チーム</span>
         </h1>
         <p class="hero-lead">
           地域を元気にする<br />
@@ -125,9 +125,9 @@ const recentNews = allNews
   <section id="about" class="section">
     <div class="container">
       <p class="section-label">ABOUT US</p>
-      <h2 class="section-title section-title--btn">私たちについて</h2>
+      <h2 class="section-title">私たちについて</h2>
       <p class="section-lead">
-        げんきフェスタチームは、地域のみんなが笑顔になれるイベントを企画・運営する有志のチームです。
+        げんき塾チームは、地域のみんなが笑顔になれるイベントを企画・運営する有志のチームです。
         「げんきフェスタ」をはじめ、様々なイベントを通じて地域の絆を深める活動をしています。
       </p>
       <div class="features">
@@ -219,7 +219,7 @@ const recentNews = allNews
   <section class="section section--accent">
     <div class="container">
       <h2 class="cta-title">最新情報をフォロー</h2>
-      <p class="cta-lead">SNSでげんきフェスタチームの情報をお届けします</p>
+      <p class="cta-lead">SNSでげんき塾チームの情報をお届けします</p>
       <div class="sns-links">
         <a href="#" class="sns-link" aria-label="Instagram">
           <img src={`${import.meta.env.BASE_URL}images/common/sns/icons8-instagram-100.png`} alt="Instagram" width="32" height="32" />
@@ -671,14 +671,11 @@ const recentNews = allNews
   }
 
   .section-title {
+    display: inline-block;
     font-size: 1.5rem;
     font-weight: 900;
     line-height: 1.5;
     margin-bottom: var(--space-md);
-  }
-
-  .section-title--btn {
-    display: inline-block;
     padding: var(--space-sm) var(--space-lg);
     background: var(--color-primary);
     color: white;
@@ -1008,6 +1005,87 @@ const recentNews = allNews
 
     .section--video-sp {
       display: none;
+    }
+  }
+
+  /* iPad横向き（PC表示）時もSNS・動画セクション非表示 */
+  @media (min-width: 1024px) and (max-width: 1199px) and (orientation: landscape) {
+    .section--accent {
+      display: none;
+    }
+
+    .section--video-sp {
+      display: none;
+    }
+  }
+
+  /* ========== iPad縦向き対応（全幅表示） ========== */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .container {
+      max-width: 100%;
+      padding: 0 var(--space-lg);
+    }
+
+    .hero-content {
+      padding: 0 var(--space-lg);
+    }
+
+    .hero-logo {
+      width: 80%;
+      max-width: 450px;
+    }
+
+    .hero-action-cards {
+      max-width: 100%;
+      padding: 0 var(--space-md);
+    }
+
+    .hero-action-card {
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .hero-action-label {
+      font-size: 1.5rem;
+    }
+
+    .hero-action-desc {
+      font-size: 1rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+    }
+
+    .event-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .section-lead {
+      font-size: 1rem;
+    }
+  }
+
+  /* タブレット全般のコンテンツ全幅対応（フォールバック） */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+      max-width: 100%;
+      padding: 0 var(--space-lg);
+    }
+
+    .hero-content {
+      padding: 0 var(--space-lg);
+    }
+
+    .hero-action-cards {
+      max-width: 100%;
     }
   }
 </style>

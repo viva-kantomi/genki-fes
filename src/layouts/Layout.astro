@@ -5,7 +5,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description = 'げんきフェスタチーム - 地域を元気にするイベント企画チーム', ogImage = '/images/og-default.png' } = Astro.props;
+const { title, description = 'げんき塾チーム - 地域を元気にするイベント企画チーム', ogImage = '/images/og-default.png' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -71,7 +71,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           <header class="header">
             <div class="header-inner">
               <a href="/" class="logo">
-                <span class="logo-text">げんきフェスタチーム</span>
+                <span class="logo-text">げんき塾チーム</span>
               </a>
               <nav class="nav-desktop">
                 <a href="/" class="nav-link">HOME</a>
@@ -106,7 +106,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           <footer class="footer">
             <div class="footer-inner">
               <div class="footer-logo">
-                <span class="logo-text">げんきフェスタチーム</span>
+                <span class="logo-text">げんき塾チーム</span>
               </div>
               <nav class="footer-nav">
                 <a href="/">トップ</a>
@@ -115,7 +115,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                 <a href="/news/">NEWS</a>
                 <a href="/about/">ABOUT</a>
               </nav>
-              <p class="copyright">&copy; 2026 げんきフェスタチーム</p>
+              <p class="copyright">&copy; 2026 げんき塾チーム</p>
               <p class="credits">icon by <a target="_blank" href="https://icons8.com">Icons8</a></p>
             </div>
           </footer>
@@ -194,7 +194,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         new (window as any).YT.Player('youtube-player', {
           videoId: '1OqHFpav2X0',
           playerVars: {
-            autoplay: 1,
+            autoplay: 0,
             loop: 1,
             playlist: '1OqHFpav2X0',
             controls: 1,
@@ -203,7 +203,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           events: {
             onReady: function(event: any) {
               event.target.setVolume(10);
-              event.target.playVideo();
             }
           }
         });
@@ -222,8 +221,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     --color-border: #000000;       /* 枠・ボーダー（黒） */
 
     /* 派生カラー（上記を参照） */
-    --color-primary: var(--color-blue);
-    --color-secondary: var(--color-red);
+    --color-primary: var(--color-red);
+    --color-secondary: var(--color-blue);
     --color-accent: var(--color-yellow);
     --color-bg-white: #FFFFFF;
     --color-bg-dark: var(--color-blue);
@@ -958,8 +957,177 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     }
   }
 
-  /* タブレット対応（SP枠を中央寄せ） */
-  @media (min-width: 768px) and (max-width: 1199px) {
+  /* ========== iPad縦向き対応（SP表示・全幅） ========== */
+  /* iPad縦: 768px〜1024px - スマホ表示だが全幅に広げる */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .desktop-layout {
+      justify-content: center;
+    }
+
+    .phone-frame {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .phone-frame-inner {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .header {
+      left: 0;
+      right: 0;
+      width: 100%;
+    }
+
+    .header-inner {
+      max-width: 100%;
+      padding: 0 var(--space-lg);
+    }
+
+    .nav-mobile {
+      left: 0;
+      right: 0;
+      width: 100%;
+    }
+
+    /* フッターも全幅に */
+    .footer-inner {
+      max-width: 100%;
+      padding: 0 var(--space-lg);
+    }
+
+    .footer-nav {
+      gap: var(--space-sm) var(--space-lg);
+    }
+  }
+
+  /* ========== iPad横向き対応（PC表示・サイドバー調整） ========== */
+  /* iPad横: 1024px〜1199px - PC表示でサイドバーを表示 */
+  /* 左サイドバー: 広く、右サイドバー: 狭く */
+  @media (min-width: 1024px) and (max-width: 1199px) and (orientation: landscape) {
+    :root {
+      --layout-left-ipad: 50%;  /* 左サイドバー */
+    }
+
+    .sidebar {
+      display: block;
+    }
+
+    .sidebar-left {
+      display: flex;
+      width: var(--layout-left-ipad);
+    }
+
+    .sidebar-left-header {
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .sidebar-left-title {
+      font-size: 1.4rem;
+    }
+
+    .sidebar-left-date {
+      font-size: 1.4rem;
+    }
+
+    .countdown-hero-label {
+      font-size: 1rem;
+    }
+
+    .countdown-hero {
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .countdown-hero-number {
+      font-size: 3.5rem;
+    }
+
+    .countdown-hero-unit {
+      font-size: 1.4rem;
+    }
+
+    .sidebar-content {
+      padding: var(--space-md);
+    }
+
+    .video-label {
+      font-size: 0.85rem;
+    }
+
+    .sidebar-right {
+      display: flex;
+      left: calc(var(--layout-left-ipad) + var(--phone-max-width));
+      right: 0;
+    }
+
+    .sidebar-right-menu {
+      padding: var(--space-xs);
+      padding-top: var(--space-sm);
+    }
+
+    .sidebar-menu-title {
+      font-size: 0.9rem;
+      margin-bottom: var(--space-xs);
+    }
+
+    .sidebar-nav-link {
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      box-shadow: 2px 2px 0 var(--color-border);
+    }
+
+    .sidebar-right-sns {
+      padding: var(--space-xs);
+    }
+
+    .sidebar-sns-title {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+    }
+
+    .sidebar-right-sns .sns-link img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .phone-frame {
+      position: absolute;
+      left: var(--layout-left-ipad);
+      width: var(--phone-max-width);
+      max-width: var(--phone-max-width);
+      border-left: 2px solid var(--color-primary);
+      border-right: 2px solid var(--color-primary);
+    }
+
+    .header {
+      left: var(--layout-left-ipad);
+      width: var(--phone-max-width);
+      max-width: var(--phone-max-width);
+      border-left: 2px solid var(--color-primary);
+      border-right: 2px solid var(--color-primary);
+    }
+
+    .header-inner {
+      max-width: none;
+    }
+
+    .menu-btn {
+      display: none;
+    }
+
+    .nav-mobile {
+      left: var(--layout-left-ipad);
+      width: var(--phone-max-width);
+      max-width: var(--phone-max-width);
+      border-left: 2px solid var(--color-primary);
+      border-right: 2px solid var(--color-primary);
+    }
+  }
+
+  /* ========== iPad Pro横向き対応（1024px〜1199px、orientation関係なく） ========== */
+  /* iPad Proなど大きめタブレット横向きでも対応 */
+  @media (min-width: 1024px) and (max-width: 1199px) {
     .desktop-layout {
       justify-content: center;
     }
@@ -970,6 +1138,35 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     .header-inner {
       max-width: var(--phone-max-width);
+    }
+  }
+
+  /* タブレット対応（768px〜1023px、横向きでない場合のフォールバック） */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .desktop-layout {
+      justify-content: center;
+    }
+
+    .phone-frame {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .header {
+      left: 0;
+      right: 0;
+      width: 100%;
+    }
+
+    .header-inner {
+      max-width: 100%;
+      padding: 0 var(--space-lg);
+    }
+
+    .nav-mobile {
+      left: 0;
+      right: 0;
+      width: 100%;
     }
   }
 </style>
