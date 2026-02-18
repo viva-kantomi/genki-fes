@@ -139,13 +139,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           <p class="sidebar-sns-title">SNS</p>
           <div class="sns-links">
             <a href="#" class="sns-link" aria-label="Instagram">
-              <img src="/images/common/sns/icons8-instagram-100.png" alt="Instagram" width="32" height="32" />
+              <img src={`${import.meta.env.BASE_URL}images/common/sns/icons8-instagram-100.png`} alt="Instagram" width="32" height="32" />
             </a>
             <a href="#" class="sns-link" aria-label="YouTube">
-              <img src="/images/common/sns/icons8-youtube-100.png" alt="YouTube" width="32" height="32" />
+              <img src={`${import.meta.env.BASE_URL}images/common/sns/icons8-youtube-100.png`} alt="YouTube" width="32" height="32" />
             </a>
             <a href="#" class="sns-link" aria-label="Facebook">
-              <img src="/images/common/sns/icons8-facebook-100.png" alt="Facebook" width="32" height="32" />
+              <img src={`${import.meta.env.BASE_URL}images/common/sns/icons8-facebook-100.png`} alt="Facebook" width="32" height="32" />
             </a>
           </div>
         </div>
