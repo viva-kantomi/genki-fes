@@ -1,0 +1,207 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const events = [
+  {
+    title: 'げんきフェスタ',
+    description: '毎年夏に開催される地域最大のフェスティバル。音楽、グルメ、ワークショップなど盛りだくさん！',
+    schedule: '毎年8月',
+    image: '/images/events/genki-festa.jpg',
+    link: '/2026/',
+    featured: true,
+  },
+  {
+    title: 'げんきマルシェ',
+    description: '地元の新鮮野菜やハンドメイド雑貨が集まる月1マーケット。',
+    schedule: '毎月第2日曜日',
+    image: '/images/events/marche.jpg',
+    link: null,
+    featured: false,
+  },
+  {
+    title: 'げんきキッズフェス',
+    description: '子どもたちが主役！工作やゲーム、ステージ発表など家族で楽しめるイベント。',
+    schedule: '毎年5月',
+    image: '/images/events/kids.jpg',
+    link: null,
+    featured: false,
+  },
+  {
+    title: 'げんき音楽祭',
+    description: '地域のアマチュアバンドやアーティストが出演する音楽イベント。',
+    schedule: '毎年10月',
+    image: '/images/events/music.jpg',
+    link: null,
+    featured: false,
+  },
+];
+---
+
+<Layout title="イベント一覧 | げんきフェスタチーム">
+  <section class="page-header">
+    <div class="container">
+      <p class="page-label">EVENTS</p>
+      <h1 class="page-title">イベント一覧</h1>
+      <p class="page-lead">げんきフェスタチームが企画・運営するイベントをご紹介します</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <ul class="event-list">
+        {events.map((event) => (
+          <li class={`event-card ${event.featured ? 'event-card--featured' : ''}`}>
+            <div class="event-image">
+              <div class="event-image-placeholder">
+                {event.featured && <span class="event-badge">MAIN EVENT</span>}
+              </div>
+            </div>
+            <div class="event-body">
+              <h2 class="event-title">{event.title}</h2>
+              <p class="event-schedule">{event.schedule}</p>
+              <p class="event-description">{event.description}</p>
+              {event.link && (
+                <a href={event.link} class="event-link">
+                  詳細を見る
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  .page-header {
+    background: var(--color-bg-white);
+    padding: var(--space-xl) 0;
+    border-bottom: 2px solid var(--color-border);
+    text-align: center;
+  }
+
+  .page-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--color-primary);
+    margin-bottom: var(--space-xs);
+  }
+
+  .page-title {
+    font-size: 1.75rem;
+    font-weight: 900;
+    margin-bottom: var(--space-sm);
+  }
+
+  .page-lead {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  .section {
+    padding: var(--space-xl) 0;
+  }
+
+  .event-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .event-card {
+    background: var(--color-bg-white);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .event-card--featured {
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 20px rgba(40, 111, 170, 0.15);
+  }
+
+  .event-image {
+    width: 100%;
+  }
+
+  .event-image-placeholder {
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-primary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .event-badge {
+    position: absolute;
+    top: var(--space-sm);
+    left: var(--space-sm);
+    background: var(--color-red);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+  }
+
+  .event-body {
+    padding: var(--space-md);
+  }
+
+  .event-title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    margin-bottom: var(--space-xs);
+  }
+
+  .event-schedule {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .event-description {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .event-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .event-link:hover {
+    color: var(--color-secondary);
+  }
+
+  .event-link svg {
+    transition: transform 0.2s;
+  }
+
+  .event-link:hover svg {
+    transform: translateX(4px);
+  }
+</style>

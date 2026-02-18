@@ -1,0 +1,966 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
+import img10 from '../../public/images/top_images/10.png';
+import img11 from '../../public/images/top_images/11.png';
+import img12 from '../../public/images/top_images/12.png';
+import img13 from '../../public/images/top_images/13.png';
+import img14 from '../../public/images/top_images/14.png';
+import img15 from '../../public/images/top_images/15.png';
+import img16 from '../../public/images/top_images/16.png';
+import img17 from '../../public/images/top_images/17.png';
+import img18 from '../../public/images/top_images/18.png';
+
+const allNews = await getCollection('news');
+const recentNews = allNews
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<Layout title="げんきフェスタチーム - 地域を元気にするイベント企画チーム">
+  <!-- ヒーロー -->
+  <section class="hero">
+    <!-- 背景画像（無限スクロール） -->
+    <div class="hero-bg">
+      <!-- 上段（右に流れる） -->
+      <div class="scroll-row scroll-row--1">
+        <div class="scroll-track scroll-right">
+          <Image src={img10} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img11} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img12} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img13} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img14} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <!-- 繰り返し（無限ループ用） -->
+          <Image src={img10} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img11} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img12} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img13} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img14} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+        </div>
+      </div>
+
+      <!-- 下段（左に流れる・レンガ状にずらす） -->
+      <div class="scroll-row scroll-row--2">
+        <div class="scroll-track scroll-left">
+          <Image src={img15} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img16} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img17} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img18} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img10} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <!-- 繰り返し（無限ループ用） -->
+          <Image src={img15} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img16} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img17} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img18} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+          <Image src={img10} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
+        </div>
+      </div>
+    </div>
+    <!-- ロゴ（スクロール行の間に配置・最前面） -->
+    <div class="hero-logo-area">
+      <a href="/2026/" class="hero-logo-link">
+        <img src="/images/genki_festa_logo.png" alt="げんきフェスタ2026 5/24 SUN" class="hero-logo" />
+        <span class="hero-logo-btn">
+          特設ページはこちら
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+    <!-- 雲のオーバーレイ -->
+    <div class="hero-clouds">
+      <div class="cloud cloud--1"></div>
+      <div class="cloud cloud--2"></div>
+      <div class="cloud cloud--3"></div>
+      <div class="cloud cloud--4"></div>
+    </div>
+    <!-- 楽しむ・楽しませるカード -->
+    <div class="hero-action-cards">
+      <a href="/events/" class="hero-action-card hero-action-card--enjoy">
+        <span class="hero-action-icon">🎪</span>
+        <span class="hero-action-label">楽しむ</span>
+        <span class="hero-action-desc">イベントを確認する</span>
+      </a>
+      <a href="/about/" class="hero-action-card hero-action-card--entertain">
+        <span class="hero-action-icon">🎤</span>
+        <span class="hero-action-label">楽しませる</span>
+        <span class="hero-action-desc">出展・参加について</span>
+      </a>
+    </div>
+    <!-- hero-logo-linkがあるときは非表示 -->
+    <!-- <div class="hero-inner">
+      <div class="hero-text-group">
+        <p class="hero-label">GENKI FESTA TEAM</p>
+        <h1 class="hero-title">
+          <span class="title-main">げんきフェスタチーム</span>
+        </h1>
+        <p class="hero-lead">
+          地域を元気にする<br />
+          イベント企画チーム
+        </p>
+      </div>
+    </div> -->
+  </section>
+
+  <!-- トップページコンテンツ -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">ABOUT US</p>
+      <h2 class="section-title">私たちについて</h2>
+      <p class="section-lead">
+        げんきフェスタチームは、地域のみんなが笑顔になれるイベントを企画・運営する有志のチームです。
+        「げんきフェスタ」をはじめ、様々なイベントを通じて地域の絆を深める活動をしています。
+      </p>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">🎉</div>
+          <div class="feature-body">
+            <h3>イベント企画</h3>
+            <p>地域密着型のフェスやマルシェを運営</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🤝</div>
+          <div class="feature-body">
+            <h3>地域連携</h3>
+            <p>自治体・商店街・学校との協働</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">✨</div>
+          <div class="feature-body">
+            <h3>笑顔創造</h3>
+            <p>老若男女みんなが楽しめる場づくり</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- イベント紹介 -->
+  <section class="section section--white">
+    <div class="container">
+      <p class="section-label">EVENTS</p>
+      <h2 class="section-title">主なイベント</h2>
+      <div class="event-cards">
+        <a href="/2026/" class="event-card event-card--featured">
+          <div class="event-card-badge">NOW</div>
+          <h3 class="event-card-title">げんきフェスタ2026</h3>
+          <p class="event-card-date">2026年8月15日（土）</p>
+          <p class="event-card-desc">今年のテーマは「元気、無限大！」</p>
+        </a>
+        <a href="/events/" class="event-card">
+          <h3 class="event-card-title">その他のイベント</h3>
+          <p class="event-card-desc">げんきマルシェ、キッズフェス など</p>
+        </a>
+      </div>
+      <div class="section-action">
+        <a href="/events/" class="btn-outline">
+          イベント一覧を見る
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- お知らせ -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">NEWS</p>
+      <h2 class="section-title">お知らせ</h2>
+      <ul class="news-list">
+        {recentNews.map((news) => (
+          <li>
+            <a href={`/news/${news.id}/`} class="news-card">
+              <time datetime={news.data.pubDate.toISOString()}>
+                {news.data.pubDate.toLocaleDateString('ja-JP', { month: '2-digit', day: '2-digit' })}
+              </time>
+              <span class="news-title">{news.data.title}</span>
+              <svg class="news-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="section-action">
+        <a href="/news/" class="btn-outline">
+          お知らせ一覧
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SNS -->
+  <section class="section section--accent">
+    <div class="container">
+      <h2 class="cta-title">最新情報をフォロー</h2>
+      <p class="cta-lead">SNSでげんきフェスタチームの情報をお届けします</p>
+      <div class="sns-links">
+        <a href="#" class="sns-link" aria-label="Instagram">
+          <img src="/images/common/sns/icons8-instagram-100.png" alt="Instagram" width="32" height="32" />
+        </a>
+        <a href="#" class="sns-link" aria-label="YouTube">
+          <img src="/images/common/sns/icons8-youtube-100.png" alt="YouTube" width="32" height="32" />
+        </a>
+        <a href="#" class="sns-link" aria-label="Facebook">
+          <img src="/images/common/sns/icons8-facebook-100.png" alt="Facebook" width="32" height="32" />
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  /* ========== ヒーロー ========== */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(180deg, #87CEEB 0%, #E0F4FF 50%, #FFF8E7 100%);
+  }
+
+  /* 背景画像 */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(255, 248, 231, 0.3) 30%,
+      rgba(255, 248, 231, 0.6) 60%,
+      rgba(255, 248, 231, 0.9) 85%,
+      #FFF8E7 100%
+    );
+    pointer-events: none;
+  }
+
+  /* スクロール行 */
+  .scroll-row {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .scroll-row--1 {
+    top: 3%;
+  }
+
+  .scroll-row--2 {
+    top: 38%;
+  }
+
+  /* スクロールトラック */
+  .scroll-track {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+  }
+
+  .scroll-right {
+    animation: scroll-right 25s linear infinite;
+  }
+
+  .scroll-left {
+    animation: scroll-left 30s linear infinite;
+  }
+
+  @keyframes scroll-right {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .hero-bg-img {
+    width: 140px;
+    height: auto;
+    border-radius: 0;
+    border: 2px solid var(--color-border);
+    opacity: 0.9;
+    box-shadow: 4px 4px 0 var(--color-border);
+    flex-shrink: 0;
+  }
+
+  /* ロゴエリア（スクロール行の間に配置・最前面） */
+  .hero-logo-area {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    z-index: 10;
+    text-align: center;
+    top: -5%;
+  }
+
+  /* 雲のアニメーション */
+  .hero-clouds {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .cloud {
+    position: absolute;
+    background: white;
+    border-radius: 100px;
+    opacity: 0.9;
+    filter: blur(2px);
+  }
+
+  .cloud::before,
+  .cloud::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+  }
+
+  .cloud--1 {
+    width: 120px;
+    height: 40px;
+    top: 10%;
+    left: -150px;
+    animation: cloud-float 25s linear infinite;
+  }
+
+  .cloud--1::before {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 20px;
+  }
+
+  .cloud--1::after {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    left: 50px;
+  }
+
+  .cloud--2 {
+    width: 100px;
+    height: 35px;
+    top: 25%;
+    left: -120px;
+    animation: cloud-float 30s linear infinite 5s;
+  }
+
+  .cloud--2::before {
+    width: 45px;
+    height: 45px;
+    top: -22px;
+    left: 15px;
+  }
+
+  .cloud--2::after {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 40px;
+  }
+
+  .cloud--3 {
+    width: 80px;
+    height: 30px;
+    top: 5%;
+    right: -100px;
+    animation: cloud-float-reverse 22s linear infinite 2s;
+  }
+
+  .cloud--3::before {
+    width: 35px;
+    height: 35px;
+    top: -18px;
+    left: 10px;
+  }
+
+  .cloud--3::after {
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    left: 30px;
+  }
+
+  .cloud--4 {
+    width: 90px;
+    height: 32px;
+    top: 35%;
+    right: -110px;
+    animation: cloud-float-reverse 28s linear infinite 8s;
+  }
+
+  .cloud--4::before {
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    left: 12px;
+  }
+
+  .cloud--4::after {
+    width: 45px;
+    height: 45px;
+    top: -22px;
+    left: 35px;
+  }
+
+  @keyframes cloud-float {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(100vw + 200px)); }
+  }
+
+  @keyframes cloud-float-reverse {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-100vw - 200px)); }
+  }
+
+  /* ========== 楽しむ・楽しませるカード ========== */
+  .hero-action-cards {
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 6;
+    display: flex;
+    gap: var(--space-sm);
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .hero-action-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-md) var(--space-sm);
+    background: rgba(255, 255, 255, 0.95);
+    border: 3px solid var(--color-border);
+    border-radius: 0;
+    text-decoration: none;
+    color: var(--color-text);
+    box-shadow: 4px 4px 0 var(--color-border);
+    transition: all 0.2s;
+    backdrop-filter: blur(8px);
+  }
+
+  .hero-action-card:hover {
+    box-shadow: 2px 2px 0 var(--color-border);
+    transform: translate(2px, 2px);
+  }
+
+  .hero-action-card:active {
+    box-shadow: 0 0 0 var(--color-border);
+    transform: translate(4px, 4px);
+  }
+
+  .hero-action-card--enjoy {
+    background: rgba(235, 186, 36, 0.95);
+    color: var(--color-text);
+  }
+
+  .hero-action-card--entertain {
+    background: rgba(40, 111, 170, 0.95);
+    color: white;
+  }
+
+  .hero-action-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .hero-action-label {
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .hero-action-desc {
+    font-size: 0.7rem;
+    opacity: 0.9;
+    margin-top: 2px;
+  }
+
+  .hero-inner {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    width: 100%;
+    max-width: 600px;
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .hero-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: var(--space-sm);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  }
+
+  .hero-title {
+    margin-bottom: var(--space-md);
+  }
+
+  .title-main {
+    display: block;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+  }
+
+  .hero-lead {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  }
+
+  .hero-text-group {
+    background: rgba(255, 255, 255, 0.85);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .hero-logo-link {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+  }
+
+  .hero-logo-link:hover {
+    transform: scale(1.05);
+  }
+
+  .hero-logo {
+    width: 400px;
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+    animation: logo-bounce 3s ease-in-out infinite;
+  }
+
+  @keyframes logo-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero-logo-btn {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-secondary);
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid var(--color-border);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 var(--color-border);
+    transition: all 0.2s;
+    text-shadow: 1px 1px 0 var(--color-border);
+    white-space: nowrap;
+  }
+
+  .hero-logo-link:hover .hero-logo-btn {
+    box-shadow: 1px 1px 0 var(--color-border);
+    transform: translateX(-50%) translate(2px, 2px);
+  }
+
+  .hero-logo-link:active .hero-logo-btn {
+    box-shadow: 0 0 0 var(--color-border);
+    transform: translateX(-50%) translate(3px, 3px);
+  }
+
+  /* ========== セクション共通 ========== */
+  .section {
+    padding: var(--space-2xl) 0;
+  }
+
+  .section--white {
+    background: var(--color-bg-white);
+  }
+
+  .section--accent {
+    background: var(--color-secondary);
+    color: white;
+    padding: var(--space-lg) 0;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--color-primary);
+    margin-bottom: var(--space-xs);
+  }
+
+  .section--accent .section-label {
+    color: rgba(255,255,255,0.7);
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    line-height: 1.5;
+    margin-bottom: var(--space-md);
+  }
+
+  .section-lead {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .section-action {
+    text-align: center;
+    margin-top: var(--space-md);
+  }
+
+  /* ========== 特徴 ========== */
+  .features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: var(--color-bg-white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+  }
+
+  .feature-icon {
+    font-size: 1.75rem;
+    flex-shrink: 0;
+  }
+
+  .feature-body h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .feature-body p {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  /* ========== イベントカード ========== */
+  .event-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .event-card {
+    display: block;
+    padding: var(--space-md);
+    background: var(--color-bg);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .event-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .event-card--featured {
+    background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-primary) 100%);
+    color: white;
+    border-color: var(--color-primary);
+  }
+
+  .event-card-badge {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    background: var(--color-yellow);
+    color: var(--color-text);
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    padding: 4px 8px;
+    border: 2px solid var(--color-border);
+    border-radius: 0;
+    box-shadow: 2px 2px 0 var(--color-border);
+  }
+
+  .event-card-title {
+    font-size: 1.1rem;
+    font-weight: 900;
+    margin-bottom: 4px;
+  }
+
+  .event-card-date {
+    font-size: 0.8rem;
+    font-weight: 700;
+    opacity: 0.9;
+    margin-bottom: var(--space-xs);
+  }
+
+  .event-card-desc {
+    font-size: 0.85rem;
+    opacity: 0.9;
+  }
+
+  /* ========== お知らせ ========== */
+  .news-list {
+    list-style: none;
+  }
+
+  .news-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    text-decoration: none;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.2s;
+  }
+
+  .news-card:hover {
+    background: var(--color-bg-white);
+  }
+
+  .news-card time {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+
+  .news-title {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .news-arrow {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  .news-card:hover .news-arrow {
+    transform: translateX(4px);
+    color: var(--color-primary);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid var(--color-border);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 var(--color-border);
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover {
+    background: var(--color-primary);
+    color: white;
+    box-shadow: 2px 2px 0 var(--color-border);
+    transform: translate(2px, 2px);
+  }
+
+  /* ========== CTA ========== */
+  .cta-title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: var(--space-xs);
+  }
+
+  .cta-lead {
+    font-size: 0.85rem;
+    text-align: center;
+    opacity: 0.9;
+    margin-bottom: var(--space-md);
+  }
+
+  .sns-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+  }
+
+  .sns-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .sns-link:hover {
+    transform: scale(1.1);
+  }
+
+  .sns-link img {
+    width: 48px;
+    height: 48px;
+  }
+
+  /* ========== PC対応 ========== */
+  @media (min-width: 768px) {
+    .title-main {
+      font-size: 2.5rem;
+    }
+
+    .hero-logo {
+      width: 350px;
+    }
+
+    .hero-bg-img {
+      width: 180px;
+    }
+
+    .scroll-row--1 {
+      top: 2%;
+    }
+
+    .scroll-row--2 {
+      top: 35%;
+    }
+
+    .hero-logo-area {
+      top: -5%;
+    }
+
+    .cloud--1 {
+      width: 180px;
+      height: 60px;
+    }
+
+    .cloud--1::before {
+      width: 75px;
+      height: 75px;
+      top: -38px;
+    }
+
+    .cloud--1::after {
+      width: 90px;
+      height: 90px;
+      top: -45px;
+    }
+
+    .cloud--2 {
+      width: 150px;
+      height: 50px;
+    }
+
+    .cloud--2::before {
+      width: 65px;
+      height: 65px;
+      top: -32px;
+    }
+
+    .cloud--2::after {
+      width: 75px;
+      height: 75px;
+      top: -38px;
+    }
+
+    .hero-action-cards {
+      max-width: 450px;
+      gap: var(--space-md);
+    }
+
+    .hero-action-card {
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .hero-action-icon {
+      font-size: 2.5rem;
+    }
+
+    .hero-action-label {
+      font-size: 1.25rem;
+    }
+
+    .hero-action-desc {
+      font-size: 0.8rem;
+    }
+  }
+
+  /* PC表示時はSNSセクションを非表示 */
+  @media (min-width: 1200px) {
+    .section--accent {
+      display: none;
+    }
+  }
+</style>
+

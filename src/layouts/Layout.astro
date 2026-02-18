@@ -1,0 +1,849 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description = 'げんきフェスタチーム - 地域を元気にするイベント企画チーム', ogImage = '/images/og-default.png' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- OGP -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:locale" content="ja_JP" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+  </head>
+  <body>
+    <!-- PC用3カラムレイアウト -->
+    <div class="desktop-layout">
+      <!-- 左サイドバー（カウントダウン・動画） -->
+      <aside class="sidebar sidebar-left">
+        <div class="sidebar-content">
+          <div class="sidebar-section">
+            <p class="sidebar-section-title">COUNTDOWN</p>
+            <div class="countdown">
+              <div class="countdown-item">
+                <span class="countdown-number">120</span>
+                <span class="countdown-label">日</span>
+              </div>
+            </div>
+          </div>
+          <div class="sidebar-section">
+            <div class="video-placeholder">
+              <div class="video-placeholder-inner">
+                <span class="play-icon">▶</span>
+                <p>プロモーション動画</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 中央：SP枠（メインコンテンツ） -->
+      <div class="phone-frame">
+        <div class="phone-frame-inner">
+          <!-- ヘッダー -->
+          <header class="header">
+            <div class="header-inner">
+              <a href="/" class="logo">
+                <span class="logo-text">げんきフェスタチーム</span>
+              </a>
+              <nav class="nav-desktop">
+                <a href="/" class="nav-link">HOME</a>
+                <a href="/events/" class="nav-link">EVENTS</a>
+                <a href="/history/" class="nav-link">HISTORY</a>
+                <a href="/2026/" class="nav-link">2026</a>
+                <a href="/news/" class="nav-link">NEWS</a>
+                <a href="/about/" class="nav-link">ABOUT</a>
+              </nav>
+              <button class="menu-btn" id="menuBtn" aria-label="メニューを開く">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </header>
+
+          <!-- モバイルナビゲーション -->
+          <nav class="nav-mobile" id="nav">
+            <a href="/" class="nav-mobile-link nav-blue">トップ</a>
+            <a href="/events/" class="nav-mobile-link nav-yellow">イベント一覧</a>
+            <a href="/history/" class="nav-mobile-link nav-red">HISTORY</a>
+            <a href="/2026/" class="nav-mobile-link nav-blue">2026 げんきフェスタ 特設ページ</a>
+            <a href="/news/" class="nav-mobile-link nav-yellow">NEWS</a>
+            <a href="/about/" class="nav-mobile-link nav-red">ABOUT</a>
+          </nav>
+
+          <main>
+            <slot />
+          </main>
+
+          <!-- フッター -->
+          <footer class="footer">
+            <div class="footer-inner">
+              <div class="footer-logo">
+                <span class="logo-text">げんきフェスタチーム</span>
+              </div>
+              <nav class="footer-nav">
+                <a href="/">トップ</a>
+                <a href="/events/">イベント一覧</a>
+                <a href="/history/">HISTORY</a>
+                <a href="/2026/">2026 げんきフェスタ 特設ページ</a>
+                <a href="/news/">NEWS</a>
+                <a href="/about/">ABOUT</a>
+              </nav>
+              <p class="copyright">&copy; 2026 げんきフェスタチーム</p>
+              <p class="credits">icon by <a target="_blank" href="https://icons8.com">Icons8</a></p>
+            </div>
+          </footer>
+        </div>
+      </div>
+
+      <!-- 右サイドバー（メニュー・SNS） -->
+      <aside class="sidebar sidebar-right">
+        <div class="sidebar-right-menu">
+          <p class="sidebar-menu-title">メニュー</p>
+          <nav class="sidebar-nav">
+            <a href="/" class="sidebar-nav-link sidebar-nav-blue">トップ</a>
+            <a href="/events/" class="sidebar-nav-link sidebar-nav-yellow">イベント一覧</a>
+            <a href="/history/" class="sidebar-nav-link sidebar-nav-red">HISTORY</a>
+            <a href="/2026/" class="sidebar-nav-link sidebar-nav-blue">げんきフェスタ2026<br>特設ページ</a>
+            <a href="/news/" class="sidebar-nav-link sidebar-nav-yellow">NEWS</a>
+            <a href="/about/" class="sidebar-nav-link sidebar-nav-red">ABOUT</a>
+          </nav>
+        </div>
+        <div class="sidebar-right-sns">
+          <p class="sidebar-sns-title">SNS</p>
+          <div class="sns-links">
+            <a href="#" class="sns-link" aria-label="Instagram">
+              <img src="/images/common/sns/icons8-instagram-100.png" alt="Instagram" width="32" height="32" />
+            </a>
+            <a href="#" class="sns-link" aria-label="YouTube">
+              <img src="/images/common/sns/icons8-youtube-100.png" alt="YouTube" width="32" height="32" />
+            </a>
+            <a href="#" class="sns-link" aria-label="Facebook">
+              <img src="/images/common/sns/icons8-facebook-100.png" alt="Facebook" width="32" height="32" />
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <script>
+      const menuBtn = document.getElementById('menuBtn');
+      const nav = document.getElementById('nav');
+      const body = document.body;
+
+      menuBtn?.addEventListener('click', () => {
+        menuBtn.classList.toggle('active');
+        nav?.classList.toggle('active');
+        body.classList.toggle('nav-open');
+      });
+
+      nav?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menuBtn?.classList.remove('active');
+          nav?.classList.remove('active');
+          body.classList.remove('nav-open');
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    /* ポップ三原色 カラーパレット */
+    --color-bg: #fdf4d5;           /* 背景色（クリーム） */
+    --color-blue: #286faa;         /* アクセント青 */
+    --color-red: #d92325;          /* アクセント赤 */
+    --color-yellow: #ebba24;       /* アクセント黄色 */
+    --color-border: #000000;       /* 枠・ボーダー（黒） */
+
+    /* 派生カラー（上記を参照） */
+    --color-primary: var(--color-blue);
+    --color-secondary: var(--color-red);
+    --color-accent: var(--color-yellow);
+    --color-bg-white: #FFFFFF;
+    --color-bg-dark: var(--color-blue);
+    --color-bg-sidebar: #1d5280;   /* ダークブルー（青の暗め） */
+    --color-text: #000000;
+    --color-text-muted: #555555;
+    --color-coral: var(--color-red);
+
+    /* シャドウ */
+    --shadow-sm: 0 1px 3px rgba(44,42,38,0.08);
+    --shadow-md: 0 4px 12px rgba(44,42,38,0.1);
+    --shadow-lg: 0 8px 30px rgba(44,42,38,0.15);
+
+    /* 角丸 */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 32px;
+    --radius-full: 9999px;
+
+    /* スペース */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-2xl: 4rem;
+
+    /* Phone frame dimensions */
+    --phone-max-width: 430px;
+
+    /* ========== PC 3カラム レイアウト設定 ========== */
+    /* SP枠の配置位置を10分割で指定 */
+    /* 例: 5〜8に配置 → left:4, right:2 */
+    --layout-left: 5;      /* SP枠の左側の余白 (50%) */
+    --layout-right: 1;     /* SP枠の右側の余白 (10%) */
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'Zen Maru Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  body.nav-open {
+    overflow: hidden;
+  }
+
+  /* ========== Desktop 3-column Layout (6:3:1) ========== */
+  .desktop-layout {
+    display: flex;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  /* ========== サイドバー（共通） ========== */
+  .sidebar {
+    display: none;
+    background: var(--color-bg);
+    color: var(--color-text);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+
+  .sidebar-left {
+    left: 0;
+    width: calc(var(--layout-left) * 10%);
+    border-right: 2px solid var(--color-border);
+  }
+
+  .sidebar-right {
+    left: calc(var(--layout-left) * 10% + var(--phone-max-width));
+    right: 0;
+    width: auto;
+    border-left: 2px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-right-menu {
+    padding: var(--space-md);
+    padding-top: var(--space-xl);
+  }
+
+  .sidebar-right-sns {
+    padding: var(--space-md);
+    background: var(--color-red);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-sm);
+    border-top: 2px solid var(--color-border);
+    margin-top: auto;
+  }
+
+  .sidebar-sns-title {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    color: #FFFFFF;
+    background: var(--color-blue);
+    padding: 5px 12px;
+    border-radius: 0;
+    border: 2px solid var(--color-border);
+    box-shadow: 3px 3px 0 var(--color-border);
+    text-shadow: 1px 1px 0 var(--color-border);
+  }
+
+  .sidebar-right-sns .sns-links {
+    justify-content: center;
+  }
+
+  .sidebar-right-sns .sns-link {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  .sidebar-right-sns .sns-link:hover {
+    transform: scale(1.1);
+  }
+
+  .sidebar-content {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    height: 100%;
+    justify-content: center;
+  }
+
+  /* 左サイドバー */
+  .sidebar-logo {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    padding-bottom: var(--space-md);
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .sidebar-logo-text {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--color-red);
+  }
+
+  .sidebar-menu-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--color-blue);
+    margin-bottom: var(--space-sm);
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .sidebar-nav-link {
+    display: block;
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+    text-decoration: none;
+    border: 2px solid var(--color-border);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 var(--color-border);
+    transition: all 0.2s;
+    text-shadow: 1px 1px 0 var(--color-border);
+  }
+
+  .sidebar-nav-link:hover {
+    box-shadow: 2px 2px 0 var(--color-border);
+    transform: translate(2px, 2px);
+  }
+
+  .sidebar-nav-link:active {
+    box-shadow: 0 0 0 var(--color-border);
+    transform: translate(4px, 4px);
+  }
+
+  .sidebar-nav-link.sidebar-nav-blue {
+    background: var(--color-blue);
+  }
+
+  .sidebar-nav-link.sidebar-nav-yellow {
+    background: var(--color-yellow);
+    color: var(--color-text);
+    text-shadow: none;
+  }
+
+  .sidebar-nav-link.sidebar-nav-red {
+    background: var(--color-red);
+  }
+
+  .sidebar-info {
+    margin-top: auto;
+    padding: var(--space-md);
+    background: var(--color-yellow);
+    border: 1px solid var(--color-border);
+    border-radius: 0;
+  }
+
+  .sidebar-info-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+  }
+
+  .sidebar-info-text {
+    font-size: 0.85rem;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  /* 右サイドバー */
+  .sidebar-section {
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .sidebar-section:last-child {
+    border-bottom: none;
+  }
+
+  .sidebar-section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--color-blue);
+    margin-bottom: var(--space-sm);
+  }
+
+  .video-placeholder {
+    aspect-ratio: 16/9;
+    background: var(--color-blue);
+    border: 1px solid var(--color-border);
+    border-radius: 0;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .video-placeholder:hover {
+    border-color: var(--color-primary);
+  }
+
+  .video-placeholder-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    color: #FFFFFF;
+  }
+
+  .play-icon {
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-red);
+    color: #FFFFFF;
+    border-radius: 50%;
+  }
+
+  .video-placeholder-inner p {
+    font-size: 0.75rem;
+  }
+
+  .sns-links {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .sns-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .sns-link:hover {
+    transform: scale(1.1);
+  }
+
+  .sns-link img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .countdown {
+    text-align: center;
+  }
+
+  .countdown-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+
+  .countdown-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+
+  .countdown-label {
+    font-size: 1rem;
+    color: var(--color-accent);
+  }
+
+  /* ========== Phone Frame（中央のSP枠 30%） ========== */
+  .phone-frame {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phone-frame-inner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg);
+  }
+
+  /* ========== ヘッダー ========== */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--color-yellow);
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .header-inner {
+    max-width: var(--phone-max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ロゴ */
+  .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    background: var(--color-red);
+    padding: 5px 10px;
+    border-radius: 0;
+    border: 2px solid var(--color-border);
+    box-shadow: 3px 3px 0 var(--color-border);
+    transition: all 0.2s;
+    margin-right: auto;
+  }
+
+  .logo:hover {
+    box-shadow: 2px 2px 0 var(--color-border);
+    transform: translate(2px, 2px);
+  }
+
+  .logo:active {
+    box-shadow: 0 0 0 var(--color-border);
+    transform: translate(4px, 4px);
+  }
+
+  .logo-text {
+    font-size: 0.9rem;
+    font-weight: 900;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0 var(--color-border);
+  }
+
+  /* デスクトップナビ（Phone Frame内では非表示） */
+  .nav-desktop {
+    display: none;
+  }
+
+  /* ハンバーガーボタン */
+  .menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 0;
+    transition: background 0.2s;
+  }
+
+  .menu-btn:hover {
+    background: var(--color-accent);
+  }
+
+  .menu-btn span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--color-text);
+    border-radius: 1px;
+    transition: all 0.3s;
+  }
+
+  .menu-btn.active span:first-child {
+    transform: translateY(4px) rotate(45deg);
+  }
+
+  .menu-btn.active span:last-child {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  /* モバイルナビ */
+  .nav-mobile {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background: var(--color-bg-white);
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-lg);
+    gap: var(--space-xs);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .nav-mobile.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-mobile-link {
+    display: block;
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+    text-decoration: none;
+    border: 2px solid var(--color-border);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 var(--color-border);
+    transition: all 0.2s;
+    text-shadow: 1px 1px 0 var(--color-border);
+  }
+
+  .nav-mobile-link:hover {
+    box-shadow: 2px 2px 0 var(--color-border);
+    transform: translate(2px, 2px);
+  }
+
+  .nav-mobile-link:active {
+    box-shadow: 0 0 0 var(--color-border);
+    transform: translate(4px, 4px);
+  }
+
+  .nav-mobile-link.nav-blue {
+    background: var(--color-blue);
+  }
+
+  .nav-mobile-link.nav-yellow {
+    background: var(--color-yellow);
+    color: var(--color-text);
+    text-shadow: none;
+  }
+
+  .nav-mobile-link.nav-red {
+    background: var(--color-red);
+  }
+
+  /* ========== メイン ========== */
+  main {
+    flex: 1;
+    margin-top: 56px;
+  }
+
+  /* ========== フッター ========== */
+  .footer {
+    background: var(--color-blue);
+    color: #FFFFFF;
+    padding: var(--space-xl) var(--space-md);
+    border-top: 2px solid var(--color-border);
+  }
+
+  .footer-inner {
+    text-align: center;
+  }
+
+  .footer .logo-text {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0 var(--color-border);
+  }
+
+  .footer-logo {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: var(--space-md);
+  }
+
+  .footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .footer-nav a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+
+  .footer-nav a:hover {
+    color: var(--color-yellow);
+  }
+
+  .copyright {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.05em;
+  }
+
+  .credits {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: var(--space-sm);
+  }
+
+  .credits a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: underline;
+  }
+
+  .credits a:hover {
+    color: var(--color-yellow);
+  }
+
+  /* ========== ユーティリティ ========== */
+  a {
+    color: var(--color-coral);
+  }
+
+  /* ========== PC対応（3カラムレイアウト） ========== */
+  /* SP枠の配置は :root の --layout-left, --layout-right で設定 */
+  @media (min-width: 1200px) {
+    .sidebar {
+      display: block;
+    }
+
+    .sidebar-right {
+      display: flex;
+    }
+
+    .phone-frame {
+      position: absolute;
+      left: calc(var(--layout-left) * 10%);
+      width: var(--phone-max-width);
+      max-width: var(--phone-max-width);
+      border-left: 2px solid var(--color-primary);
+      border-right: 2px solid var(--color-primary);
+    }
+
+    .header {
+      left: calc(var(--layout-left) * 10%);
+      width: var(--phone-max-width);
+      max-width: var(--phone-max-width);
+      border-left: 2px solid var(--color-primary);
+      border-right: 2px solid var(--color-primary);
+    }
+
+    .header-inner {
+      max-width: none;
+    }
+
+    /* PCではハンバーガーメニュー非表示 */
+    .menu-btn {
+      display: none;
+    }
+
+    .nav-mobile {
+      left: calc(var(--layout-left) * 10%);
+      width: var(--phone-max-width);
+      max-width: var(--phone-max-width);
+      transform: none;
+      border-left: 2px solid var(--color-primary);
+      border-right: 2px solid var(--color-primary);
+    }
+  }
+
+  /* タブレット対応（SP枠を中央寄せ） */
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .desktop-layout {
+      justify-content: center;
+    }
+
+    .phone-frame {
+      max-width: var(--phone-max-width);
+    }
+
+    .header-inner {
+      max-width: var(--phone-max-width);
+    }
+  }
+</style>

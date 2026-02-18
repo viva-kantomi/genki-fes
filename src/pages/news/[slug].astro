@@ -1,0 +1,203 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const news = await getCollection('news');
+  return news.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const formattedDate = entry.data.pubDate.toLocaleDateString('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout
+  title={`${entry.data.title} | 元気フェス`}
+  description={entry.data.description}
+  ogImage={entry.data.heroImage}
+>
+  <article>
+    <header class="article-header">
+      <div class="container">
+        <a href="/news/" class="back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          お知らせ一覧
+        </a>
+        <time datetime={entry.data.pubDate.toISOString()}>{formattedDate}</time>
+        <h1>{entry.data.title}</h1>
+        {entry.data.tags && (
+          <div class="tags">
+            {entry.data.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="article-content">
+        <Content />
+      </div>
+      <footer class="article-footer">
+        <a href="/news/" class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          お知らせ一覧に戻る
+        </a>
+      </footer>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  .article-header {
+    background: var(--color-bg-white);
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    margin-bottom: var(--space-md);
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--color-primary);
+  }
+
+  .article-header time {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xs);
+  }
+
+  .article-header h1 {
+    font-size: 1.35rem;
+    font-weight: 900;
+    line-height: 1.4;
+    margin-bottom: var(--space-sm);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    background: var(--color-bg);
+    color: var(--color-text-muted);
+    border-radius: var(--radius-full);
+  }
+
+  .article-content {
+    padding: var(--space-lg) 0;
+    line-height: 1.9;
+  }
+
+  .article-content :global(h2) {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: var(--color-text);
+    margin: var(--space-lg) 0 var(--space-sm);
+    padding-bottom: var(--space-xs);
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .article-content :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .article-content :global(h3) {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: var(--space-md) 0 var(--space-sm);
+  }
+
+  .article-content :global(p) {
+    margin-bottom: var(--space-md);
+  }
+
+  .article-content :global(ul),
+  .article-content :global(ol) {
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-md);
+  }
+
+  .article-content :global(li) {
+    margin-bottom: var(--space-xs);
+  }
+
+  .article-content :global(strong) {
+    font-weight: 700;
+  }
+
+  .article-content :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .article-content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    margin: var(--space-md) 0;
+  }
+
+  .article-footer {
+    padding: var(--space-lg) 0 var(--space-2xl);
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-full);
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover {
+    background: var(--color-primary);
+    color: white;
+  }
+</style>
