@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(wsl -e bash -c \"cd /home/ichikawa/projects/genki-fes/genki-fes && npm create astro@latest . -- --template minimal --install --no-git --typescript strict\":*)",
+      "Bash(wsl npm create:*)",
+      "Bash(npm --version:*)",
+      "Bash(npx create-astro@latest:*)",
+      "Bash(npm install:*)",
+      "Bash(ls:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npx astro build:*)"
+    ]
+  }
+}

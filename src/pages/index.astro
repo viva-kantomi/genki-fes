@@ -80,13 +80,11 @@ const recentNews = allNews
     <!-- 楽しむ・楽しませるカード -->
     <div class="hero-action-cards">
       <a href="/events/" class="hero-action-card hero-action-card--enjoy">
-        <span class="hero-action-icon">🎪</span>
         <span class="hero-action-label">楽しむ</span>
         <span class="hero-action-desc">イベントを確認する</span>
       </a>
       <a href="/about/" class="hero-action-card hero-action-card--entertain">
-        <span class="hero-action-icon">🎤</span>
-        <span class="hero-action-label">楽しませる</span>
+        <span class="hero-action-label">出店・参加方法</span>
         <span class="hero-action-desc">出展・参加について</span>
       </a>
     </div>
@@ -103,6 +101,22 @@ const recentNews = allNews
         </p>
       </div>
     </div> -->
+  </section>
+
+  <!-- SP用動画セクション -->
+  <section class="section section--video-sp">
+    <div class="container">
+      <p class="video-sp-label">2025年のげんきフェスタの様子</p>
+      <div class="video-sp-container">
+        <iframe
+          src="https://www.youtube.com/embed/1OqHFpav2X0?rel=0"
+          title="げんきフェスタ プロモーション動画"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
   </section>
 
   <!-- トップページコンテンツ -->
@@ -229,7 +243,7 @@ const recentNews = allNews
   /* ========== ヒーロー ========== */
   .hero {
     position: relative;
-    min-height: 100svh;
+    min-height: 85svh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -459,7 +473,7 @@ const recentNews = allNews
   /* ========== 楽しむ・楽しませるカード ========== */
   .hero-action-cards {
     position: absolute;
-    bottom: 30%;
+    bottom: 20%;
     left: 50%;
     transform: translateX(-50%);
     z-index: 6;
@@ -467,6 +481,7 @@ const recentNews = allNews
     gap: var(--space-sm);
     width: 90%;
     max-width: 400px;
+    font-family: 'Zen Maru Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   .hero-action-card {
@@ -483,6 +498,7 @@ const recentNews = allNews
     box-shadow: 4px 4px 0 var(--color-border);
     transition: all 0.2s;
     backdrop-filter: blur(8px);
+    font-family: 'Zen Maru Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   .hero-action-card:hover {
@@ -503,11 +519,6 @@ const recentNews = allNews
   .hero-action-card--entertain {
     background: rgba(40, 111, 170, 0.95);
     color: white;
-  }
-
-  .hero-action-icon {
-    font-size: 2rem;
-    margin-bottom: var(--space-xs);
   }
 
   .hero-action-label {
@@ -943,10 +954,6 @@ const recentNews = allNews
       padding: var(--space-lg) var(--space-md);
     }
 
-    .hero-action-icon {
-      font-size: 2.5rem;
-    }
-
     .hero-action-label {
       font-size: 1.25rem;
     }
@@ -956,9 +963,39 @@ const recentNews = allNews
     }
   }
 
-  /* PC表示時はSNSセクションを非表示 */
+  /* SP用動画セクション */
+  .section--video-sp {
+    padding: var(--space-lg) 0;
+    background: var(--color-bg-white);
+  }
+
+  .video-sp-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+    text-align: center;
+  }
+
+  .video-sp-container {
+    aspect-ratio: 16/9;
+    width: 100%;
+    border: 2px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .video-sp-container iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* PC表示時はSNSセクションと動画セクションを非表示 */
   @media (min-width: 1200px) {
     .section--accent {
+      display: none;
+    }
+
+    .section--video-sp {
       display: none;
     }
   }
