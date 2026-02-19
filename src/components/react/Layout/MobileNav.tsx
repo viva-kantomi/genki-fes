@@ -1,16 +1,13 @@
 import { Link } from 'react-router-dom';
 
-export function MobileNav() {
-  const closeMenu = () => {
-    const menuBtn = document.getElementById('menuBtn');
-    const nav = document.getElementById('nav');
-    menuBtn?.classList.remove('active');
-    nav?.classList.remove('active');
-    document.body.classList.remove('nav-open');
-  };
+interface MobileNavProps {
+  isOpen: boolean;
+  closeMenu: () => void;
+}
 
+export function MobileNav({ isOpen, closeMenu }: MobileNavProps) {
   return (
-    <nav className="nav-mobile" id="nav">
+    <nav className={`nav-mobile ${isOpen ? 'active' : ''}`}>
       <Link to="/" className="nav-mobile-link nav-blue" onClick={closeMenu}>トップ</Link>
       <Link to="/events/" className="nav-mobile-link nav-yellow" onClick={closeMenu}>イベント一覧</Link>
       <Link to="/history/" className="nav-mobile-link nav-red" onClick={closeMenu}>HISTORY</Link>

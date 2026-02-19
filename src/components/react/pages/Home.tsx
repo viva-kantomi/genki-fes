@@ -33,14 +33,14 @@ export function Home() {
           <div className="scroll-row scroll-row--1">
             <div className="scroll-track scroll-right">
               {[10, 11, 12, 13, 14, 10, 11, 12, 13, 14].map((num, i) => (
-                <img key={i} src={`${basePath}images/top_images/${num}.png`} alt="" className="hero-bg-img" loading="eager" />
+                <img key={i} src={`${basePath}images/top_images/${num}.webp`} alt="" className="hero-bg-img" loading="eager" />
               ))}
             </div>
           </div>
           <div className="scroll-row scroll-row--2">
             <div className="scroll-track scroll-left">
               {[15, 16, 17, 18, 10, 15, 16, 17, 18, 10].map((num, i) => (
-                <img key={i} src={`${basePath}images/top_images/${num}.png`} alt="" className="hero-bg-img" loading="eager" />
+                <img key={i} src={`${basePath}images/top_images/${num}.webp`} alt="" className="hero-bg-img" loading="eager" />
               ))}
             </div>
           </div>
@@ -54,7 +54,7 @@ export function Home() {
         <div className="hero-content">
           <div className="hero-logo-area">
             <Link to="/2026/" className="hero-logo-link">
-              <img src={`${basePath}images/genki_festa_logo.png`} alt="げんきフェスタ2026 5/24 SUN" className="hero-logo" />
+              <img src={`${basePath}images/genki_festa_logo.webp`} alt="げんきフェスタ2026 5/24 SUN" className="hero-logo" />
               <span className="hero-logo-btn">
                 特設ページはこちら
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -97,32 +97,20 @@ export function Home() {
         <div className="container">
           <p className="section-label">ABOUT US</p>
           <h2 className="section-title">私たちについて</h2>
-          <p className="section-lead">
-            げんき塾チームは、地域のみんなが笑顔になれるイベントを企画・運営する有志のチームです。
-            「げんきフェスタ」をはじめ、様々なイベントを通じて地域の絆を深める活動をしています。
-          </p>
-          <div className="features">
-            <div className="feature">
-              <div className="feature-icon">🎉</div>
-              <div className="feature-body">
-                <h3>イベント企画</h3>
-                <p>地域密着型のフェスやマルシェを運営</p>
-              </div>
-            </div>
-            <div className="feature">
-              <div className="feature-icon">🤝</div>
-              <div className="feature-body">
-                <h3>地域連携</h3>
-                <p>自治体・商店街・学校との協働</p>
-              </div>
-            </div>
-            <div className="feature">
-              <div className="feature-icon">✨</div>
-              <div className="feature-body">
-                <h3>笑顔創造</h3>
-                <p>老若男女みんなが楽しめる場づくり</p>
-              </div>
-            </div>
+          <div className="about-box">
+            <p className="about-line">わたしたちは、特定の団体ではありません。</p>
+            <p className="about-line">決まったメンバーも、決まった役割もありません。</p>
+            <p className="about-line">不定形で上下もない、名前のない<strong>「なにか」</strong>です！</p>
+            <img src={`${basePath}images/common/ameba.webp`} alt="" className="about-image" />
+            <p className="about-punch">いつも説明に困っています！</p>
+          </div>
+          <div className="section-action">
+            <Link to="/about/" className="btn-outline">
+              詳細はこちら
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
@@ -133,20 +121,32 @@ export function Home() {
           <p className="section-label">EVENTS</p>
           <h2 className="section-title">主なイベント</h2>
           <div className="event-cards">
-            <Link to="/2026/" className="event-card event-card--featured">
-              <div className="event-card-badge">NOW</div>
-              <h3 className="event-card-title">げんきフェスタ2026</h3>
-              <p className="event-card-date">2026年8月15日（土）</p>
-              <p className="event-card-desc">今年のテーマは「元気、無限大！」</p>
+            <Link to="/2026/" className="event-card">
+              <img src={`${basePath}images/event_cards_genki.jpg`} alt="げんきフェスタ" className="event-card-image" />
+              <div className="event-card-overlay">
+                <h3 className="event-card-title">げんきフェスタ</h3>
+                <p className="event-card-schedule">毎年5月開催</p>
+              </div>
             </Link>
             <Link to="/events/" className="event-card">
-              <h3 className="event-card-title">その他のイベント</h3>
-              <p className="event-card-desc">げんきマルシェ、キッズフェス など</p>
+              <img src={`${basePath}images/event_cards_getsunomi.jpg`} alt="月のみ" className="event-card-image" />
+              <div className="event-card-overlay">
+                <h3 className="event-card-title">月のみ</h3>
+                <p className="event-card-schedule">毎週月曜日開催</p>
+              </div>
+            </Link>
+            <Link to="/events/" className="event-card">
+              <img src={`${basePath}images/event_cards_yomise.jpg`} alt="夜店" className="event-card-image" />
+              <div className="event-card-overlay">
+                <h3 className="event-card-title">夜店</h3>
+                <p className="event-card-schedule">毎年7月開催</p>
+              </div>
             </Link>
           </div>
+          <p className="event-note">他にも地域勉強会やゼミの発表会も！</p>
           <div className="section-action">
             <Link to="/events/" className="btn-outline">
-              イベント一覧を見る
+              イベント一覧
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -525,36 +525,35 @@ export function Home() {
           margin-top: var(--space-md);
         }
 
-        /* 特徴 */
-        .features {
-          display: flex;
-          flex-direction: column;
-          gap: var(--space-sm);
+        /* 私たちについてボックス */
+        .about-box {
+          text-align: center;
         }
 
-        .feature {
-          display: flex;
-          align-items: center;
-          gap: var(--space-sm);
-          padding: var(--space-md);
-          background: var(--color-bg-white);
-          border-radius: var(--radius-md);
-          border: 1px solid var(--color-border);
+        .about-line {
+          font-size: 1rem;
+          font-weight: 500;
+          line-height: 1.8;
+          color: var(--color-text);
+          margin-bottom: var(--space-xs);
         }
 
-        .feature-icon {
-          font-size: 1.75rem;
-          flex-shrink: 0;
+        .about-line strong {
+          color: var(--color-red);
+          font-size: 1.1rem;
+          font-weight: 900;
         }
 
-        .feature-body h3 {
-          font-size: 0.95rem;
+        .about-image {
+          width: 120px;
+          height: auto;
+          margin: var(--space-md) auto;
+          display: block;
+        }
+
+        .about-punch {
+          font-size: 1rem;
           font-weight: 700;
-          margin-bottom: 2px;
-        }
-
-        .feature-body p {
-          font-size: 0.8rem;
           color: var(--color-text-muted);
         }
 
@@ -567,59 +566,57 @@ export function Home() {
 
         .event-card {
           display: block;
-          padding: var(--space-md);
-          background: var(--color-bg);
-          border: 2px solid var(--color-border);
-          border-radius: var(--radius-md);
-          text-decoration: none;
-          color: var(--color-text);
-          transition: all 0.2s;
           position: relative;
+          overflow: hidden;
+          border: 2px solid var(--color-border);
+          border-radius: 0;
+          box-shadow: 4px 4px 0 var(--color-border);
+          text-decoration: none;
+          aspect-ratio: 16 / 9;
+          transition: all 0.2s;
         }
 
         .event-card:hover {
-          border-color: var(--color-primary);
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-sm);
-        }
-
-        .event-card--featured {
-          background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-primary) 100%);
-          color: white;
-          border-color: var(--color-primary);
-        }
-
-        .event-card-badge {
-          position: absolute;
-          top: var(--space-sm);
-          right: var(--space-sm);
-          background: var(--color-yellow);
-          color: var(--color-text);
-          font-size: 0.65rem;
-          font-weight: 900;
-          letter-spacing: 0.1em;
-          padding: 4px 8px;
-          border: 2px solid var(--color-border);
-          border-radius: 0;
           box-shadow: 2px 2px 0 var(--color-border);
+          transform: translate(2px, 2px);
+        }
+
+        .event-card-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .event-card-overlay {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: var(--space-md);
+          padding-top: var(--space-xl);
+          background: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+          color: white;
         }
 
         .event-card-title {
-          font-size: 1.1rem;
+          font-size: 1.2rem;
           font-weight: 900;
-          margin-bottom: 4px;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 0, 0, 0.5);
+          letter-spacing: 0.05em;
         }
 
-        .event-card-date {
-          font-size: 0.8rem;
-          font-weight: 700;
-          opacity: 0.9;
-          margin-bottom: var(--space-xs);
-        }
-
-        .event-card-desc {
+        .event-card-schedule {
           font-size: 0.85rem;
-          opacity: 0.9;
+          font-weight: 700;
+          margin-top: 4px;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .event-note {
+        font-weight: bold;
+          text-align: center;
+          font-size: 0.9rem;
+          margin-top: var(--space-md);
         }
 
         /* お知らせ */
@@ -667,7 +664,7 @@ export function Home() {
           align-items: center;
           gap: var(--space-xs);
           padding: var(--space-sm) var(--space-md);
-          background: transparent;
+          background: white;
           color: var(--color-primary);
           font-size: 0.9rem;
           font-weight: 700;

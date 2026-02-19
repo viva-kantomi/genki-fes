@@ -4,57 +4,65 @@ export function About() {
       <div className="page-header">
         <div className="container">
           <p className="page-label">ABOUT</p>
-          <h1>元気フェスについて</h1>
+          <h1>げんき塾チームについて</h1>
         </div>
       </div>
 
       <div className="container">
+        <section className="motto-section">
+          <p className="motto-label">MOTTO</p>
+          <p className="motto">楽しませる方が<br />もっと楽しい</p>
+        </section>
+
         <section className="content-section">
-          <h2>元気フェスとは</h2>
-          <p>
-            元気フェスは、地域のみんなで作る、みんなが楽しめるフェスティバルです。
-            音楽、グルメ、ワークショップなど、老若男女問わず楽しめるコンテンツをたくさんご用意しています。
+          <h2>わたしたちについて</h2>
+          <div className="about-text">
+            <p className="lead">わたしたちは、特定の団体ではありません。</p>
+            <p className="highlight">あえて言うなら、<strong>「まちの常連」</strong>です。</p>
+            <p>
+              決まったメンバーも、決まった役割もない。<br />
+              それでも集まり、何かをしているうちに、<br />
+              気づけば地域の出来事のそばに立っています。
+            </p>
+            <p className="emphasis">
+              私たちを結んでいるのは、目的ではなく、<br />
+              <strong>続いてきた時間と行い</strong>です。
+            </p>
+            <div className="activity-list">
+              <span>飲み会</span>
+              <span>飾り付けづくり</span>
+              <span>地域イベント</span>
+              <span>旅や交流</span>
+            </div>
+            <p>
+              その積み重ねが、<br />
+              関係人口のハブとなり、<br />
+              外からの学びや出会いを呼び込みました。
+            </p>
+          </div>
+        </section>
+
+        <section className="conclusion-section">
+          <p className="conclusion-text">
+            名前がなくても、<br />
+            組織でなくても、<br />
+            <strong>続いている関係が、ここにあります。</strong>
           </p>
         </section>
 
-        <section className="content-section">
-          <h2>私たちの想い</h2>
-          <p>
-            「元気をつなぐ、笑顔をつなぐ」をテーマに、地域の絆を深め、みんなが笑顔になれる場所を作りたい。
-            そんな想いから元気フェスは生まれました。
-          </p>
-        </section>
-
-        <section className="content-section">
-          <h2>開催情報</h2>
-          <dl className="info-list">
-            <div className="info-item">
-              <dt>開催日</dt>
-              <dd>2026年夏（詳細は後日発表）</dd>
+        <section className="join-section">
+          <div className="join-box">
+            <h2>参加してみたい方へ</h2>
+            <p>SNSからお問い合わせいただき、</p>
+            <p>まずは毎週 月曜日開催の<br/><strong>月のみ</strong>にお越しください！</p>
+            <div className="sns-links">
+              <a href="#" className="sns-link" aria-label="Facebook">
+                <img src={`${import.meta.env.BASE_URL}images/common/sns/icons8-facebook-100.png`} alt="Facebook" width="48" height="48" />
+              </a>
+              <a href="#" className="sns-link" aria-label="Instagram">
+                <img src={`${import.meta.env.BASE_URL}images/common/sns/icons8-instagram-100.png`} alt="Instagram" width="48" height="48" />
+              </a>
             </div>
-            <div className="info-item">
-              <dt>会場</dt>
-              <dd>未定（後日発表）</dd>
-            </div>
-          </dl>
-        </section>
-
-        <section className="content-section">
-          <h2>お問い合わせ</h2>
-          <p>元気フェスに関するお問い合わせは、SNSのDMまたはメールにてお願いいたします。</p>
-          <div className="contact-links">
-            <a href="#" className="contact-link">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-              X（Twitter）
-            </a>
-            <a href="#" className="contact-link">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.509.5.902 1.105 1.153 1.772.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772c-.5.508-1.105.902-1.772 1.153-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 1.802c-2.67 0-2.986.01-4.04.059-.976.045-1.505.207-1.858.344-.466.182-.8.398-1.15.748-.35.35-.566.684-.748 1.15-.137.353-.3.882-.344 1.857-.048 1.055-.058 1.37-.058 4.041 0 2.67.01 2.986.058 4.04.045.976.207 1.505.344 1.858.182.466.399.8.748 1.15.35.35.684.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058 2.67 0 2.987-.01 4.04-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.684.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041 0-2.67-.01-2.986-.058-4.04-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.055-.048-1.37-.058-4.041-.058zm0 3.063a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 8.468a3.333 3.333 0 100-6.666 3.333 3.333 0 000 6.666zm6.538-8.671a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z"/>
-              </svg>
-              Instagram
-            </a>
           </div>
         </section>
       </div>
@@ -83,10 +91,8 @@ export function About() {
         }
         .content-section {
           padding: var(--space-lg) 0;
-          border-bottom: 1px solid var(--color-border);
         }
         .content-section:last-child {
-          border-bottom: none;
           padding-bottom: var(--space-2xl);
         }
         .content-section h2 {
@@ -95,32 +101,197 @@ export function About() {
           margin-bottom: var(--space-sm);
         }
         .content-section p {
-          font-size: 0.9rem;
-          line-height: 1.8;
-          color: var(--color-text-muted);
-        }
-        .info-list {
-          display: flex;
-          flex-direction: column;
-          gap: var(--space-sm);
-        }
-        .info-item {
-          display: flex;
-          gap: var(--space-md);
-          padding: var(--space-sm);
-          background: var(--color-bg-white);
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-sm);
-        }
-        .info-item dt {
-          font-size: 0.8rem;
-          font-weight: 700;
-          min-width: 60px;
-          color: var(--color-secondary);
-        }
-        .info-item dd {
-          font-size: 0.9rem;
+          font-size: 0.95rem;
+          line-height: 2;
           color: var(--color-text);
+        }
+
+        /* モットーセクション */
+        .motto-section {
+          padding: var(--space-xl) 0;
+          text-align: center;
+          background: linear-gradient(135deg, var(--color-red) 0%, #ff4d4f 100%);
+          margin: 0 calc(-1 * var(--space-md));
+          padding-left: var(--space-md);
+          padding-right: var(--space-md);
+          position: relative;
+          overflow: hidden;
+        }
+        .motto-section::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(255,255,255,0.03) 10px,
+            rgba(255,255,255,0.03) 20px
+          );
+        }
+        .motto-label {
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          color: rgba(255,255,255,0.8);
+          margin-bottom: var(--space-sm);
+          position: relative;
+        }
+        .motto {
+          font-size: 1.8rem;
+          font-weight: 900;
+          color: white;
+          line-height: 1.4;
+          text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+          position: relative;
+        }
+
+        /* わたしたちについて */
+        .about-text {
+          font-size: 1rem;
+          line-height: 2;
+          color: var(--color-text);
+        }
+        .about-text p {
+          margin-bottom: var(--space-lg);
+          font-weight: 500;
+        }
+        .about-text p:last-child {
+          margin-bottom: 0;
+        }
+        .about-text .lead {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: var(--color-text);
+        }
+        .about-text .highlight {
+          font-size: 1.2rem;
+          font-weight: 700;
+        }
+        .about-text .highlight strong {
+          color: var(--color-red);
+          font-size: 1.3rem;
+        }
+        .about-text .emphasis {
+          padding: var(--space-md);
+          background: var(--color-bg);
+          border-left: 4px solid var(--color-yellow);
+          border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        .about-text .emphasis strong {
+          color: var(--color-blue);
+        }
+        .activity-list {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: var(--space-sm);
+          margin-bottom: var(--space-lg);
+          padding: var(--space-md) 0;
+        }
+        .activity-list span {
+          display: inline-block;
+          padding: 12px 16px;
+          background: var(--color-yellow);
+          color: var(--color-text);
+          font-size: 1rem;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          border: 2px solid var(--color-border);
+          border-radius: 0;
+          box-shadow: 4px 4px 0 var(--color-border);
+          text-shadow: none;
+        }
+        .activity-list span:nth-child(2) {
+          background: var(--color-red);
+          color: white;
+          text-shadow: 1px 1px 0 var(--color-border);
+        }
+        .activity-list span:nth-child(3) {
+          background: var(--color-blue);
+          color: white;
+          text-shadow: 1px 1px 0 var(--color-border);
+        }
+        .activity-list span:nth-child(4) {
+          background: white;
+        }
+        /* conclusionセクション */
+        .conclusion-section {
+          padding: var(--space-xl) 0;
+          text-align: center;
+          background: linear-gradient(135deg, var(--color-blue) 0%, #3d8fd1 100%);
+          margin: 0 calc(-1 * var(--space-md));
+          padding-left: var(--space-md);
+          padding-right: var(--space-md);
+          position: relative;
+          overflow: hidden;
+        }
+        .conclusion-section::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(255,255,255,0.03) 10px,
+            rgba(255,255,255,0.03) 20px
+          );
+        }
+        .conclusion-text {
+          font-size: 1.1rem;
+          font-weight: 500;
+          color: white;
+          line-height: 1.8;
+          position: relative;
+        }
+        .conclusion-text strong {
+          display: block;
+          font-size: 1.3rem;
+          font-weight: 900;
+          margin-top: var(--space-sm);
+          text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+        }
+        /* 参加してみたい方へセクション */
+        .join-section {
+          padding: var(--space-lg) 0 var(--space-2xl);
+        }
+        .join-box {
+          padding: var(--space-lg);
+          background: white;
+          border: 2px solid var(--color-border);
+          border-radius: 0;
+          box-shadow: 4px 4px 0 var(--color-border);
+          text-align: center;
+        }
+        .join-box h2 {
+          font-size: 1.2rem;
+          font-weight: 900;
+          margin-bottom: var(--space-md);
+          color: var(--color-text);
+        }
+        .join-box p {
+          font-size: 1rem;
+          font-weight: 700;
+          line-height: 1.6;
+          color: var(--color-text);
+          margin-bottom: var(--space-xs);
+        }
+        .join-box p strong {
+          color: var(--color-red);
+          font-size: 1.1rem;
+        }
+        .join-box .sns-links {
+          display: flex;
+          justify-content: center;
+          gap: var(--space-md);
+          margin-top: var(--space-md);
         }
         .contact-links {
           display: flex;

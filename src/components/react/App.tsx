@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { Header } from './Layout/Header';
 import { Footer } from './Layout/Footer';
 import { MobileNav } from './Layout/MobileNav';
@@ -11,6 +11,17 @@ import { History } from './pages/History';
 import { NewsList } from './pages/NewsList';
 import { NewsDetail } from './pages/NewsDetail';
 import { NoteDetail } from './pages/NoteDetail';
+
+// ページ遷移時にスクロールをトップに戻す
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 // サイドバーからのナビゲーションイベントをリッスン
 function NavigationListener() {
@@ -32,12 +43,24 @@ function NavigationListener() {
 
 export function App() {
   const basePath = import.meta.env.BASE_URL || '/';
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    document.body.classList.toggle('nav-open', !isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    document.body.classList.remove('nav-open');
+  };
 
   return (
     <BrowserRouter basename={basePath.replace(/\/$/, '')}>
+      <ScrollToTop />
       <NavigationListener />
-      <Header />
-      <MobileNav />
+      <Header isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+      <MobileNav isOpen={isMenuOpen} closeMenu={closeMenu} />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />

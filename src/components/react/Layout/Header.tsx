@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 
-export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+interface HeaderProps {
+  isMenuOpen: boolean;
+  toggleMenu: () => void;
+}
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    document.body.classList.toggle('nav-open', !isMenuOpen);
-  };
-
+export function Header({ isMenuOpen, toggleMenu }: HeaderProps) {
   return (
     <header className="header">
       <div className="header-inner">
@@ -25,7 +22,6 @@ export function Header() {
         </nav>
         <button
           className={`menu-btn ${isMenuOpen ? 'active' : ''}`}
-          id="menuBtn"
           aria-label="メニューを開く"
           onClick={toggleMenu}
         >
