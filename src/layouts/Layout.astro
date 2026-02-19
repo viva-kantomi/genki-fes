@@ -112,8 +112,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           e.preventDefault();
           const href = link.getAttribute('href');
           if (href) {
+            // React Routerはbasenameを自動付与するので、ベースパスを除去して渡す
+            const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+            const path = basePath && href.startsWith(basePath)
+              ? href.slice(basePath.length) || '/'
+              : href;
             window.dispatchEvent(new CustomEvent('spa-navigate', {
-              detail: { path: href }
+              detail: { path }
             }));
           }
         });
