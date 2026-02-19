@@ -98,11 +98,13 @@ export function Home() {
           <p className="section-label">ABOUT US</p>
           <h2 className="section-title">私たちについて</h2>
           <div className="about-box">
-            <p className="about-line">わたしたちは、特定の団体ではありません。</p>
-            <p className="about-line">決まったメンバーも、決まった役割もありません。</p>
-            <p className="about-line">不定形で上下もない、名前のない<strong>「なにか」</strong>です！</p>
+            <p className="about-line">わたしたちは、特定の団体ではありません</p>
+            <p className="about-line">決まったメンバーも</p>
+            <p className="about-line">決まった役割もありません</p>
+            <p className="about-line">不定形で上下もない</p>
+            <p className="about-line">名前のない<strong>「なにか」</strong>です！</p>
             <img src={`${basePath}images/common/ameba.webp`} alt="" className="about-image" />
-            <p className="about-punch">いつも説明に困っています！</p>
+            <p className="about-line">いつも説明に困っています！</p>
           </div>
           <div className="section-action">
             <Link to="/about/" className="btn-outline">

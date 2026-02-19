@@ -20,9 +20,43 @@ const areas = [
   { name: 'キッズエリア', icon: '🎠', description: '遊具・ゲームコーナー' },
   { name: '休憩エリア', icon: '🌳', description: '日陰・給水スポット' },
 ];
+
+const eventJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "げんきフェスタ2026",
+  "description": "群馬県富岡市発！げんき塾チームが主催する夏の大型イベント。テーマは「元気、無限大！」。音楽、グルメ、ワークショップなど家族で楽しめるお祭り。",
+  "startDate": "2026-08-15T10:00:00+09:00",
+  "endDate": "2026-08-15T17:00:00+09:00",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "location": {
+    "@type": "Place",
+    "name": "東京・お台場 海浜公園",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "addressRegion": "東京都"
+    }
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "げんき塾チーム",
+    "url": "https://viva-kantomi.github.io/genki-fes/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "JPY",
+    "availability": "https://schema.org/InStock",
+    "url": "https://viva-kantomi.github.io/genki-fes/2026/"
+  },
+  "image": "https://viva-kantomi.github.io/genki-fes/images/og-default.png"
+};
 ---
 
-<Layout title="げんきフェスタ2026 | げんき塾チーム">
+<Layout title="げんきフェスタ2026｜群馬県富岡市の夏祭り・イベント特設ページ" description="げんきフェスタ2026の特設ページ。群馬県富岡市発のげんき塾チームが主催する夏の大型イベント。テーマは「元気、無限大！」。タイムスケジュール、エリアマップ、アクセス情報を掲載。">
+  <script type="application/ld+json" set:html={JSON.stringify(eventJsonLd)} />
   <section class="hero-2026">
     <div class="hero-inner">
       <p class="hero-date">2026.8.15 SAT</p>

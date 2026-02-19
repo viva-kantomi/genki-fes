@@ -9,7 +9,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description = 'げんき塾チーム - 地域を元気にするイベント企画チーム', ogImage = '/images/og-default.png' } = Astro.props;
+const { title, description = '群馬県富岡市発！げんき塾チームが主催する「げんきフェスタ」公式サイト。地域を元気にするイベント・お祭りの企画運営。音楽、グルメ、ワークショップなど家族で楽しめるイベント情報をお届けします。', ogImage = '/images/og-default.png' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -29,7 +29,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content="げんきフェスタ,群馬県,富岡市,イベント,祭,フェス,地域イベント,げんき塾チーム" />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="ja" href={canonicalURL} />
+
+    <!-- Mobile -->
+    <meta name="theme-color" content="#d92325" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
     <!-- OGP -->
     <meta property="og:type" content="website" />
@@ -44,6 +51,23 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+
+    <!-- JSON-LD 構造化データ -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "げんき塾チーム",
+      "description": "群馬県富岡市を拠点とする地域イベント企画チーム。げんきフェスタをはじめ、地域を元気にするお祭り・イベントを企画運営。",
+      "url": "https://viva-kantomi.github.io/genki-fes/",
+      "logo": "https://viva-kantomi.github.io/genki-fes/images/og-default.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "富岡市",
+        "addressRegion": "群馬県",
+        "addressCountry": "JP"
+      },
+      "sameAs": []
+    })} />
   </head>
   <body>
     <!-- PC用3カラムレイアウト -->

@@ -17,7 +17,10 @@ import img18 from '../../public/images/top_images/18.png';
 const noteArticles = await fetchNoteArticles(3);
 ---
 
-<Layout title="げんき塾チーム - 地域を元気にするイベント企画チーム">
+<Layout title="げんき塾チーム｜群馬県富岡市のイベント・お祭り企画" description="群馬県富岡市を拠点に活動する「げんき塾チーム」公式サイト。げんきフェスタをはじめ、地域を元気にするイベント・お祭りを企画運営。音楽、グルメ、ワークショップなど家族で楽しめるイベント情報を発信中。">
+  <!-- SEO用 h1（視覚的非表示） -->
+  <h1 class="visually-hidden">げんき塾チーム - 群馬県富岡市のイベント・お祭り企画チーム</h1>
+
   <!-- ヒーロー -->
   <section class="hero">
     <!-- 背景画像（無限スクロール） -->
@@ -234,6 +237,19 @@ const noteArticles = await fetchNoteArticles(3);
 </Layout>
 
 <style>
+  /* SEO用 視覚的非表示クラス */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .container {
     max-width: 600px;
     margin: 0 auto;

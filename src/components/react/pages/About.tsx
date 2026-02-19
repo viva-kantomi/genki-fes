@@ -15,29 +15,37 @@ export function About() {
         </section>
 
         <section className="content-section">
-          <h2>わたしたちについて</h2>
+          <h1>私たちについて</h1>
           <div className="about-text">
-            <p className="lead">わたしたちは、特定の団体ではありません。</p>
-            <p className="highlight">あえて言うなら、<strong>「まちの常連」</strong>です。</p>
+            <p className="lead">私たちは、特定の団体ではありません。</p>
+            <p className="highlight">あえて言葉にするなら<br/><strong>「まちの常連」</strong>です。</p>
             <p>
               決まったメンバーも、決まった役割もない。<br />
               それでも集まり、何かをしているうちに、<br />
               気づけば地域の出来事のそばに立っています。
             </p>
-            <p className="emphasis">
-              私たちを結んでいるのは、目的ではなく、<br />
-              <strong>続いてきた時間と行い</strong>です。
+            <p className="highlight">私たちを結んでいるのは<br />
+              <strong>目的</strong>ではありません。<br />
+            </p>
+            <p className="highlight">
+              私たちを結んでいるのは<br />
+              <strong>時間</strong>と<strong>行動</strong>です。
             </p>
             <div className="activity-list">
+              <span>げんきフェスタ</span>
               <span>飲み会</span>
-              <span>飾り付けづくり</span>
-              <span>地域イベント</span>
               <span>旅や交流</span>
+              <span>ボランティア</span>
+              <span>マラソン</span>
+              <span>ゲストハウス</span>
+              <span>勉強会</span>
+              <span>地域活性化</span>
+              <span>ワークショップ</span>
             </div>
-            <p>
+            <p className="highlight">
               その積み重ねが、<br />
               関係人口のハブとなり、<br />
-              外からの学びや出会いを呼び込みました。
+              学びや出会いを呼び込みました。
             </p>
           </div>
         </section>
@@ -46,15 +54,16 @@ export function About() {
           <p className="conclusion-text">
             名前がなくても、<br />
             組織でなくても、<br />
-            <strong>続いている関係が、ここにあります。</strong>
+            <strong>ワクワクする「なにか」が<br />ここにあります。</strong>
           </p>
         </section>
 
         <section className="join-section">
           <div className="join-box">
             <h2>参加してみたい方へ</h2>
-            <p>SNSからお問い合わせいただき、</p>
-            <p>まずは毎週 月曜日開催の<br/><strong>月のみ</strong>にお越しください！</p>
+            <p>SNSからお問い合わせいただき、<br/>
+              まずは毎週 月曜日開催の<br/><strong>月のみ</strong>にお越しください！</p>
+            <p><a href="/" className="tsukinomi-link">月のみの詳細はコチラ</a></p>
             <div className="sns-links">
               <a href="#" className="sns-link" aria-label="Facebook">
                 <img src={`${import.meta.env.BASE_URL}images/common/sns/icons8-facebook-100.png`} alt="Facebook" width="48" height="48" />
@@ -218,6 +227,43 @@ export function About() {
         .activity-list span:nth-child(4) {
           background: white;
         }
+        .activity-list span:nth-child(5) {
+          background: var(--color-yellow);
+          color: var(--color-text);
+        }
+        .activity-list span:nth-child(6) {
+          background: var(--color-red);
+          color: white;
+          text-shadow: 1px 1px 0 var(--color-border);
+        }
+        .activity-list span:nth-child(7) {
+          background: var(--color-blue);
+          color: white;
+          text-shadow: 1px 1px 0 var(--color-border);
+        }
+        .activity-list span:nth-child(8) {
+          background: var(--color-yellow);
+          color: var(--color-text);
+        }
+        .activity-list span:nth-child(9) {
+          background: var(--color-red);
+          color: white;
+          text-shadow: 1px 1px 0 var(--color-border);
+        }
+        .activity-list span:nth-child(10) {
+          background: var(--color-blue);
+          color: white;
+          text-shadow: 1px 1px 0 var(--color-border);
+        }
+        .activity-list span:nth-child(11) {
+          background: var(--color-yellow);
+          color: var(--color-text);
+        }
+        .activity-list span:nth-child(12) {
+          background: var(--color-red);
+          color: white;
+          text-shadow: 1px 1px 0 var(--color-border);
+        }
         /* conclusionセクション */
         .conclusion-section {
           padding: var(--space-xl) 0;
@@ -286,6 +332,16 @@ export function About() {
         .join-box p strong {
           color: var(--color-red);
           font-size: 1.1rem;
+        }
+        .tsukinomi-link {
+          display: inline-block;
+          color: var(--color-blue);
+          font-weight: 700;
+          text-decoration: underline;
+          transition: all 0.2s;
+        }
+        .tsukinomi-link:hover {
+          color: var(--color-red);
         }
         .join-box .sns-links {
           display: flex;
