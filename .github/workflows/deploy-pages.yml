@@ -35,9 +35,6 @@ jobs:
 
       - name: Build
         run: npm run build
-        env:
-          PUBLIC_SITE_URL: https://viva-kantomi.github.io
-          PUBLIC_BASE_PATH: /genki-fes
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
