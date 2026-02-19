@@ -12,7 +12,11 @@
       "Bash(npx astro build:*)",
       "Bash(grep:*)",
       "Bash(cd:*)",
-      "Bash(npm run prebuild:*)"
+      "Bash(npm run prebuild:*)",
+      "Bash(git checkout:*)",
+      "Bash(git merge:*)",
+      "Bash(git stash:*)",
+      "Bash(git push:*)"
     ]
   }
 }
