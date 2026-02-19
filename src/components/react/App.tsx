@@ -32,8 +32,12 @@ function NavigationListener() {
       navigate(e.detail.path);
     };
 
+    // Reactがマウント完了したことを通知
+    (window as any).__spaNavigateReady = true;
+
     window.addEventListener('spa-navigate', handleNavigate as EventListener);
     return () => {
+      (window as any).__spaNavigateReady = false;
       window.removeEventListener('spa-navigate', handleNavigate as EventListener);
     };
   }, [navigate]);

@@ -110,16 +110,34 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       document.querySelectorAll('.sidebar-nav-link').forEach(link => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
-          const href = link.getAttribute('href');
+          const href = (link as HTMLAnchorElement).getAttribute('href');
           if (href) {
             // React Routerはbasenameを自動付与するので、ベースパスを除去して渡す
-            const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+            const basePath = (import.meta.env.BASE_URL || '').replace(/\/$/, '');
             const path = basePath && href.startsWith(basePath)
               ? href.slice(basePath.length) || '/'
               : href;
-            window.dispatchEvent(new CustomEvent('spa-navigate', {
-              detail: { path }
-            }));
+
+            // Reactがマウント済みかチェック（spa-navigate-readyフラグ）
+            const dispatchNavigate = () => {
+              window.dispatchEvent(new CustomEvent('spa-navigate', {
+                detail: { path }
+              }));
+            };
+
+            if ((window as any).__spaNavigateReady) {
+              dispatchNavigate();
+            } else {
+              // Reactがまだ準備中の場合、少し待ってリトライ
+              const checkReady = setInterval(() => {
+                if ((window as any).__spaNavigateReady) {
+                  clearInterval(checkReady);
+                  dispatchNavigate();
+                }
+              }, 10);
+              // 最大500ms待つ
+              setTimeout(() => clearInterval(checkReady), 500);
+            }
           }
         });
       });
