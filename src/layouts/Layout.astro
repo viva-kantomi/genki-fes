@@ -261,11 +261,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     color: var(--color-text);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
+    height: 100%;
+    height: -webkit-fill-available;
   }
 
   body {
-    min-height: 100vh;
     min-height: 100dvh;
+    min-height: -webkit-fill-available;
     overflow-x: hidden;
   }
 
@@ -276,8 +278,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   /* ========== Desktop 3-column Layout (6:3:1) ========== */
   .desktop-layout {
     display: flex;
-    min-height: 100vh;
     min-height: 100dvh;
+    min-height: -webkit-fill-available;
   }
 
   /* ========== サイドバー（共通） ========== */
@@ -287,7 +289,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     color: var(--color-text);
     position: fixed;
     top: 0;
-    bottom: 0;
+    height: 100dvh;
+    height: -webkit-fill-available;
     overflow: hidden;
     font-family: var(--font-main);
   }
@@ -387,6 +390,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     border-left: 2px solid var(--color-border);
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .sidebar-right-menu {
@@ -642,8 +647,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   /* ========== Phone Frame（中央のSP枠 30%） ========== */
   .phone-frame {
     width: 100%;
-    min-height: 100vh;
     min-height: 100dvh;
+    min-height: -webkit-fill-available;
     display: flex;
     flex-direction: column;
   }
@@ -1049,6 +1054,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     .sidebar-right-menu {
       padding: var(--space-xs);
       padding-top: var(--space-sm);
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
     }
 
     .sidebar-menu-title {
@@ -1064,6 +1072,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     .sidebar-right-sns {
       padding: var(--space-xs);
+      flex-shrink: 0;
     }
 
     .sidebar-sns-title {
