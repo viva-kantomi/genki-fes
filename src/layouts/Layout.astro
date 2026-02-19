@@ -195,12 +195,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       (window as any).onYouTubeIframeAPIReady = function() {
         new (window as any).YT.Player('youtube-player', {
           videoId: '1OqHFpav2X0',
+          host: 'https://www.youtube-nocookie.com',
           playerVars: {
             autoplay: 0,
             loop: 1,
             playlist: '1OqHFpav2X0',
             controls: 1,
-            rel: 0
+            rel: 0,
+            origin: window.location.origin
           },
           events: {
             onReady: function(event: any) {
