@@ -5,7 +5,16 @@
     "date": "2026年5月24日（日）",
     "schedule": "毎年5月開催",
     "description": "年に一度の大イベント！音楽、グルメ、ワークショップなど盛りだくさん！",
-    "link": "/2026/",
+    "details": [
+      "商店街全体が会場となる年に一度の大イベント。",
+      "ステージパフォーマンス、グルメ屋台、ワークショップなど盛りだくさん！",
+      "地域の人も、遠くからの人も、みんなで楽しめる一日。"
+    ],
+    "comments": [
+      "毎年楽しみにしてます！",
+      "子どもから大人まで楽しめる！"
+    ],
+    "link": "/genki-festa-2026/",
     "image": "/images/event_cards_genki.jpg",
     "featured": true,
     "badge": "NOW",
@@ -18,6 +27,16 @@
     "date": "毎週月曜日",
     "schedule": "毎週月曜日開催",
     "description": "自分で飲み物と食べ物を持ち寄ってワイワイ",
+    "details": [
+      "毎週月曜日に開催される月のみ。",
+      "飲み物や食べ物を持ち寄り、やりたいことや手伝って欲しいことを気軽に話せる場。",
+      "イベント時期は準備しながら飲んだり食べたり。",
+      "誰かの為にできることが溢れている。"
+    ],
+    "comments": [
+      "10代〜70代の人が居ておもしろい！",
+      "強制されることがなくとても気軽に参加できる！"
+    ],
     "link": null,
     "image": "/images/event_cards_getsunomi.jpg",
     "featured": false,
@@ -31,6 +50,14 @@
     "date": "毎年7月",
     "schedule": "毎年7月開催",
     "description": "夏の夜を彩る夜店イベント。",
+    "details": [
+      "夏の夜を彩る夜店イベント。",
+      "屋台や出し物で商店街が賑わう。"
+    ],
+    "comments": [
+      "夏の風物詩！",
+      "子どもたちが楽しそう！"
+    ],
     "link": null,
     "image": "/images/event_cards_yomise.jpg",
     "featured": false,
@@ -44,6 +71,10 @@
     "date": "不定期",
     "schedule": "不定期開催",
     "description": "研究発表・商店街研究",
+    "details": [
+      "大学生と地域が連携した研究発表や商店街研究。"
+    ],
+    "comments": [],
     "link": null,
     "image": null,
     "featured": false,
@@ -57,6 +88,10 @@
     "date": "不定期",
     "schedule": "不定期開催",
     "description": "研究・勉強会",
+    "details": [
+      "地域の歴史や文化を学ぶ勉強会。"
+    ],
+    "comments": [],
     "link": null,
     "image": null,
     "featured": false,
@@ -70,6 +105,8 @@
     "date": "不定期",
     "schedule": "不定期開催",
     "description": "",
+    "details": [],
+    "comments": [],
     "link": null,
     "image": null,
     "featured": false,

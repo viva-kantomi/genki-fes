@@ -16,7 +16,7 @@ export function Header({ isMenuOpen, toggleMenu }: HeaderProps) {
           <Link to="/" className="nav-link">HOME</Link>
           <Link to="/events/" className="nav-link">EVENTS</Link>
           <Link to="/history/" className="nav-link">HISTORY</Link>
-          <Link to="/2026/" className="nav-link">2026</Link>
+          <Link to="/genki-festa-2026/" className="nav-link">2026</Link>
           <Link to="/news/" className="nav-link">NEWS</Link>
           <Link to="/about/" className="nav-link">ABOUT</Link>
         </nav>

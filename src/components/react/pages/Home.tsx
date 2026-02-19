@@ -85,7 +85,7 @@ export function Home() {
         <div className="hero-content">
           <div className="hero-logo-area">
             {showGenkiFestaSpecial ? (
-              <Link to="/2026/" className="hero-logo-link">
+              <Link to="/genki-festa-2026/" className="hero-logo-link">
                 <img src={logoImage} alt="げんきフェスタ2026 5/24 SUN" className="hero-logo" />
                 <span className="hero-logo-btn">
                   特設ページはこちら

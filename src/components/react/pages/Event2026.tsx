@@ -1,31 +1,66 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
+// イベント情報（正しい情報）
+const eventInfo = {
+  date: '2026年5月24日（日）',
+  dateShort: '2026.5.24 SUN',
+  time: '10:00〜16:00',
+  location: '群馬県富岡市 宮本町商店街',
+  theme: '元気、無限大！',
+};
+
+// タイムスケジュール（未定）
 const schedule = [
-  { time: '10:00', content: '開場', description: 'フードエリア・ワークショップエリアオープン' },
-  { time: '11:00', content: 'オープニングセレモニー', description: 'メインステージにて' },
-  { time: '11:30', content: 'ライブステージ開始', description: '地元アーティストによるライブ' },
-  { time: '12:00', content: 'キッズタイム', description: 'サブステージで子ども向けショー' },
-  { time: '14:00', content: 'スペシャルゲストライブ', description: '詳細は後日発表！' },
-  { time: '16:00', content: 'フィナーレ', description: '全員参加のダンスタイム' },
-  { time: '17:00', content: '閉場', description: '' },
+  { time: '10:00', content: '開場', description: '各エリアオープン' },
+  { time: '10:30', content: '調整中', description: '詳細は後日発表' },
+  { time: '11:00', content: '調整中', description: '詳細は後日発表' },
+  { time: '12:00', content: '調整中', description: '詳細は後日発表' },
+  { time: '13:00', content: '調整中', description: '詳細は後日発表' },
+  { time: '14:00', content: '調整中', description: '詳細は後日発表' },
+  { time: '15:00', content: '調整中', description: '詳細は後日発表' },
+  { time: '16:00', content: '閉場', description: '' },
 ];
 
+// エリア情報
 const areas = [
-  { name: 'メインステージ', icon: '🎵', description: '音楽ライブ、ダンスパフォーマンス' },
-  { name: 'サブステージ', icon: '🎭', description: 'キッズショー、トークイベント' },
-  { name: 'フードエリア', icon: '🍔', description: '地元グルメ30店舗以上' },
-  { name: 'ワークショップ', icon: '🎨', description: '工作・体験ブース' },
-  { name: 'キッズエリア', icon: '🎠', description: '遊具・ゲームコーナー' },
-  { name: '休憩エリア', icon: '🌳', description: '日陰・給水スポット' },
+  { id: 'A', name: 'おとみちゃん広場', color: '#e74c3c' },
+  { id: 'B', name: '城町広場', color: '#3498db' },
+  { id: 'C', name: 'まぶしや前広場', color: '#27ae60' },
+  { id: 'D', name: '韮塚製糸場広場', color: '#f39c12' },
 ];
+
+// 出店情報（仮データ）
+const shops: Record<string, Array<{name: string; category: string; description: string}>> = {
+  A: [
+    { name: '出店名1', category: 'フード', description: '詳細は後日発表' },
+    { name: '出店名2', category: 'フード', description: '詳細は後日発表' },
+    { name: '出店名3', category: '物販', description: '詳細は後日発表' },
+  ],
+  B: [
+    { name: '出店名4', category: 'フード', description: '詳細は後日発表' },
+    { name: '出店名5', category: 'ワークショップ', description: '詳細は後日発表' },
+  ],
+  C: [
+    { name: '出店名6', category: 'フード', description: '詳細は後日発表' },
+    { name: '出店名7', category: 'フード', description: '詳細は後日発表' },
+    { name: '出店名8', category: '物販', description: '詳細は後日発表' },
+    { name: '出店名9', category: 'ワークショップ', description: '詳細は後日発表' },
+  ],
+  D: [
+    { name: '出店名10', category: 'フード', description: '詳細は後日発表' },
+    { name: '出店名11', category: 'ワークショップ', description: '詳細は後日発表' },
+  ],
+};
 
 export function Event2026() {
   const [days, setDays] = useState('---');
+  const [activeArea, setActiveArea] = useState<string | null>(null);
+  const areaRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
     const updateCountdown = () => {
-      const eventDate = new Date('2026-08-15T10:00:00+09:00');
+      const eventDate = new Date('2026-05-24T10:00:00+09:00');
       const now = new Date();
       const diff = eventDate.getTime() - now.getTime();
       const daysLeft = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
@@ -37,23 +72,55 @@ export function Event2026() {
     return () => clearInterval(interval);
   }, []);
 
+  // スクロール監視でアクティブエリアを更新
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 100;
+
+      for (const area of areas) {
+        const element = areaRefs.current[area.id];
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveArea(area.id);
+            return;
+          }
+        }
+      }
+      setActiveArea(null);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToArea = (areaId: string) => {
+    const element = areaRefs.current[areaId];
+    if (element) {
+      const offsetTop = element.offsetTop - 60;
+      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
+      {/* ヒーローセクション */}
       <section className="hero-2026">
         <div className="hero-inner">
-          <p className="hero-date">2026.8.15 SAT</p>
+          <p className="hero-date">{eventInfo.dateShort}</p>
           <h1 className="hero-title">
             <span className="title-year">2026</span>
             <span className="title-main">げんきフェスタ</span>
           </h1>
-          <p className="hero-theme">テーマ：「元気、無限大！」</p>
+          <p className="hero-theme">テーマ：「{eventInfo.theme}」</p>
           <div className="hero-info">
-            <p>東京・お台場 海浜公園</p>
-            <p>10:00〜17:00 / 入場無料</p>
+            <p>{eventInfo.location}</p>
+            <p>{eventInfo.time} / 入場無料</p>
           </div>
         </div>
       </section>
 
+      {/* カウントダウン */}
       <section className="countdown-section">
         <div className="container">
           <p className="countdown-label">開催まであと</p>
@@ -66,6 +133,7 @@ export function Event2026() {
         </div>
       </section>
 
+      {/* コンセプト */}
       <section className="section">
         <div className="container">
           <p className="section-label">CONCEPT</p>
@@ -78,10 +146,12 @@ export function Event2026() {
         </div>
       </section>
 
+      {/* タイムスケジュール */}
       <section className="section section--white">
         <div className="container">
           <p className="section-label">TIMETABLE</p>
           <h2 className="section-title">タイムスケジュール</h2>
+          <p className="schedule-notice">※現在調整中です。決まり次第更新します。</p>
           <div className="timetable">
             {schedule.map((item, index) => (
               <div key={index} className="timetable-item">
@@ -97,24 +167,89 @@ export function Event2026() {
         </div>
       </section>
 
+      {/* 全体エリア紹介 */}
       <section className="section">
         <div className="container">
           <p className="section-label">AREA MAP</p>
-          <h2 className="section-title">エリア紹介</h2>
-          <div className="areas">
-            {areas.map((area, index) => (
-              <div key={index} className="area-card">
-                <span className="area-icon">{area.icon}</span>
-                <div className="area-body">
+          <h2 className="section-title">会場マップ</h2>
+
+          {/* 全体マップ画像（仮） */}
+          <div className="map-overview">
+            <div className="map-placeholder">
+              <span className="placeholder-text">会場全体マップ</span>
+              <span className="placeholder-sub">（準備中）</span>
+            </div>
+          </div>
+
+          <p className="map-description">
+            宮本町商店街の4つのエリアで、さまざまな出店やイベントをお楽しみいただけます。
+          </p>
+
+          {/* エリア一覧 */}
+          <div className="area-grid">
+            {areas.map((area) => (
+              <button
+                key={area.id}
+                onClick={() => scrollToArea(area.id)}
+                className="area-card-link"
+                style={{ '--area-color': area.color } as React.CSSProperties}
+              >
+                <div className="area-badge">{area.id}</div>
+                <div className="area-info">
                   <h3 className="area-name">{area.name}</h3>
-                  <p className="area-desc">{area.description}</p>
+                  <span className="area-arrow">→</span>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
       </section>
 
+      {/* 個別エリア紹介 + 出店情報 */}
+      <section className="section section--white">
+        <div className="container">
+          <p className="section-label">SHOPS</p>
+          <h2 className="section-title">エリア別出店情報</h2>
+
+          {areas.map((area) => (
+            <div
+              key={area.id}
+              ref={(el) => { areaRefs.current[area.id] = el; }}
+              className="area-section"
+              style={{ '--area-color': area.color } as React.CSSProperties}
+            >
+              {/* スティッキーヘッダー */}
+              <div className="area-sticky-header">
+                <div className="area-header-content">
+                  <span className="area-header-badge">{area.id}</span>
+                  <span className="area-header-name">{area.name}</span>
+                </div>
+              </div>
+
+              {/* エリア画像（仮） */}
+              <div className="area-image-wrapper">
+                <div className="area-image-placeholder">
+                  <span className="placeholder-text">{area.name}</span>
+                  <span className="placeholder-sub">（写真準備中）</span>
+                </div>
+              </div>
+
+              {/* 出店一覧 */}
+              <div className="shop-list">
+                {shops[area.id]?.map((shop, index) => (
+                  <div key={index} className="shop-card">
+                    <div className="shop-category">{shop.category}</div>
+                    <h4 className="shop-name">{shop.name}</h4>
+                    <p className="shop-desc">{shop.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* アクセス */}
       <section className="section section--blue">
         <div className="container">
           <p className="section-label" style={{ color: 'rgba(255,255,255,0.7)' }}>ACCESS</p>
@@ -122,18 +257,18 @@ export function Event2026() {
           <div className="access-info">
             <div className="access-item">
               <h3>電車でお越しの方</h3>
-              <p>りんかい線「東京テレポート駅」徒歩5分</p>
-              <p>ゆりかもめ「お台場海浜公園駅」徒歩3分</p>
+              <p>上信電鉄「上州富岡駅」より徒歩約10分</p>
             </div>
             <div className="access-item">
               <h3>お車でお越しの方</h3>
-              <p>首都高速湾岸線「お台場」出口より5分</p>
-              <p>※駐車場には限りがあります。公共交通機関をご利用ください。</p>
+              <p>上信越自動車道「富岡IC」より約10分</p>
+              <p>※会場周辺の駐車場をご利用ください</p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* CTA */}
       <section className="section section--accent">
         <div className="container">
           <h2 className="cta-title">最新情報をチェック！</h2>
@@ -148,51 +283,477 @@ export function Event2026() {
       </section>
 
       <style>{`
-        .container { max-width: 600px; margin: 0 auto; padding: 0 var(--space-md); }
-        .hero-2026 { background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-primary) 50%, var(--color-secondary) 100%); padding: var(--space-2xl) var(--space-md); text-align: center; color: white; border-bottom: 2px solid var(--color-border); }
-        .hero-inner { max-width: 600px; margin: 0 auto; }
-        .hero-date { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; margin-bottom: var(--space-sm); opacity: 0.9; }
-        .hero-title { margin-bottom: var(--space-md); }
-        .title-year { display: block; font-size: 3.5rem; font-weight: 900; line-height: 1; text-shadow: 3px 3px 0 var(--color-border); }
-        .title-main { display: block; font-size: 2rem; font-weight: 900; margin-top: var(--space-xs); }
-        .hero-theme { font-size: 1rem; font-weight: 700; background: var(--color-yellow); color: var(--color-text); display: inline-block; padding: var(--space-xs) var(--space-md); border-radius: var(--radius-full); margin-bottom: var(--space-md); }
-        .hero-info { font-size: 0.9rem; line-height: 1.8; opacity: 0.95; }
-        .countdown-section { background: var(--color-yellow); padding: var(--space-lg) 0; text-align: center; border-bottom: 2px solid var(--color-border); }
-        .countdown-label { font-size: 0.8rem; font-weight: 700; color: var(--color-text); margin-bottom: var(--space-xs); }
-        .countdown-display { display: flex; justify-content: center; gap: var(--space-md); }
-        .countdown-item { display: flex; align-items: baseline; gap: 4px; }
-        .countdown-number { font-size: 3rem; font-weight: 900; color: var(--color-primary); line-height: 1; }
-        .countdown-unit { font-size: 1.25rem; font-weight: 700; color: var(--color-text); }
-        .section { padding: var(--space-xl) 0; }
-        .section--white { background: var(--color-bg-white); }
-        .section--blue { background: var(--color-primary); color: white; }
-        .section--accent { background: var(--color-secondary); color: white; text-align: center; }
-        .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; color: var(--color-primary); margin-bottom: var(--space-xs); }
-        .section--blue .section-label { color: var(--color-yellow); }
-        .section-title { display: inline-block; font-size: 1.5rem; font-weight: 900; line-height: 1.4; margin-bottom: var(--space-md); padding: var(--space-sm) var(--space-lg); background: var(--color-primary); color: white; border: 3px solid var(--color-border); border-radius: 0; box-shadow: 4px 4px 0 var(--color-border); }
-        .section--blue .section-title { background: var(--color-yellow); color: var(--color-text); }
-        .section-lead { font-size: 0.9rem; line-height: 1.8; color: var(--color-text-muted); }
-        .timetable { display: flex; flex-direction: column; }
-        .timetable-item { display: flex; gap: var(--space-md); padding: var(--space-md) 0; border-bottom: 1px solid var(--color-border); }
-        .timetable-time { font-size: 1rem; font-weight: 900; color: var(--color-primary); min-width: 60px; }
-        .timetable-content { flex: 1; }
-        .timetable-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 2px; }
-        .timetable-desc { font-size: 0.8rem; color: var(--color-text-muted); }
-        .timetable-note { font-size: 0.75rem; color: var(--color-text-muted); margin-top: var(--space-md); }
-        .areas { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-sm); }
-        .area-card { background: var(--color-bg-white); border: 2px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-md); text-align: center; }
-        .area-icon { font-size: 2rem; display: block; margin-bottom: var(--space-xs); }
-        .area-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; }
-        .area-desc { font-size: 0.75rem; color: var(--color-text-muted); }
-        .access-info { display: flex; flex-direction: column; gap: var(--space-md); }
-        .access-item { background: rgba(255,255,255,0.1); padding: var(--space-md); border-radius: var(--radius-md); }
-        .access-item h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: var(--space-xs); color: var(--color-yellow); }
-        .access-item p { font-size: 0.85rem; line-height: 1.7; opacity: 0.95; }
-        .cta-title { font-size: 1.5rem; font-weight: 900; margin-bottom: var(--space-xs); }
-        .cta-lead { font-size: 0.9rem; opacity: 0.9; margin-bottom: var(--space-md); }
-        .cta-btn { display: inline-flex; align-items: center; gap: var(--space-xs); padding: var(--space-sm) var(--space-lg); background: white; color: var(--color-secondary); font-size: 0.9rem; font-weight: 700; text-decoration: none; border-radius: var(--radius-full); transition: all 0.2s; }
-        .cta-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-        @media (max-width: 400px) { .areas { grid-template-columns: 1fr; } }
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 0 var(--space-md);
+        }
+
+        /* ヒーロー */
+        .hero-2026 {
+          background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-primary) 50%, var(--color-secondary) 100%);
+          padding: var(--space-2xl) var(--space-md);
+          text-align: center;
+          color: white;
+          border-bottom: 2px solid var(--color-border);
+        }
+
+        .hero-inner {
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .hero-date {
+          font-size: 0.85rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          margin-bottom: var(--space-sm);
+          opacity: 0.9;
+        }
+
+        .hero-title {
+          margin-bottom: var(--space-md);
+        }
+
+        .title-year {
+          display: block;
+          font-size: 3.5rem;
+          font-weight: 900;
+          line-height: 1;
+          text-shadow: 3px 3px 0 var(--color-border);
+        }
+
+        .title-main {
+          display: block;
+          font-size: 2rem;
+          font-weight: 900;
+          margin-top: var(--space-xs);
+        }
+
+        .hero-theme {
+          font-size: 1rem;
+          font-weight: 700;
+          background: var(--color-yellow);
+          color: var(--color-text);
+          display: inline-block;
+          padding: var(--space-xs) var(--space-md);
+          border-radius: var(--radius-full);
+          margin-bottom: var(--space-md);
+        }
+
+        .hero-info {
+          font-size: 0.9rem;
+          line-height: 1.8;
+          opacity: 0.95;
+        }
+
+        /* カウントダウン */
+        .countdown-section {
+          background: var(--color-yellow);
+          padding: var(--space-lg) 0;
+          text-align: center;
+          border-bottom: 2px solid var(--color-border);
+        }
+
+        .countdown-label {
+          font-size: 0.8rem;
+          font-weight: 700;
+          color: var(--color-text);
+          margin-bottom: var(--space-xs);
+        }
+
+        .countdown-display {
+          display: flex;
+          justify-content: center;
+          gap: var(--space-md);
+        }
+
+        .countdown-item {
+          display: flex;
+          align-items: baseline;
+          gap: 4px;
+        }
+
+        .countdown-number {
+          font-size: 3rem;
+          font-weight: 900;
+          color: var(--color-primary);
+          line-height: 1;
+        }
+
+        .countdown-unit {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--color-text);
+        }
+
+        /* セクション共通 */
+        .section {
+          padding: var(--space-xl) 0;
+        }
+
+        .section--white {
+          background: var(--color-bg-white);
+        }
+
+        .section--blue {
+          background: var(--color-primary);
+          color: white;
+        }
+
+        .section--accent {
+          background: var(--color-secondary);
+          color: white;
+          text-align: center;
+        }
+
+        .section-label {
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          color: var(--color-primary);
+          margin-bottom: var(--space-xs);
+        }
+
+        .section--blue .section-label {
+          color: var(--color-yellow);
+        }
+
+        .section-title {
+          display: inline-block;
+          font-size: 1.5rem;
+          font-weight: 900;
+          line-height: 1.4;
+          margin-bottom: var(--space-md);
+          padding: var(--space-sm) var(--space-lg);
+          background: var(--color-primary);
+          color: white;
+          border: 3px solid var(--color-border);
+          border-radius: 0;
+          box-shadow: 4px 4px 0 var(--color-border);
+        }
+
+        .section--blue .section-title {
+          background: var(--color-yellow);
+          color: var(--color-text);
+        }
+
+        .section-lead {
+          font-size: 0.9rem;
+          line-height: 1.8;
+          color: var(--color-text-muted);
+        }
+
+        /* スケジュール注意書き */
+        .schedule-notice {
+          background: var(--color-yellow);
+          color: var(--color-text);
+          padding: var(--space-sm) var(--space-md);
+          border-radius: var(--radius-md);
+          font-size: 0.85rem;
+          font-weight: 700;
+          margin-bottom: var(--space-md);
+          text-align: center;
+        }
+
+        /* タイムテーブル */
+        .timetable {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .timetable-item {
+          display: flex;
+          gap: var(--space-md);
+          padding: var(--space-md) 0;
+          border-bottom: 1px solid var(--color-border);
+        }
+
+        .timetable-time {
+          font-size: 1rem;
+          font-weight: 900;
+          color: var(--color-primary);
+          min-width: 60px;
+        }
+
+        .timetable-content {
+          flex: 1;
+        }
+
+        .timetable-title {
+          font-size: 0.95rem;
+          font-weight: 700;
+          margin-bottom: 2px;
+        }
+
+        .timetable-desc {
+          font-size: 0.8rem;
+          color: var(--color-text-muted);
+        }
+
+        .timetable-note {
+          font-size: 0.75rem;
+          color: var(--color-text-muted);
+          margin-top: var(--space-md);
+        }
+
+        /* 全体マップ */
+        .map-overview {
+          margin-bottom: var(--space-md);
+        }
+
+        .map-placeholder,
+        .area-image-placeholder {
+          background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+          border: 2px dashed var(--color-border);
+          border-radius: var(--radius-md);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          color: var(--color-text-muted);
+        }
+
+        .map-placeholder {
+          aspect-ratio: 16 / 9;
+        }
+
+        .placeholder-text {
+          font-size: 1rem;
+          font-weight: 700;
+        }
+
+        .placeholder-sub {
+          font-size: 0.8rem;
+          margin-top: var(--space-xs);
+        }
+
+        .map-description {
+          font-size: 0.9rem;
+          line-height: 1.7;
+          color: var(--color-text-muted);
+          margin-bottom: var(--space-lg);
+        }
+
+        /* エリアグリッド */
+        .area-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--space-sm);
+        }
+
+        .area-card-link {
+          display: flex;
+          align-items: center;
+          gap: var(--space-sm);
+          padding: var(--space-md);
+          background: white;
+          border: 2px solid var(--color-border);
+          border-radius: var(--radius-md);
+          text-decoration: none;
+          color: var(--color-text);
+          transition: all 0.2s;
+          border-left: 4px solid var(--area-color);
+          cursor: pointer;
+          width: 100%;
+          text-align: left;
+        }
+
+        .area-card-link:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-md);
+        }
+
+        .area-badge {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: var(--area-color);
+          color: white;
+          font-weight: 900;
+          font-size: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .area-info {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .area-name {
+          font-size: 0.85rem;
+          font-weight: 700;
+          margin: 0;
+        }
+
+        .area-arrow {
+          color: var(--color-text-muted);
+          font-size: 1rem;
+        }
+
+        /* 個別エリアセクション */
+        .area-section {
+          margin-bottom: var(--space-2xl);
+          scroll-margin-top: 60px;
+        }
+
+        .area-section:last-child {
+          margin-bottom: 0;
+        }
+
+        /* スティッキーヘッダー */
+        .area-sticky-header {
+          position: sticky;
+          top: 0;
+          z-index: 10;
+          background: var(--area-color);
+          margin: 0 calc(-1 * var(--space-md));
+          padding: var(--space-sm) var(--space-md);
+          border-bottom: 2px solid var(--color-border);
+        }
+
+        .area-header-content {
+          display: flex;
+          align-items: center;
+          gap: var(--space-sm);
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .area-header-badge {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          background: white;
+          color: var(--area-color);
+          font-weight: 900;
+          font-size: 0.9rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .area-header-name {
+          color: white;
+          font-weight: 700;
+          font-size: 1rem;
+          text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+        }
+
+        /* エリア画像 */
+        .area-image-wrapper {
+          margin: var(--space-md) 0;
+        }
+
+        .area-image-placeholder {
+          aspect-ratio: 16 / 10;
+        }
+
+        /* 出店リスト */
+        .shop-list {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-sm);
+        }
+
+        .shop-card {
+          background: white;
+          border: 2px solid var(--color-border);
+          border-radius: var(--radius-md);
+          padding: var(--space-md);
+        }
+
+        .shop-category {
+          display: inline-block;
+          font-size: 0.7rem;
+          font-weight: 700;
+          padding: 2px 8px;
+          background: var(--color-bg);
+          border-radius: var(--radius-full);
+          margin-bottom: var(--space-xs);
+          color: var(--color-text-muted);
+        }
+
+        .shop-name {
+          font-size: 1rem;
+          font-weight: 700;
+          margin: 0 0 var(--space-xs) 0;
+        }
+
+        .shop-desc {
+          font-size: 0.85rem;
+          color: var(--color-text-muted);
+          margin: 0;
+        }
+
+        /* アクセス */
+        .access-info {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-md);
+        }
+
+        .access-item {
+          background: rgba(255,255,255,0.1);
+          padding: var(--space-md);
+          border-radius: var(--radius-md);
+        }
+
+        .access-item h3 {
+          font-size: 0.9rem;
+          font-weight: 700;
+          margin-bottom: var(--space-xs);
+          color: var(--color-yellow);
+        }
+
+        .access-item p {
+          font-size: 0.85rem;
+          line-height: 1.7;
+          opacity: 0.95;
+        }
+
+        /* CTA */
+        .cta-title {
+          font-size: 1.5rem;
+          font-weight: 900;
+          margin-bottom: var(--space-xs);
+        }
+
+        .cta-lead {
+          font-size: 0.9rem;
+          opacity: 0.9;
+          margin-bottom: var(--space-md);
+        }
+
+        .cta-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--space-xs);
+          padding: var(--space-sm) var(--space-lg);
+          background: white;
+          color: var(--color-secondary);
+          font-size: 0.9rem;
+          font-weight: 700;
+          text-decoration: none;
+          border-radius: var(--radius-full);
+          transition: all 0.2s;
+        }
+
+        .cta-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-md);
+        }
+
+        @media (max-width: 400px) {
+          .area-grid {
+            grid-template-columns: 1fr;
+          }
+        }
       `}</style>
     </>
   );

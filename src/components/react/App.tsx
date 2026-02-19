@@ -68,7 +68,7 @@ export function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/2026/" element={<Event2026 />} />
+          <Route path="/genki-festa-2026/" element={<Event2026 />} />
           <Route path="/events/" element={<Events />} />
           <Route path="/about/" element={<About />} />
           <Route path="/history/" element={<History />} />

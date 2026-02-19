@@ -103,7 +103,7 @@ export function History() {
         <div className="container">
           <h2 className="cta-title">げんきフェスタ2026</h2>
           <p className="cta-lead">今年の開催情報をチェック！</p>
-          <Link to="/2026/" className="cta-btn">
+          <Link to="/genki-festa-2026/" className="cta-btn">
             2026特設ページへ
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
