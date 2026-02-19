@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import eventsData from '../../../data/events.json';
+import { Countdown } from '../Countdown';
 
 interface NoteArticle {
   key: string;
@@ -7,9 +9,35 @@ interface NoteArticle {
   publishedAt: string;
 }
 
+interface Event {
+  id: string;
+  title: string;
+  date: string;
+  schedule: string;
+  description: string;
+  link: string | null;
+  image: string | null;
+  featured: boolean;
+  badge: string | null;
+  order: number;
+}
+
+// 特設ページ表示フラグ
+const showGenkiFestaSpecial = import.meta.env.PUBLIC_SHOW_GENKI_FESTA_SPECIAL === 'true';
+
 export function Home() {
   const [noteArticles, setNoteArticles] = useState<NoteArticle[]>([]);
   const basePath = import.meta.env.BASE_URL || '/';
+
+  // ロゴ画像を環境変数で切り替え
+  const logoImage = showGenkiFestaSpecial
+    ? `${basePath}images/top_logo_special.webp`
+    : `${basePath}images/top_logo.webp`;
+
+  // order 3までのイベントを取得
+  const topEvents = (eventsData as Event[])
+    .sort((a, b) => a.order - b.order)
+    .filter((event) => event.order <= 3);
 
   useEffect(() => {
     // ビルド時に生成されたJSONからデータ取得
@@ -27,6 +55,9 @@ export function Home() {
 
   return (
     <>
+      {/* SP用カウントダウン */}
+      {showGenkiFestaSpecial && <Countdown />}
+
       {/* ヒーロー */}
       <section className="hero">
         <div className="hero-bg">
@@ -53,20 +84,26 @@ export function Home() {
         </div>
         <div className="hero-content">
           <div className="hero-logo-area">
-            <Link to="/2026/" className="hero-logo-link">
-              <img src={`${basePath}images/genki_festa_logo.webp`} alt="げんきフェスタ2026 5/24 SUN" className="hero-logo" />
-              <span className="hero-logo-btn">
-                特設ページはこちら
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </span>
-            </Link>
+            {showGenkiFestaSpecial ? (
+              <Link to="/2026/" className="hero-logo-link">
+                <img src={logoImage} alt="げんきフェスタ2026 5/24 SUN" className="hero-logo" />
+                <span className="hero-logo-btn">
+                  特設ページはこちら
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </Link>
+            ) : (
+              <div className="hero-logo-static">
+                <img src={logoImage} alt="げんき塾チーム" className="hero-logo" />
+              </div>
+            )}
           </div>
           <div className="hero-action-cards">
             <Link to="/events/" className="hero-action-card hero-action-card--enjoy">
               <span className="hero-action-label">楽しむ</span>
-              <span className="hero-action-desc">イベント一覧</span>
+              <span className="hero-action-desc">イベント詳細</span>
             </Link>
             <Link to="/about/" className="hero-action-card hero-action-card--entertain">
               <span className="hero-action-label">楽しませる</span>
@@ -123,32 +160,22 @@ export function Home() {
           <p className="section-label">EVENTS</p>
           <h2 className="section-title">主なイベント</h2>
           <div className="event-cards">
-            <Link to="/2026/" className="event-card">
-              <img src={`${basePath}images/event_cards_genki.jpg`} alt="げんきフェスタ" className="event-card-image" />
-              <div className="event-card-overlay">
-                <h3 className="event-card-title">げんきフェスタ</h3>
-                <p className="event-card-schedule">毎年5月開催</p>
+            {topEvents.map((event) => (
+              <div key={event.id} className="event-card event-card--no-link">
+                {event.image && (
+                  <img src={`${basePath}${event.image.replace(/^\//, '')}`} alt={event.title} className="event-card-image" />
+                )}
+                <div className="event-card-overlay">
+                  <h3 className="event-card-title">{event.title}</h3>
+                  <p className="event-card-schedule">{event.schedule}</p>
+                </div>
               </div>
-            </Link>
-            <Link to="/events/" className="event-card">
-              <img src={`${basePath}images/event_cards_getsunomi.jpg`} alt="月のみ" className="event-card-image" />
-              <div className="event-card-overlay">
-                <h3 className="event-card-title">月のみ</h3>
-                <p className="event-card-schedule">毎週月曜日開催</p>
-              </div>
-            </Link>
-            <Link to="/events/" className="event-card">
-              <img src={`${basePath}images/event_cards_yomise.jpg`} alt="夜店" className="event-card-image" />
-              <div className="event-card-overlay">
-                <h3 className="event-card-title">夜店</h3>
-                <p className="event-card-schedule">毎年7月開催</p>
-              </div>
-            </Link>
+            ))}
           </div>
           <p className="event-note">他にも地域勉強会やゼミの発表会も！</p>
           <div className="section-action">
             <Link to="/events/" className="btn-outline">
-              イベント一覧
+              イベント詳細
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -482,6 +509,15 @@ export function Home() {
           transform: translateX(-50%) translate(2px, 2px);
         }
 
+        .hero-logo-static {
+          display: inline-block;
+          position: relative;
+        }
+
+        .hero-logo-static .hero-logo {
+          animation: logo-bounce 3s ease-in-out infinite;
+        }
+
         /* セクション共通 */
         .section { padding: var(--space-2xl) 0; }
         .section--white { background: var(--color-bg-white); }
@@ -578,9 +614,8 @@ export function Home() {
           transition: all 0.2s;
         }
 
-        .event-card:hover {
-          box-shadow: 2px 2px 0 var(--color-border);
-          transform: translate(2px, 2px);
+        .event-card--no-link {
+          cursor: default;
         }
 
         .event-card-image {

@@ -1,35 +1,30 @@
 import { Link } from 'react-router-dom';
+import eventsData from '../../../data/events.json';
 
-const events = [
-  {
-    title: 'げんきフェスタ',
-    description: '毎年夏に開催される地域最大のフェスティバル。音楽、グルメ、ワークショップなど盛りだくさん！',
-    schedule: '毎年8月',
-    link: '/2026/',
-    featured: true,
-  },
-  {
-    title: 'げんきマルシェ',
-    description: '地元の新鮮野菜やハンドメイド雑貨が集まる月1マーケット。',
-    schedule: '毎月第2日曜日',
-    link: null,
-    featured: false,
-  },
-  {
-    title: 'げんきキッズフェス',
-    description: '子どもたちが主役！工作やゲーム、ステージ発表など家族で楽しめるイベント。',
-    schedule: '毎年5月',
-    link: null,
-    featured: false,
-  },
-  {
-    title: 'げんき音楽祭',
-    description: '地域のアマチュアバンドやアーティストが出演する音楽イベント。',
-    schedule: '毎年10月',
-    link: null,
-    featured: false,
-  },
-];
+interface Event {
+  id: string;
+  title: string;
+  date: string;
+  schedule: string;
+  description: string;
+  link: string | null;
+  image: string | null;
+  featured: boolean;
+  badge: string | null;
+  order: number;
+  category: 'weekly' | 'yearly' | 'irregular';
+}
+
+// 全イベントをorder順に取得
+const events = (eventsData as Event[]).sort((a, b) => a.order - b.order);
+
+// カテゴリ別に分類
+const weeklyEvents = events.filter((e) => e.category === 'weekly');
+const yearlyEvents = events.filter((e) => e.category === 'yearly');
+const irregularEvents = events.filter((e) => e.category === 'irregular');
+
+// 特設ページ表示フラグ
+const showGenkiFestaSpecial = import.meta.env.PUBLIC_SHOW_GENKI_FESTA_SPECIAL === 'true';
 
 export function Events() {
   return (
@@ -37,37 +32,67 @@ export function Events() {
       <section className="page-header">
         <div className="container">
           <p className="page-label">EVENTS</p>
-          <h1 className="page-title">イベント一覧</h1>
+          <h1 className="page-title">イベント詳細</h1>
           <p className="page-lead">げんき塾チームが企画・運営するイベントをご紹介します</p>
         </div>
       </section>
 
       <section className="section">
         <div className="container">
-          <ul className="event-list">
-            {events.map((event, index) => (
-              <li key={index} className={`event-card ${event.featured ? 'event-card--featured' : ''}`}>
-                <div className="event-image">
-                  <div className="event-image-placeholder">
-                    {event.featured && <span className="event-badge">MAIN EVENT</span>}
-                  </div>
-                </div>
-                <div className="event-body">
-                  <h2 className="event-title">{event.title}</h2>
-                  <p className="event-schedule">{event.schedule}</p>
-                  <p className="event-description">{event.description}</p>
-                  {event.link && (
-                    <Link to={event.link} className="event-link">
-                      詳細を見る
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                      </svg>
-                    </Link>
+          {/* 毎週イベント（赤） */}
+          <div className="event-category">
+            <h2 className="category-title category-title--red">毎週イベント</h2>
+            <div className="event-buttons">
+              {weeklyEvents.map((event) => (
+                <div key={event.id} className="event-button event-button--red">
+                  <span className="event-button-title">{event.title}</span>
+                  {event.description && (
+                    <span className="event-button-desc">{event.description}</span>
                   )}
                 </div>
-              </li>
-            ))}
-          </ul>
+              ))}
+            </div>
+          </div>
+
+          {/* 年に一度のイベント（青） */}
+          <div className="event-category">
+            <h2 className="category-title category-title--blue">年に一度のイベント</h2>
+            <div className="event-buttons">
+              {yearlyEvents.map((event) => (
+                event.id === 'genki-festa-2026' && showGenkiFestaSpecial && event.link ? (
+                  <Link key={event.id} to={event.link} className="event-button event-button--blue event-button--link">
+                    <span className="event-button-title">{event.title}</span>
+                    {event.description && (
+                      <span className="event-button-desc">{event.description}</span>
+                    )}
+                    <span className="event-button-badge">特設ページへ</span>
+                  </Link>
+                ) : (
+                  <div key={event.id} className="event-button event-button--blue">
+                    <span className="event-button-title">{event.title}</span>
+                    {event.description && (
+                      <span className="event-button-desc">{event.description}</span>
+                    )}
+                  </div>
+                )
+              ))}
+            </div>
+          </div>
+
+          {/* 不定期開催（黄） */}
+          <div className="event-category">
+            <h2 className="category-title category-title--yellow">不定期開催</h2>
+            <div className="event-buttons">
+              {irregularEvents.map((event) => (
+                <div key={event.id} className="event-button event-button--yellow">
+                  <span className="event-button-title">{event.title}</span>
+                  {event.description && (
+                    <span className="event-button-desc">{event.description}</span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -102,80 +127,96 @@ export function Events() {
         .section {
           padding: var(--space-xl) 0;
         }
-        .event-list {
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: var(--space-lg);
+        .event-category {
+          margin-bottom: var(--space-xl);
         }
-        .event-card {
-          background: var(--color-bg-white);
+        .event-category:last-child {
+          margin-bottom: 0;
+        }
+        .category-title {
+          display: inline-block;
+          font-size: 1.1rem;
+          font-weight: 900;
+          padding: var(--space-xs) var(--space-md);
+          margin-bottom: var(--space-md);
           border: 2px solid var(--color-border);
-          border-radius: var(--radius-lg);
-          overflow: hidden;
+          box-shadow: 3px 3px 0 var(--color-border);
         }
-        .event-card--featured {
-          border-color: var(--color-primary);
-          box-shadow: 0 4px 20px rgba(40, 111, 170, 0.15);
-        }
-        .event-image-placeholder {
-          aspect-ratio: 16/9;
-          background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-primary) 100%);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-        }
-        .event-badge {
-          position: absolute;
-          top: var(--space-sm);
-          left: var(--space-sm);
+        .category-title--red {
           background: var(--color-red);
           color: white;
-          font-size: 0.7rem;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          padding: var(--space-xs) var(--space-sm);
-          border-radius: var(--radius-sm);
+          text-shadow: 1px 1px 0 var(--color-border);
         }
-        .event-body {
+        .category-title--blue {
+          background: var(--color-blue);
+          color: white;
+          text-shadow: 1px 1px 0 var(--color-border);
+        }
+        .category-title--yellow {
+          background: var(--color-yellow);
+          color: var(--color-text);
+        }
+        .event-buttons {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-sm);
+        }
+        .event-button {
+          display: flex;
+          flex-direction: column;
           padding: var(--space-md);
-        }
-        .event-title {
-          font-size: 1.25rem;
-          font-weight: 900;
-          margin-bottom: var(--space-xs);
-        }
-        .event-schedule {
-          font-size: 0.8rem;
-          font-weight: 700;
-          color: var(--color-primary);
-          margin-bottom: var(--space-sm);
-        }
-        .event-description {
-          font-size: 0.9rem;
-          line-height: 1.7;
-          color: var(--color-text-muted);
-          margin-bottom: var(--space-md);
-        }
-        .event-link {
-          display: inline-flex;
-          align-items: center;
-          gap: var(--space-xs);
-          font-size: 0.9rem;
-          font-weight: 700;
-          color: var(--color-primary);
+          border: 2px solid var(--color-border);
+          box-shadow: 4px 4px 0 var(--color-border);
           text-decoration: none;
+        }
+        .event-button--red {
+          background: var(--color-red);
+          color: white;
+        }
+        .event-button--blue {
+          background: var(--color-blue);
+          color: white;
+        }
+        .event-button--yellow {
+          background: var(--color-yellow);
+          color: var(--color-text);
+        }
+        .event-button--link {
+          cursor: pointer;
           transition: all 0.2s;
+          position: relative;
         }
-        .event-link:hover {
-          color: var(--color-secondary);
+        .event-button--link:hover {
+          box-shadow: 2px 2px 0 var(--color-border);
+          transform: translate(2px, 2px);
         }
-        .event-link svg {
-          transition: transform 0.2s;
+        .event-button--link:active {
+          box-shadow: 0 0 0 var(--color-border);
+          transform: translate(4px, 4px);
         }
-        .event-link:hover svg {
-          transform: translateX(4px);
+        .event-button-title {
+          font-size: 1.2rem;
+          font-weight: 900;
+          text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+        }
+        .event-button--yellow .event-button-title {
+          text-shadow: none;
+        }
+        .event-button-desc {
+          font-size: 0.85rem;
+          margin-top: var(--space-xs);
+          opacity: 0.95;
+        }
+        .event-button-badge {
+          display: inline-block;
+          margin-top: var(--space-sm);
+          padding: 4px 12px;
+          background: var(--color-yellow);
+          color: var(--color-text);
+          font-size: 0.75rem;
+          font-weight: 700;
+          border: 2px solid var(--color-border);
+          align-self: flex-start;
         }
       `}</style>
     </>

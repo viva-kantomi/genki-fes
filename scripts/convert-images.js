@@ -7,7 +7,7 @@ const publicDir = './public/images';
 // 変換対象のPNG画像
 const targets = [
   { dir: 'top_images', files: ['10.png', '11.png', '12.png', '13.png', '14.png', '15.png', '16.png', '17.png', '18.png'] },
-  { dir: '.', files: ['genki_festa_logo.png'] },
+  { dir: '.', files: ['genki_festa_logo.png', 'top_logo.png'] },
   { dir: 'common', files: ['ameba.png'] },
 ];
 

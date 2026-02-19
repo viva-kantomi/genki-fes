@@ -1,40 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getPath } from '../../lib/path';
+import { getAllEvents } from '../../lib/events';
 
-const events = [
-  {
-    title: 'げんきフェスタ',
-    description: '毎年夏に開催される地域最大のフェスティバル。音楽、グルメ、ワークショップなど盛りだくさん！',
-    schedule: '毎年8月',
-    image: '/images/events/genki-festa.jpg',
-    link: '/2026/',
-    featured: true,
-  },
-  {
-    title: 'げんきマルシェ',
-    description: '地元の新鮮野菜やハンドメイド雑貨が集まる月1マーケット。',
-    schedule: '毎月第2日曜日',
-    image: '/images/events/marche.jpg',
-    link: null,
-    featured: false,
-  },
-  {
-    title: 'げんきキッズフェス',
-    description: '子どもたちが主役！工作やゲーム、ステージ発表など家族で楽しめるイベント。',
-    schedule: '毎年5月',
-    image: '/images/events/kids.jpg',
-    link: null,
-    featured: false,
-  },
-  {
-    title: 'げんき音楽祭',
-    description: '地域のアマチュアバンドやアーティストが出演する音楽イベント。',
-    schedule: '毎年10月',
-    image: '/images/events/music.jpg',
-    link: null,
-    featured: false,
-  },
-];
+const events = getAllEvents();
 ---
 
 <Layout title="イベント一覧｜群馬県富岡市のげんきフェスタ・お祭り情報" description="群馬県富岡市で開催されるげんきフェスタ、げんきマルシェ、キッズフェスなどのイベント一覧。地域のお祭り・フェス情報をまとめてチェック。音楽、グルメ、ワークショップなど家族で楽しめるイベントが盛りだくさん。">
@@ -48,30 +17,25 @@ const events = [
 
   <section class="section">
     <div class="container">
-      <ul class="event-list">
-        {events.map((event) => (
-          <li class={`event-card ${event.featured ? 'event-card--featured' : ''}`}>
-            <div class="event-image">
-              <div class="event-image-placeholder">
-                {event.featured && <span class="event-badge">MAIN EVENT</span>}
-              </div>
+      <div class="event-cards">
+        {events.map((event) =>
+          event.link ? (
+            <a href={getPath(event.link)} class={`event-card ${event.featured ? 'event-card--featured' : ''}`}>
+              {event.badge && <div class="event-card-badge">{event.badge}</div>}
+              <h2 class="event-card-title">{event.title}</h2>
+              <p class="event-card-date">{event.date}</p>
+              <p class="event-card-desc">{event.description}</p>
+            </a>
+          ) : (
+            <div class={`event-card ${event.featured ? 'event-card--featured' : ''}`}>
+              {event.badge && <div class="event-card-badge">{event.badge}</div>}
+              <h2 class="event-card-title">{event.title}</h2>
+              <p class="event-card-date">{event.date}</p>
+              <p class="event-card-desc">{event.description}</p>
             </div>
-            <div class="event-body">
-              <h2 class="event-title">{event.title}</h2>
-              <p class="event-schedule">{event.schedule}</p>
-              <p class="event-description">{event.description}</p>
-              {event.link && (
-                <a href={event.link} class="event-link">
-                  詳細を見る
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
-                </a>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
+          )
+        )}
+      </div>
     </div>
   </section>
 </Layout>
@@ -113,95 +77,82 @@ const events = [
     padding: var(--space-xl) 0;
   }
 
-  .event-list {
-    list-style: none;
+  /* イベントカード（TOPページと統一） */
+  .event-cards {
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
+    gap: var(--space-sm);
   }
 
   .event-card {
-    background: var(--color-bg-white);
+    display: block;
+    padding: var(--space-md);
+    background: var(--color-bg);
     border: 2px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-  }
-
-  .event-card--featured {
-    border-color: var(--color-primary);
-    box-shadow: 0 4px 20px rgba(40, 111, 170, 0.15);
-  }
-
-  .event-image {
-    width: 100%;
-  }
-
-  .event-image-placeholder {
-    aspect-ratio: 16/9;
-    background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-primary) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: all 0.2s;
     position: relative;
   }
 
-  .event-badge {
+  a.event-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .event-card--featured {
+    background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-primary) 100%);
+    color: white;
+    border-color: var(--color-primary);
+  }
+
+  .event-card-badge {
     position: absolute;
     top: var(--space-sm);
-    left: var(--space-sm);
-    background: var(--color-red);
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: var(--space-xs) var(--space-sm);
-    border-radius: var(--radius-sm);
-  }
-
-  .event-body {
-    padding: var(--space-md);
-  }
-
-  .event-title {
-    font-size: 1.25rem;
+    right: var(--space-sm);
+    background: var(--color-yellow);
+    color: var(--color-text);
+    font-size: 0.65rem;
     font-weight: 900;
+    letter-spacing: 0.1em;
+    padding: 4px 8px;
+    border: 2px solid var(--color-border);
+    border-radius: 0;
+    box-shadow: 2px 2px 0 var(--color-border);
+  }
+
+  .event-card-title {
+    font-size: 1.1rem;
+    font-weight: 900;
+    margin-bottom: 4px;
+  }
+
+  .event-card-date {
+    font-size: 0.8rem;
+    font-weight: 700;
+    opacity: 0.9;
     margin-bottom: var(--space-xs);
   }
 
-  .event-schedule {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin-bottom: var(--space-sm);
+  .event-card-desc {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    line-height: 1.6;
   }
 
-  .event-description {
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-md);
-  }
+  /* タブレット対応 */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .container {
+      max-width: 100%;
+      padding: 0 var(--space-lg);
+    }
 
-  .event-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-
-  .event-link:hover {
-    color: var(--color-secondary);
-  }
-
-  .event-link svg {
-    transition: transform 0.2s;
-  }
-
-  .event-link:hover svg {
-    transform: translateX(4px);
+    .event-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
   }
 </style>

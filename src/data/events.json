@@ -1,0 +1,80 @@
+[
+  {
+    "id": "genki-festa-2026",
+    "title": "げんきフェスタ",
+    "date": "2026年5月24日（日）",
+    "schedule": "毎年5月開催",
+    "description": "年に一度の大イベント！音楽、グルメ、ワークショップなど盛りだくさん！",
+    "link": "/2026/",
+    "image": "/images/event_cards_genki.jpg",
+    "featured": true,
+    "badge": "NOW",
+    "order": 1,
+    "category": "yearly"
+  },
+  {
+    "id": "tsukinomi",
+    "title": "げつのみ",
+    "date": "毎週月曜日",
+    "schedule": "毎週月曜日開催",
+    "description": "自分で飲み物と食べ物を持ち寄ってワイワイ",
+    "link": null,
+    "image": "/images/event_cards_getsunomi.jpg",
+    "featured": false,
+    "badge": null,
+    "order": 2,
+    "category": "weekly"
+  },
+  {
+    "id": "yomise",
+    "title": "夜店",
+    "date": "毎年7月",
+    "schedule": "毎年7月開催",
+    "description": "夏の夜を彩る夜店イベント。",
+    "link": null,
+    "image": "/images/event_cards_yomise.jpg",
+    "featured": false,
+    "badge": null,
+    "order": 3,
+    "category": "yearly"
+  },
+  {
+    "id": "test-event-1",
+    "title": "大学コラボ",
+    "date": "不定期",
+    "schedule": "不定期開催",
+    "description": "研究発表・商店街研究",
+    "link": null,
+    "image": null,
+    "featured": false,
+    "badge": null,
+    "order": 4,
+    "category": "irregular"
+  },
+  {
+    "id": "test-event-2",
+    "title": "地域探求",
+    "date": "不定期",
+    "schedule": "不定期開催",
+    "description": "研究・勉強会",
+    "link": null,
+    "image": null,
+    "featured": false,
+    "badge": null,
+    "order": 5,
+    "category": "irregular"
+  },
+  {
+    "id": "test-event-3",
+    "title": "テストイベント3",
+    "date": "不定期",
+    "schedule": "不定期開催",
+    "description": "",
+    "link": null,
+    "image": null,
+    "featured": false,
+    "badge": null,
+    "order": 6,
+    "category": "irregular"
+  }
+]

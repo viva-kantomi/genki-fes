@@ -9,7 +9,7 @@ export function Footer() {
         </div>
         <nav className="footer-nav">
           <Link to="/">トップ</Link>
-          <Link to="/events/">イベント一覧</Link>
+          <Link to="/events/">イベント詳細</Link>
           <Link to="/history/">HISTORY</Link>
           <Link to="/news/">NEWS</Link>
           <Link to="/about/">ABOUT</Link>
