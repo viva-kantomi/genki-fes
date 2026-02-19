@@ -11,7 +11,8 @@
       "Bash(npm run dev:*)",
       "Bash(npx astro build:*)",
       "Bash(grep:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(npm run prebuild:*)"
     ]
   }
 }

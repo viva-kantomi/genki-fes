@@ -1,5 +1,7 @@
 ---
-import { getPath, getAssetPath } from '../lib/path';
+// SP枠内のみReact Routerで差し替え、左右サイドバーはAstroで静的配置
+import { getPath } from '../lib/path';
+import { App } from '../components/react/App';
 
 interface Props {
   title: string;
@@ -66,61 +68,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         </div>
       </aside>
 
-      <!-- 中央：SP枠（メインコンテンツ） -->
+      <!-- 中央：SP枠（Reactアプリ） -->
       <div class="phone-frame">
         <div class="phone-frame-inner">
-          <!-- ヘッダー -->
-          <header class="header">
-            <div class="header-inner">
-              <a href={getPath('/')} class="logo">
-                <span class="logo-text">げんき塾チーム</span>
-              </a>
-              <nav class="nav-desktop">
-                <a href={getPath('/')} class="nav-link">HOME</a>
-                <a href={getPath('/events/')} class="nav-link">EVENTS</a>
-                <a href={getPath('/history/')} class="nav-link">HISTORY</a>
-                <a href={getPath('/2026/')} class="nav-link">2026</a>
-                <a href={getPath('/news/')} class="nav-link">NEWS</a>
-                <a href={getPath('/about/')} class="nav-link">ABOUT</a>
-              </nav>
-              <button class="menu-btn" id="menuBtn" aria-label="メニューを開く">
-                <span></span>
-                <span></span>
-              </button>
-            </div>
-          </header>
-
-          <!-- モバイルナビゲーション -->
-          <nav class="nav-mobile" id="nav">
-            <a href={getPath('/')} class="nav-mobile-link nav-blue">トップ</a>
-            <a href={getPath('/events/')} class="nav-mobile-link nav-yellow">イベント一覧</a>
-            <a href={getPath('/history/')} class="nav-mobile-link nav-red">HISTORY</a>
-            <a href={getPath('/2026/')} class="nav-mobile-link nav-blue">2026 げんきフェスタ 特設ページ</a>
-            <a href={getPath('/news/')} class="nav-mobile-link nav-yellow">NEWS</a>
-            <a href={getPath('/about/')} class="nav-mobile-link nav-red">ABOUT</a>
-          </nav>
-
-          <main>
-            <slot />
-          </main>
-
-          <!-- フッター -->
-          <footer class="footer">
-            <div class="footer-inner">
-              <div class="footer-logo">
-                <span class="logo-text">げんき塾チーム</span>
-              </div>
-              <nav class="footer-nav">
-                <a href={getPath('/')}>トップ</a>
-                <a href={getPath('/events/')}>イベント一覧</a>
-                <a href={getPath('/history/')}>HISTORY</a>
-                <a href={getPath('/news/')}>NEWS</a>
-                <a href={getPath('/about/')}>ABOUT</a>
-              </nav>
-              <p class="copyright">&copy; 2026 げんき塾チーム</p>
-              <p class="credits">icon by <a target="_blank" href="https://icons8.com">Icons8</a></p>
-            </div>
-          </footer>
+          <App client:only="react" />
         </div>
       </div>
 
@@ -155,21 +106,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </div>
 
     <script>
-      const menuBtn = document.getElementById('menuBtn');
-      const nav = document.getElementById('nav');
-      const body = document.body;
-
-      menuBtn?.addEventListener('click', () => {
-        menuBtn.classList.toggle('active');
-        nav?.classList.toggle('active');
-        body.classList.toggle('nav-open');
-      });
-
-      nav?.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          menuBtn?.classList.remove('active');
-          nav?.classList.remove('active');
-          body.classList.remove('nav-open');
+      // サイドバーのリンクをクリックしたらReact Router経由で遷移
+      document.querySelectorAll('.sidebar-nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const href = link.getAttribute('href');
+          if (href) {
+            window.dispatchEvent(new CustomEvent('spa-navigate', {
+              detail: { path: href }
+            }));
+          }
         });
       });
 
@@ -187,12 +133,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       updateCountdown();
 
       // YouTube IFrame API
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+      function initYouTubePlayer() {
+        const playerEl = document.getElementById('youtube-player');
+        // 既にiframeになっている場合はスキップ
+        if (!playerEl || playerEl.tagName === 'IFRAME') return;
 
-      (window as any).onYouTubeIframeAPIReady = function() {
         new (window as any).YT.Player('youtube-player', {
           videoId: '1OqHFpav2X0',
           host: 'https://www.youtube-nocookie.com',
@@ -210,7 +155,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             }
           }
         });
-      };
+      }
+
+      // YouTube API がまだ読み込まれていない場合
+      if (!(window as any).YT) {
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+
+        (window as any).onYouTubeIframeAPIReady = initYouTubePlayer;
+      } else {
+        // 既にAPIが読み込まれている場合は直接初期化
+        initYouTubePlayer();
+      }
     </script>
   </body>
 </html>
