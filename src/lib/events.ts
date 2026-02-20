@@ -6,11 +6,14 @@ export interface Event {
   date: string;
   schedule: string;
   description: string;
+  details: string[];
+  comments: string[];
   link: string | null;
   image: string | null;
   featured: boolean;
   badge: string | null;
   order: number;
+  category: 'yearly' | 'weekly' | 'irregular';
 }
 
 /**

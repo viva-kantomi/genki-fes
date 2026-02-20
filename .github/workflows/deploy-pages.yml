@@ -2,7 +2,7 @@ name: Deploy Astro site to GitHub Pages
 
 on:
   push:
-    branches: ["main", "feat/mobile-app-shell-spa"]
+    branches: ["main"]
   schedule:
     # 1時間おきに実行（毎時0分）
     - cron: '0 * * * *'

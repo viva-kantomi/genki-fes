@@ -25,4 +25,4 @@ pnpm-debug.log*
 # astro
 .astro/
 
-*.Identifier
+*:Zone.Identifier

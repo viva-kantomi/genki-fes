@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 
 // イベント情報（正しい情報）
@@ -161,7 +160,7 @@ const shops: Record<string, Shop[]> = {
 
 export function Event2026() {
   const [days, setDays] = useState('---');
-  const [activeArea, setActiveArea] = useState<string | null>(null);
+  const [, setActiveArea] = useState<string | null>(null);
   const areaRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
