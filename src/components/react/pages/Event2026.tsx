@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
+import shopsData from '../../../data/shops.json';
 
-// イベント情報（正しい情報）
+// イベント情報
 const eventInfo = {
   date: '2026年5月24日（日）',
   dateShort: '2026.5.24 SUN',
@@ -21,142 +22,27 @@ const schedule = [
   { time: '16:00', content: '閉場', description: '' },
 ];
 
-// エリア情報
-const areas = [
-  { id: 'A', name: 'おとみちゃん広場', color: '#e74c3c' },
-  { id: 'B', name: '城町広場', color: '#3498db' },
-  { id: 'C', name: 'まぶしや前広場', color: '#27ae60' },
-  { id: 'D', name: '韮塚製糸場広場', color: '#f39c12' },
-];
+// 出店情報の型
+interface Shop {
+  name: string;
+  enName: string;
+  category: string;
+  summary: string;
+  detail?: string;
+  appeal?: string;
+  hasImage?: boolean;
+}
+
+// エリア情報・出店情報をJSONから読み込み
+const areas = shopsData.areas;
+const shops = shopsData.shops as Record<string, Shop[]>;
 
 // 特設ページ用アセットのベースパス
 const basePath = import.meta.env.BASE_URL || '/';
 const assetsPath = `${basePath}assets/genki-festa-2026/`;
 
-// 出店情報の型
-interface Shop {
-  name: string;
-  enName: string;         // 英語名（画像ファイル名に使用）
-  category: string;
-  summary: string;        // 概要メモ（上部に表示）
-  detail?: string;        // 詳細（下部に表示）
-  appeal?: string;        // アピールポイント（下部に表示）
-  hasImage?: boolean;     // 画像があるかどうか（true: {enName}.webp を表示）
-}
-
 // 出店画像パスを生成
 const getShopImagePath = (enName: string) => `${assetsPath}shops/${enName}.webp`;
-
-// 出店情報（テストデータ）
-const shops: Record<string, Shop[]> = {
-  A: [
-    {
-      name: 'たこ焼き太郎',
-      enName: 'takoyaki-taro',
-      category: 'フード',
-      summary: '本場大阪の味！外はカリッと中はトロトロ',
-      detail: '創業30年の秘伝のタレを使用。1舟6個入り500円から。',
-      appeal: '当日限定！チーズたこ焼きも販売します！',
-      hasImage: false,
-    },
-    {
-      name: 'クレープハウス MiMi',
-      enName: 'crepe-mimi',
-      category: 'フード',
-      summary: 'ふわふわ生地の手作りクレープ',
-      detail: '生クリームたっぷり、フルーツも新鮮なものを使用しています。',
-      appeal: '',
-      hasImage: false,
-    },
-    {
-      name: 'ハンドメイド雑貨 ことり',
-      enName: 'handmade-kotori',
-      category: '物販',
-      summary: '一つひとつ手作りのアクセサリー',
-      detail: '',
-      appeal: 'イベント限定デザインのピアス・イヤリングを販売！',
-      hasImage: false,
-    },
-  ],
-  B: [
-    {
-      name: '焼きそば屋台 げんき',
-      enName: 'yakisoba-genki',
-      category: 'フード',
-      summary: '特製ソースが自慢の焼きそば',
-      detail: '野菜たっぷり、麺はもちもち。大盛り無料サービス中！',
-      appeal: '辛口ソースもあります（激辛注意！）',
-      hasImage: false,
-    },
-    {
-      name: 'キャンドル作り体験',
-      enName: 'candle-workshop',
-      category: 'ワークショップ',
-      summary: '世界に一つだけのオリジナルキャンドル',
-      detail: '所要時間約30分。小さなお子様でも参加OK！',
-      appeal: '当日持ち帰りできます。参加費800円。',
-      hasImage: false,
-    },
-  ],
-  C: [
-    {
-      name: 'カレーの店 スパイス',
-      enName: 'curry-spice',
-      category: 'フード',
-      summary: '本格スパイスカレー',
-      detail: '辛さは5段階から選べます。ナン・ライスどちらでもOK。',
-      appeal: '',
-      hasImage: false,
-    },
-    {
-      name: 'かき氷 ひんやり堂',
-      enName: 'kakigori-hinyarido',
-      category: 'フード',
-      summary: 'ふわふわ氷のかき氷専門店',
-      detail: '',
-      appeal: '自家製シロップ使用！いちご・マンゴー・抹茶など10種類以上',
-      hasImage: false,
-    },
-    {
-      name: '古着屋 リバイブ',
-      enName: 'vintage-revive',
-      category: '物販',
-      summary: '厳選ヴィンテージアイテム',
-      detail: '90年代のアメカジ、ストリート系を中心にセレクト。',
-      appeal: '',
-      hasImage: false,
-    },
-    {
-      name: '似顔絵コーナー',
-      enName: 'portrait-corner',
-      category: 'ワークショップ',
-      summary: 'プロの似顔絵師があなたを描きます',
-      detail: '1枚約10分。カップル・家族での参加も大歓迎！',
-      appeal: '1枚1,000円。2枚目以降は500円！',
-      hasImage: false,
-    },
-  ],
-  D: [
-    {
-      name: 'ピザ窯 ナポリ',
-      enName: 'pizza-napoli',
-      category: 'フード',
-      summary: '本格石窯で焼く熱々ピザ',
-      detail: '注文を受けてから焼き上げます。マルゲリータ、クアトロフォルマッジなど。',
-      appeal: '焼きたてを提供！待ち時間は約5分。',
-      hasImage: false,
-    },
-    {
-      name: 'レジン工作教室',
-      enName: 'resin-workshop',
-      category: 'ワークショップ',
-      summary: 'キラキラ光るレジンアクセサリー作り',
-      detail: 'UVレジンを使った簡単工作。初心者大歓迎。',
-      appeal: '夏らしい貝殻やお花を閉じ込めよう！参加費600円。',
-      hasImage: false,
-    },
-  ],
-};
 
 export function Event2026() {
   const [days, setDays] = useState('---');
