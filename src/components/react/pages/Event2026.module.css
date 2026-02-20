@@ -1,0 +1,562 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* ヒーロー */
+.hero2026 {
+  background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-primary) 50%, var(--color-secondary) 100%);
+  padding: var(--space-2xl) var(--space-md);
+  text-align: center;
+  color: white;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.heroInner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.heroDate {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  margin-bottom: var(--space-sm);
+  opacity: 0.9;
+}
+
+.heroTitle {
+  margin-bottom: var(--space-md);
+}
+
+.titleYear {
+  display: block;
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 3px 3px 0 var(--color-border);
+}
+
+.titleMain {
+  display: block;
+  font-size: 2rem;
+  font-weight: 900;
+  margin-top: var(--space-xs);
+}
+
+.heroTheme {
+  font-size: 1rem;
+  font-weight: 700;
+  background: var(--color-yellow);
+  color: var(--color-text);
+  display: inline-block;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-md);
+}
+
+.heroInfo {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  opacity: 0.95;
+}
+
+/* カウントダウン */
+.countdownSection {
+  background: var(--color-yellow);
+  padding: var(--space-lg) 0;
+  text-align: center;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.countdownLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.countdownDisplay {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.countdownItem {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.countdownNumber {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.countdownUnit {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* セクション共通 */
+.section {
+  padding: var(--space-xl) 0;
+}
+
+.sectionWhite {
+  background: var(--color-bg-white);
+}
+
+.sectionBlue {
+  background: var(--color-primary);
+  color: white;
+}
+
+.sectionAccent {
+  background: var(--color-secondary);
+  color: white;
+  text-align: center;
+}
+
+.sectionLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.sectionBlue .sectionLabel {
+  color: var(--color-yellow);
+}
+
+.sectionLabelLight {
+  color: rgba(255,255,255,0.7);
+}
+
+.sectionTitle {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1.4;
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--color-primary);
+  color: white;
+  border: 3px solid var(--color-border);
+  border-radius: 0;
+  box-shadow: 4px 4px 0 var(--color-border);
+}
+
+.sectionBlue .sectionTitle {
+  background: var(--color-yellow);
+  color: var(--color-text);
+}
+
+.sectionTitleYellow {
+  background: var(--color-yellow);
+  color: var(--color-text);
+}
+
+.sectionLead {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--color-text-muted);
+}
+
+/* スケジュール注意書き */
+.scheduleNotice {
+  background: var(--color-yellow);
+  color: var(--color-text);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+/* タイムテーブル */
+.timetable {
+  display: flex;
+  flex-direction: column;
+}
+
+.timetableItem {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.timetableTime {
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--color-primary);
+  min-width: 60px;
+}
+
+.timetableContent {
+  flex: 1;
+}
+
+.timetableTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.timetableDesc {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.timetableNote {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: var(--space-md);
+}
+
+/* 全体マップ */
+.mapOverview {
+  margin-bottom: var(--space-md);
+}
+
+.mapPlaceholder,
+.areaImagePlaceholder {
+  background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+}
+
+.mapPlaceholder {
+  aspect-ratio: 16 / 9;
+}
+
+.placeholderText {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.placeholderSub {
+  font-size: 0.8rem;
+  margin-top: var(--space-xs);
+}
+
+.mapDescription {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+/* エリアグリッド */
+.areaGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+
+.areaCardLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: white;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: all 0.2s;
+  border-left: 4px solid var(--area-color);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.areaCardLink:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.areaBadge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--area-color);
+  color: white;
+  font-weight: 900;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.areaInfo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.areaName {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.areaArrow {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+/* 個別エリアセクション */
+.areaSection {
+  margin-bottom: var(--space-2xl);
+  scroll-margin-top: 100px;
+}
+
+.areaSection:last-child {
+  margin-bottom: 0;
+}
+
+/* スティッキーヘッダー */
+.areaStickyHeader {
+  position: sticky;
+  top: 56px;
+  z-index: 10;
+  background: var(--area-color);
+  margin: 0 calc(-1 * var(--space-md));
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.areaHeaderContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.areaHeaderBadge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: white;
+  color: var(--area-color);
+  font-weight: 900;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.areaHeaderName {
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+}
+
+/* エリア画像 */
+.areaImageWrapper {
+  margin: var(--space-md) 0;
+}
+
+.areaImagePlaceholder {
+  aspect-ratio: 16 / 10;
+}
+
+/* 出店リスト */
+.shopList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.shopCard {
+  background: white;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* 上部：画像 + 基本情報 */
+.shopCardHeader {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+}
+
+.shopImage {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.shopImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shopImagePlaceholder {
+  background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+}
+
+.shopInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.shopCategory {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  background: var(--color-bg);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-muted);
+}
+
+.shopName {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+}
+
+.shopSummary {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 下部：詳細・アピールポイント */
+.shopCardBody {
+  padding: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.shopDetail,
+.shopAppeal {
+  margin-bottom: var(--space-sm);
+}
+
+.shopDetail:last-child,
+.shopAppeal:last-child {
+  margin-bottom: 0;
+}
+
+.shopDetailLabel,
+.shopAppealLabel {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  margin-bottom: 4px;
+  border-radius: var(--radius-sm);
+}
+
+.shopDetailLabel {
+  background: var(--color-blue);
+  color: white;
+}
+
+.shopAppealLabel {
+  background: var(--color-yellow);
+  color: var(--color-text);
+}
+
+.shopDetail p,
+.shopAppeal p {
+  font-size: 0.85rem;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* アクセス */
+.accessInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.accessItem {
+  background: rgba(255,255,255,0.1);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+}
+
+.accessItem h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+  color: var(--color-yellow);
+}
+
+.accessItem p {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  opacity: 0.95;
+}
+
+/* CTA */
+.ctaTitle {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-bottom: var(--space-xs);
+}
+
+.ctaLead {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: var(--space-md);
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-lg);
+  background: white;
+  color: var(--color-secondary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  transition: all 0.2s;
+}
+
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 400px) {
+  .areaGrid {
+    grid-template-columns: 1fr;
+  }
+}

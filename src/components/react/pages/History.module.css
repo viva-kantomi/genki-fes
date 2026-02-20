@@ -1,0 +1,199 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.pageHeader {
+  background: var(--color-bg-white);
+  padding: var(--space-xl) 0;
+  border-bottom: 2px solid var(--color-border);
+  text-align: center;
+}
+
+.pageLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.pageTitle {
+  font-size: 1.75rem;
+  font-weight: 900;
+  margin-bottom: var(--space-sm);
+}
+
+.pageLead {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.section {
+  padding: var(--space-xl) 0;
+}
+
+.sectionAccent {
+  background: var(--color-primary);
+  color: white;
+  text-align: center;
+}
+
+.timeline {
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.timelineItem {
+  position: relative;
+  padding-left: 60px;
+  padding-bottom: var(--space-xl);
+}
+
+.timelineItem:last-child {
+  padding-bottom: 0;
+}
+
+.timelineMarker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 42px;
+  height: 42px;
+  background: var(--color-primary);
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timelineYear {
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: white;
+}
+
+.historyCard {
+  background: var(--color-bg-white);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.historyImagePlaceholder {
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, var(--color-yellow) 0%, var(--color-accent) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.historyYearBadge {
+  font-size: 2rem;
+  font-weight: 900;
+  color: white;
+  text-shadow: 2px 2px 0 var(--color-border);
+}
+
+.historyBody {
+  padding: var(--space-md);
+}
+
+.historyTitle {
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin-bottom: var(--space-xs);
+}
+
+.historyTheme {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
+.historyMeta {
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.historyMeta p {
+  margin-bottom: 2px;
+}
+
+.historyMeta strong {
+  color: var(--color-text);
+}
+
+.historyHighlights {
+  font-size: 0.85rem;
+}
+
+.highlightsLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.historyHighlights ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.historyHighlights li {
+  background: var(--color-bg);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  border: 1px solid var(--color-border);
+}
+
+.ctaTitle {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-bottom: var(--space-xs);
+}
+
+.ctaLead {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: var(--space-md);
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-lg);
+  background: white;
+  color: var(--color-secondary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  transition: all 0.2s;
+}
+
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}

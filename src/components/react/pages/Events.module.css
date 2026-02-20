@@ -1,0 +1,303 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.pageHeader {
+  background: var(--color-bg-white);
+  padding: var(--space-xl) 0;
+  border-bottom: 2px solid var(--color-border);
+  text-align: center;
+}
+
+.pageLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.pageTitle {
+  font-size: 1.75rem;
+  font-weight: 900;
+  margin-bottom: var(--space-sm);
+}
+
+.pageLead {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.section {
+  padding: var(--space-xl) 0;
+}
+
+.eventCategory {
+  margin-bottom: var(--space-xl);
+}
+
+.eventCategory:last-child {
+  margin-bottom: 0;
+}
+
+.categoryTitle {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 900;
+  padding: var(--space-xs) var(--space-md);
+  margin-bottom: var(--space-md);
+  border: 2px solid var(--color-border);
+  box-shadow: 3px 3px 0 var(--color-border);
+}
+
+.categoryTitleRed {
+  background: var(--color-red);
+  color: white;
+  text-shadow: 1px 1px 0 var(--color-border);
+}
+
+.categoryTitleBlue {
+  background: var(--color-blue);
+  color: white;
+  text-shadow: 1px 1px 0 var(--color-border);
+}
+
+.categoryTitleYellow {
+  background: var(--color-yellow);
+  color: var(--color-text);
+}
+
+/* イベントカード */
+.eventCards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.eventCard {
+  display: block;
+  overflow: hidden;
+  border: 2px solid var(--color-border);
+  border-radius: 0;
+  box-shadow: 4px 4px 0 var(--color-border);
+  text-decoration: none;
+  color: var(--color-text);
+  background: var(--color-bg-white);
+}
+
+.eventCardNoLink {
+  cursor: default;
+}
+
+.eventCardInner {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 上部：画像ヘッダー */
+.eventCardHeader {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.eventCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.eventCardOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-md);
+  padding-top: var(--space-xl);
+  background: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+  color: white;
+}
+
+.eventCardNoImage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.eventCardNoImageRed {
+  background: var(--color-red);
+  color: white;
+}
+
+.eventCardNoImageBlue {
+  background: var(--color-blue);
+  color: white;
+}
+
+.eventCardNoImageYellow {
+  background: var(--color-yellow);
+  color: var(--color-text);
+}
+
+.eventCardTitle {
+  font-size: 1.3rem;
+  font-weight: 900;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.05em;
+}
+
+.eventCardNoImage .eventCardTitle {
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.eventCardNoImageYellow .eventCardTitle {
+  text-shadow: none;
+}
+
+.eventCardSchedule {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-top: 4px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.eventCardNoImage .eventCardSchedule {
+  text-shadow: none;
+  opacity: 0.9;
+}
+
+/* 特設ページへのバナーリンク（画像に重ねる・右下配置） */
+.eventCardSpecialLink {
+  position: absolute;
+  bottom: var(--space-sm);
+  right: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-decoration: none;
+  width: 50%;
+}
+
+.eventCardSpecialImage {
+  width: 100%;
+  height: auto;
+  margin-right: -20px;
+  margin-bottom: -30px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.eventCardSpecialBtn {
+  display: inline-block;
+  padding: 4px var(--space-sm);
+  background: var(--color-primary);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 2px solid var(--color-border);
+  box-shadow: 3px 3px 0 var(--color-border);
+  transition: all 0.2s;
+  text-shadow: 1px 1px 0 var(--color-border);
+  margin-top: -2px;
+}
+
+.eventCardSpecialLink:hover .eventCardSpecialBtn {
+  box-shadow: 1px 1px 0 var(--color-border);
+  transform: translate(2px, 2px);
+}
+
+.eventCardSpecialLink:active .eventCardSpecialBtn {
+  box-shadow: 0 0 0 var(--color-border);
+  transform: translate(3px, 3px);
+}
+
+/* 下部：詳細情報 */
+.eventCardBody {
+  padding: var(--space-md);
+  border-top: 2px solid var(--color-border);
+  background: white;
+}
+
+.eventCardDetails {
+  margin-bottom: var(--space-md);
+}
+
+.eventCardDetailLine {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.eventCardDetailLine:last-child {
+  margin-bottom: 0;
+}
+
+/* チャット風コメント */
+.eventCardComments {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.chatRow {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-xs);
+}
+
+.chatRowLeft {
+  flex-direction: row;
+}
+
+.chatRowRight {
+  flex-direction: row-reverse;
+}
+
+.chatIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.chatIcon svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-muted);
+}
+
+.chatBubble {
+  position: relative;
+  max-width: calc(100% - 44px);
+}
+
+.chatText {
+  display: inline-block;
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 16px;
+  border: 2px solid var(--color-border);
+  background: white;
+  color: var(--color-text);
+}
+
+.chatRowLeft .chatText {
+  border-bottom-left-radius: 4px;
+}
+
+.chatRowRight .chatText {
+  border-bottom-right-radius: 4px;
+}
