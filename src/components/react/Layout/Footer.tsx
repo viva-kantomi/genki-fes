@@ -10,7 +10,7 @@ export function Footer() {
         <nav className="footer-nav">
           <Link to="/">トップ</Link>
           <Link to="/events/">イベント詳細</Link>
-          <Link to="/history/">HISTORY</Link>
+          <Link to="/history/">これまでの活動</Link>
           <Link to="/news/">NEWS</Link>
           <Link to="/about/">ABOUT</Link>
         </nav>
