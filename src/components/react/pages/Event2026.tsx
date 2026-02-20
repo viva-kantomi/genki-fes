@@ -30,26 +30,132 @@ const areas = [
   { id: 'D', name: '韮塚製糸場広場', color: '#f39c12' },
 ];
 
-// 出店情報（仮データ）
-const shops: Record<string, Array<{name: string; category: string; description: string}>> = {
+// 特設ページ用アセットのベースパス
+const basePath = import.meta.env.BASE_URL || '/';
+const assetsPath = `${basePath}assets/genki-festa-2026/`;
+
+// 出店情報の型
+interface Shop {
+  name: string;
+  enName: string;         // 英語名（画像ファイル名に使用）
+  category: string;
+  summary: string;        // 概要メモ（上部に表示）
+  detail?: string;        // 詳細（下部に表示）
+  appeal?: string;        // アピールポイント（下部に表示）
+  hasImage?: boolean;     // 画像があるかどうか（true: {enName}.webp を表示）
+}
+
+// 出店画像パスを生成
+const getShopImagePath = (enName: string) => `${assetsPath}shops/${enName}.webp`;
+
+// 出店情報（テストデータ）
+const shops: Record<string, Shop[]> = {
   A: [
-    { name: '出店名1', category: 'フード', description: '詳細は後日発表' },
-    { name: '出店名2', category: 'フード', description: '詳細は後日発表' },
-    { name: '出店名3', category: '物販', description: '詳細は後日発表' },
+    {
+      name: 'たこ焼き太郎',
+      enName: 'takoyaki-taro',
+      category: 'フード',
+      summary: '本場大阪の味！外はカリッと中はトロトロ',
+      detail: '創業30年の秘伝のタレを使用。1舟6個入り500円から。',
+      appeal: '当日限定！チーズたこ焼きも販売します！',
+      hasImage: false,
+    },
+    {
+      name: 'クレープハウス MiMi',
+      enName: 'crepe-mimi',
+      category: 'フード',
+      summary: 'ふわふわ生地の手作りクレープ',
+      detail: '生クリームたっぷり、フルーツも新鮮なものを使用しています。',
+      appeal: '',
+      hasImage: false,
+    },
+    {
+      name: 'ハンドメイド雑貨 ことり',
+      enName: 'handmade-kotori',
+      category: '物販',
+      summary: '一つひとつ手作りのアクセサリー',
+      detail: '',
+      appeal: 'イベント限定デザインのピアス・イヤリングを販売！',
+      hasImage: false,
+    },
   ],
   B: [
-    { name: '出店名4', category: 'フード', description: '詳細は後日発表' },
-    { name: '出店名5', category: 'ワークショップ', description: '詳細は後日発表' },
+    {
+      name: '焼きそば屋台 げんき',
+      enName: 'yakisoba-genki',
+      category: 'フード',
+      summary: '特製ソースが自慢の焼きそば',
+      detail: '野菜たっぷり、麺はもちもち。大盛り無料サービス中！',
+      appeal: '辛口ソースもあります（激辛注意！）',
+      hasImage: false,
+    },
+    {
+      name: 'キャンドル作り体験',
+      enName: 'candle-workshop',
+      category: 'ワークショップ',
+      summary: '世界に一つだけのオリジナルキャンドル',
+      detail: '所要時間約30分。小さなお子様でも参加OK！',
+      appeal: '当日持ち帰りできます。参加費800円。',
+      hasImage: false,
+    },
   ],
   C: [
-    { name: '出店名6', category: 'フード', description: '詳細は後日発表' },
-    { name: '出店名7', category: 'フード', description: '詳細は後日発表' },
-    { name: '出店名8', category: '物販', description: '詳細は後日発表' },
-    { name: '出店名9', category: 'ワークショップ', description: '詳細は後日発表' },
+    {
+      name: 'カレーの店 スパイス',
+      enName: 'curry-spice',
+      category: 'フード',
+      summary: '本格スパイスカレー',
+      detail: '辛さは5段階から選べます。ナン・ライスどちらでもOK。',
+      appeal: '',
+      hasImage: false,
+    },
+    {
+      name: 'かき氷 ひんやり堂',
+      enName: 'kakigori-hinyarido',
+      category: 'フード',
+      summary: 'ふわふわ氷のかき氷専門店',
+      detail: '',
+      appeal: '自家製シロップ使用！いちご・マンゴー・抹茶など10種類以上',
+      hasImage: false,
+    },
+    {
+      name: '古着屋 リバイブ',
+      enName: 'vintage-revive',
+      category: '物販',
+      summary: '厳選ヴィンテージアイテム',
+      detail: '90年代のアメカジ、ストリート系を中心にセレクト。',
+      appeal: '',
+      hasImage: false,
+    },
+    {
+      name: '似顔絵コーナー',
+      enName: 'portrait-corner',
+      category: 'ワークショップ',
+      summary: 'プロの似顔絵師があなたを描きます',
+      detail: '1枚約10分。カップル・家族での参加も大歓迎！',
+      appeal: '1枚1,000円。2枚目以降は500円！',
+      hasImage: false,
+    },
   ],
   D: [
-    { name: '出店名10', category: 'フード', description: '詳細は後日発表' },
-    { name: '出店名11', category: 'ワークショップ', description: '詳細は後日発表' },
+    {
+      name: 'ピザ窯 ナポリ',
+      enName: 'pizza-napoli',
+      category: 'フード',
+      summary: '本格石窯で焼く熱々ピザ',
+      detail: '注文を受けてから焼き上げます。マルゲリータ、クアトロフォルマッジなど。',
+      appeal: '焼きたてを提供！待ち時間は約5分。',
+      hasImage: false,
+    },
+    {
+      name: 'レジン工作教室',
+      enName: 'resin-workshop',
+      category: 'ワークショップ',
+      summary: 'キラキラ光るレジンアクセサリー作り',
+      detail: 'UVレジンを使った簡単工作。初心者大歓迎。',
+      appeal: '夏らしい貝殻やお花を閉じ込めよう！参加費600円。',
+      hasImage: false,
+    },
   ],
 };
 
@@ -97,7 +203,7 @@ export function Event2026() {
   const scrollToArea = (areaId: string) => {
     const element = areaRefs.current[areaId];
     if (element) {
-      const offsetTop = element.offsetTop - 60;
+      const offsetTop = element.offsetTop - 100;
       window.scrollTo({ top: offsetTop, behavior: 'smooth' });
     }
   };
@@ -238,9 +344,40 @@ export function Event2026() {
               <div className="shop-list">
                 {shops[area.id]?.map((shop, index) => (
                   <div key={index} className="shop-card">
-                    <div className="shop-category">{shop.category}</div>
-                    <h4 className="shop-name">{shop.name}</h4>
-                    <p className="shop-desc">{shop.description}</p>
+                    {/* 上部：画像 + 基本情報 */}
+                    <div className="shop-card-header">
+                      {shop.hasImage ? (
+                        <div className="shop-image">
+                          <img src={getShopImagePath(shop.enName)} alt={shop.name} />
+                        </div>
+                      ) : (
+                        <div className="shop-image shop-image--placeholder">
+                          <span>No Image</span>
+                        </div>
+                      )}
+                      <div className="shop-info">
+                        <div className="shop-category">{shop.category}</div>
+                        <h4 className="shop-name">{shop.name}</h4>
+                        <p className="shop-summary">{shop.summary}</p>
+                      </div>
+                    </div>
+                    {/* 下部：詳細・アピールポイント */}
+                    {(shop.detail || shop.appeal) && (
+                      <div className="shop-card-body">
+                        {shop.detail && (
+                          <div className="shop-detail">
+                            <span className="shop-detail-label">詳細</span>
+                            <p>{shop.detail}</p>
+                          </div>
+                        )}
+                        {shop.appeal && (
+                          <div className="shop-appeal">
+                            <span className="shop-appeal-label">アピールポイント</span>
+                            <p>{shop.appeal}</p>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -265,20 +402,6 @@ export function Event2026() {
               <p>※会場周辺の駐車場をご利用ください</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section section--accent">
-        <div className="container">
-          <h2 className="cta-title">最新情報をチェック！</h2>
-          <p className="cta-lead">出演者・出店情報など随時更新中</p>
-          <Link to="/news/" className="cta-btn">
-            NEWS一覧へ
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </Link>
         </div>
       </section>
 
@@ -599,7 +722,7 @@ export function Event2026() {
         /* 個別エリアセクション */
         .area-section {
           margin-bottom: var(--space-2xl);
-          scroll-margin-top: 60px;
+          scroll-margin-top: 100px;
         }
 
         .area-section:last-child {
@@ -609,7 +732,7 @@ export function Event2026() {
         /* スティッキーヘッダー */
         .area-sticky-header {
           position: sticky;
-          top: 0;
+          top: 56px;
           z-index: 10;
           background: var(--area-color);
           margin: 0 calc(-1 * var(--space-md));
@@ -658,14 +781,50 @@ export function Event2026() {
         .shop-list {
           display: flex;
           flex-direction: column;
-          gap: var(--space-sm);
+          gap: var(--space-md);
         }
 
         .shop-card {
           background: white;
           border: 2px solid var(--color-border);
           border-radius: var(--radius-md);
+          overflow: hidden;
+        }
+
+        /* 上部：画像 + 基本情報 */
+        .shop-card-header {
+          display: flex;
+          gap: var(--space-sm);
           padding: var(--space-md);
+        }
+
+        .shop-image {
+          width: 80px;
+          height: 80px;
+          flex-shrink: 0;
+          border-radius: var(--radius-sm);
+          overflow: hidden;
+          border: 1px solid var(--color-border);
+        }
+
+        .shop-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .shop-image--placeholder {
+          background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--color-text-muted);
+          font-size: 0.7rem;
+        }
+
+        .shop-info {
+          flex: 1;
+          min-width: 0;
         }
 
         .shop-category {
@@ -682,13 +841,59 @@ export function Event2026() {
         .shop-name {
           font-size: 1rem;
           font-weight: 700;
-          margin: 0 0 var(--space-xs) 0;
+          margin: 0 0 4px 0;
         }
 
-        .shop-desc {
+        .shop-summary {
           font-size: 0.85rem;
           color: var(--color-text-muted);
           margin: 0;
+          line-height: 1.5;
+        }
+
+        /* 下部：詳細・アピールポイント */
+        .shop-card-body {
+          padding: var(--space-md);
+          border-top: 1px solid var(--color-border);
+          background: var(--color-bg);
+        }
+
+        .shop-detail,
+        .shop-appeal {
+          margin-bottom: var(--space-sm);
+        }
+
+        .shop-detail:last-child,
+        .shop-appeal:last-child {
+          margin-bottom: 0;
+        }
+
+        .shop-detail-label,
+        .shop-appeal-label {
+          display: inline-block;
+          font-size: 0.7rem;
+          font-weight: 700;
+          padding: 2px 6px;
+          margin-bottom: 4px;
+          border-radius: var(--radius-sm);
+        }
+
+        .shop-detail-label {
+          background: var(--color-blue);
+          color: white;
+        }
+
+        .shop-appeal-label {
+          background: var(--color-yellow);
+          color: var(--color-text);
+        }
+
+        .shop-detail p,
+        .shop-appeal p {
+          font-size: 0.85rem;
+          color: var(--color-text);
+          margin: 0;
+          line-height: 1.6;
         }
 
         /* アクセス */

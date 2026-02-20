@@ -15,10 +15,10 @@ export function Header({ isMenuOpen, toggleMenu }: HeaderProps) {
         <nav className="nav-desktop">
           <Link to="/" className="nav-link">HOME</Link>
           <Link to="/events/" className="nav-link">EVENTS</Link>
-          <Link to="/history/" className="nav-link">HISTORY</Link>
+          <Link to="/history/" className="nav-link">これまでの活動</Link>
           <Link to="/genki-festa-2026/" className="nav-link">2026</Link>
-          <Link to="/news/" className="nav-link">NEWS</Link>
-          <Link to="/about/" className="nav-link">ABOUT</Link>
+          <Link to="/news/" className="nav-link">お知らせ</Link>
+          <Link to="/about/" className="nav-link">私たちについて</Link>
         </nav>
         <button
           className={`menu-btn ${isMenuOpen ? 'active' : ''}`}
