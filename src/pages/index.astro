@@ -1,248 +1,34 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import { fetchNoteArticles, getNoteDetailPath } from '../lib/note';
-import { getPath } from '../lib/path';
 import { getEventsByMaxOrder } from '../lib/events';
-import '../styles/index.css';
 
-import img10 from '../../public/images/top_images/10.webp';
-import img11 from '../../public/images/top_images/11.webp';
-import img12 from '../../public/images/top_images/12.webp';
-import img13 from '../../public/images/top_images/13.webp';
-import img14 from '../../public/images/top_images/14.webp';
-import img15 from '../../public/images/top_images/15.webp';
-import img16 from '../../public/images/top_images/16.webp';
-import img17 from '../../public/images/top_images/17.webp';
-import img18 from '../../public/images/top_images/18.webp';
-
-const noteArticles = await fetchNoteArticles(3);
 const topEvents = getEventsByMaxOrder(3);
 ---
 
 <Layout title="げんき塾チーム｜群馬県富岡市のイベント・お祭り企画" description="群馬県富岡市を拠点に活動する「げんき塾チーム」公式サイト。げんきフェスタをはじめ、地域を元気にするイベント・お祭りを企画運営。音楽、グルメ、ワークショップなど家族で楽しめるイベント情報を発信中。">
-  <!-- SEO用 h1（視覚的非表示） -->
-  <h1 class="visually-hidden">げんき塾チーム - 群馬県富岡市のイベント・お祭り企画チーム</h1>
-
-  <!-- ヒーロー -->
-  <section class="hero">
-    <!-- 背景画像（無限スクロール） -->
-    <div class="hero-bg">
-      <!-- 上段（右に流れる） -->
-      <div class="scroll-row scroll-row--1">
-        <div class="scroll-track scroll-right">
-          <Image src={img10} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img11} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img12} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img13} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img14} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <!-- 繰り返し（無限ループ用） -->
-          <Image src={img10} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img11} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img12} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img13} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img14} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-        </div>
-      </div>
-
-      <!-- 下段（左に流れる・レンガ状にずらす） -->
-      <div class="scroll-row scroll-row--2">
-        <div class="scroll-track scroll-left">
-          <Image src={img15} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img16} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img17} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img18} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img10} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <!-- 繰り返し（無限ループ用） -->
-          <Image src={img15} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img16} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img17} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img18} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-          <Image src={img10} alt="" width={200} quality={70} format="webp" class="hero-bg-img" loading="eager" />
-        </div>
-      </div>
-    </div>
-    <!-- 雲のオーバーレイ -->
-    <div class="hero-clouds">
-      <div class="cloud cloud--1"></div>
-      <div class="cloud cloud--2"></div>
-      <div class="cloud cloud--3"></div>
-      <div class="cloud cloud--4"></div>
-    </div>
-    <!-- ヒーローコンテンツ（ロゴ＋カード） -->
-    <div class="hero-content">
-      <div class="hero-logo-area">
-        <a href={getPath('/genki-festa-2026/')} class="hero-logo-link">
-          <img src={`${import.meta.env.BASE_URL}images/genki_festa_logo.webp`} alt="げんきフェスタ2026 5/24 SUN" class="hero-logo" />
-          <span class="hero-logo-btn">
-            特設ページはこちら
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </span>
-        </a>
-      </div>
-      <!-- 楽しむ・楽しませるカード -->
-      <div class="hero-action-cards">
-        <a href={getPath('/events/')} class="hero-action-card hero-action-card--enjoy">
-          <span class="hero-action-label">楽しむ</span>
-          <span class="hero-action-desc">イベント一覧</span>
-        </a>
-        <a href={getPath('/about/')} class="hero-action-card hero-action-card--entertain">
-          <span class="hero-action-label">楽しませる</span>
-          <span class="hero-action-desc">出店・参加方法</span>
-        </a>
-      </div>
-    </div>
-    <!-- hero-logo-linkがあるときは非表示 -->
-    <!-- <div class="hero-inner">
-      <div class="hero-text-group">
-        <p class="hero-label">GENKI FESTA TEAM</p>
-        <h1 class="hero-title">
-          <span class="title-main">げんき塾チーム</span>
-        </h1>
-        <p class="hero-lead">
-          地域を元気にする<br />
-          イベント企画チーム
-        </p>
-      </div>
-    </div> -->
-  </section>
-
-  <!-- SP用動画セクション -->
-  <section class="section section--video-sp">
-    <div class="container">
-      <p class="video-sp-label">2025年のげんきフェスタの様子</p>
-      <div class="video-sp-container">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/1OqHFpav2X0?rel=0"
-          title="げんきフェスタ プロモーション動画"
-          style="border:0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT US セクション -->
-  <section id="about" class="section">
-    <div class="container">
-      <p class="section-label">ABOUT US</p>
-      <h2 class="section-title">私たちについて</h2>
-      <p class="section-lead">
-        げんき塾チームは、地域のみんなが笑顔になれるイベントを企画・運営する有志のチームです。
-        「げんきフェスタ」をはじめ、様々なイベントを通じて地域の絆を深める活動をしています。
-      </p>
-      <div class="features">
-        <div class="feature">
-          <div class="feature-icon">🎉</div>
-          <div class="feature-body">
-            <h3>イベント企画</h3>
-            <p>地域密着型のフェスやマルシェを運営</p>
-          </div>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">🤝</div>
-          <div class="feature-body">
-            <h3>地域連携</h3>
-            <p>自治体・商店街・学校との協働</p>
-          </div>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">✨</div>
-          <div class="feature-body">
-            <h3>笑顔創造</h3>
-            <p>老若男女みんなが楽しめる場づくり</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- イベント紹介 -->
-  <section class="section section--white">
-    <div class="container">
-      <p class="section-label">EVENTS</p>
-      <h2 class="section-title">主なイベント</h2>
-      <div class="event-cards">
-        {topEvents.map((event) =>
-          event.link ? (
-            <a href={getPath(event.link)} class={`event-card ${event.featured ? 'event-card--featured' : ''}`}>
-              {event.badge && <div class="event-card-badge">{event.badge}</div>}
-              <h3 class="event-card-title">{event.title}</h3>
-              <p class="event-card-date">{event.date}</p>
-              <p class="event-card-desc">{event.description}</p>
-            </a>
-          ) : (
-            <div class={`event-card ${event.featured ? 'event-card--featured' : ''}`}>
-              {event.badge && <div class="event-card-badge">{event.badge}</div>}
-              <h3 class="event-card-title">{event.title}</h3>
-              <p class="event-card-date">{event.date}</p>
-              <p class="event-card-desc">{event.description}</p>
-            </div>
-          )
-        )}
-      </div>
-      <div class="section-action">
-        <a href={getPath('/events/')} class="btn-outline">
-          イベント一覧を見る
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- お知らせ（noteから取得） -->
-  <section class="section">
-    <div class="container">
-      <p class="section-label">NEWS</p>
-      <h2 class="section-title">お知らせ</h2>
-      <ul class="news-list">
-        {noteArticles.map((article) => (
-          <li>
-            <a href={`${import.meta.env.BASE_URL}${getNoteDetailPath(article.key)}`} class="news-card">
-              <time datetime={new Date(article.publishedAt).toISOString()}>
-                {new Date(article.publishedAt).toLocaleDateString('ja-JP', { month: '2-digit', day: '2-digit' })}
-              </time>
-              <span class="news-title">{article.title}</span>
-              <svg class="news-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 18l6-6-6-6"/>
-              </svg>
-            </a>
-          </li>
-        ))}
-      </ul>
-      <div class="section-action">
-        <a href="https://note.com/viva_kantomi" target="_blank" rel="noopener noreferrer" class="btn-outline">
-          お知らせ一覧
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- SNS -->
-  <section class="section section--accent">
-    <div class="container">
-      <h2 class="cta-title">最新情報をフォロー</h2>
-      <p class="cta-lead">SNSでげんき塾チームの情報をお届けします</p>
-      <div class="sns-links">
-        <a href="#" class="sns-link" aria-label="Instagram">
-          <img src={`${import.meta.env.BASE_URL}images/common/sns/icons8-instagram-100.png`} alt="Instagram" width="32" height="32" />
-        </a>
-        <a href="#" class="sns-link" aria-label="YouTube">
-          <img src={`${import.meta.env.BASE_URL}images/common/sns/icons8-youtube-100.png`} alt="YouTube" width="32" height="32" />
-        </a>
-        <a href="#" class="sns-link" aria-label="Facebook">
-          <img src={`${import.meta.env.BASE_URL}images/common/sns/icons8-facebook-100.png`} alt="Facebook" width="32" height="32" />
-        </a>
-      </div>
-    </div>
-  </section>
+  <!-- SEO用コンテンツ（視覚的非表示、Googlebot向け） -->
+  <div class="seo-content">
+    <h1>げんき塾チーム - 群馬県富岡市のイベント・お祭り企画チーム</h1>
+    <p>群馬県富岡市を拠点に活動する「げんき塾チーム」公式サイト。げんきフェスタをはじめ、地域を元気にするイベント・お祭りを企画運営。</p>
+    <h2>主なイベント</h2>
+    <ul>
+      {topEvents.map((event) => (
+        <li>
+          <h3>{event.title}</h3>
+          <p>{event.date}</p>
+          <p>{event.description}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
 </Layout>
 
+<style>
+  .seo-content {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+</style>

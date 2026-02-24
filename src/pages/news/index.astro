@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { fetchNoteArticles, getNoteDetailPath } from '../../lib/note';
+
+const noteArticles = await fetchNoteArticles(20);
+---
+
+<Layout title="お知らせ｜げんき塾チーム" description="げんき塾チームからのお知らせ・ニュース一覧です。イベント情報や活動報告をお届けします。">
+  <div class="seo-content">
+    <h1>お知らせ - げんき塾チーム</h1>
+    <p>げんき塾チームからのお知らせ・ニュース一覧です。</p>
+    <ul>
+      {noteArticles.map((article) => (
+        <li>
+          <article>
+            <time datetime={new Date(article.publishedAt).toISOString()}>
+              {new Date(article.publishedAt).toLocaleDateString('ja-JP')}
+            </time>
+            <h2>{article.title}</h2>
+            <a href={`${import.meta.env.BASE_URL}${getNoteDetailPath(article.key)}`}>続きを読む</a>
+          </article>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Layout>
+
+<style>
+  .seo-content {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+</style>

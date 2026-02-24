@@ -22,6 +22,9 @@
       "Bash(npx astro check:*)",
       "Bash(find:*)",
       "Bash(du:*)"
+    ],
+    "additionalDirectories": [
+      "\\\\wsl.localhost\\Ubuntu-24.04\\home\\ichikawa\\projects\\genki-fes\\genki-fes\\src\\pages"
     ]
   }
 }

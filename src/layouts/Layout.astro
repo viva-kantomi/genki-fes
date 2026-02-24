@@ -97,6 +97,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <!-- 中央：SP枠（Reactアプリ） -->
       <div class="phone-frame">
         <div class="phone-frame-inner">
+          <!-- SEO用コンテンツ（Googlebot向け、視覚的非表示） -->
+          <slot />
+          <!-- React SPA（クライアント側でのみレンダリング） -->
           <App client:only="react" />
         </div>
       </div>

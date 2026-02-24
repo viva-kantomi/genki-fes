@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllEvents } from '../../lib/events';
+import { getPath } from '../../lib/path';
+
+const events = getAllEvents();
+---
+
+<Layout title="イベント一覧｜げんき塾チーム" description="げんき塾チームが主催・参加するイベントの一覧です。げんきフェスタをはじめ、地域を元気にするイベント情報をお届けします。">
+  <div class="seo-content">
+    <h1>イベント一覧</h1>
+    <p>げんき塾チームが主催・参加するイベントの一覧です。</p>
+    <ul>
+      {events.map((event) => (
+        <li>
+          <h2>{event.title}</h2>
+          <p>{event.date}</p>
+          <p>{event.description}</p>
+          {event.link && <a href={getPath(event.link)}>詳細を見る</a>}
+        </li>
+      ))}
+    </ul>
+  </div>
+</Layout>
+
+<style>
+  .seo-content {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+</style>
