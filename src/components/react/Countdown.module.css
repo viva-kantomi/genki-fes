@@ -38,6 +38,7 @@
   font-weight: 700;
   color: var(--color-primary, #286FAA);
   margin-right: 20px;
+  margin-top: 0px;
   text-shadow: 0 0 2px white;
 }
 
@@ -48,6 +49,7 @@
 }
 
 .countdownNumber {
+  margin-top: -10px;
   font-size: 1.5rem;
   font-weight: 900;
   color: var(--color-red, #E63946);
@@ -67,6 +69,7 @@
   font-weight: 700;
   color: var(--color-text-muted, #666);
   text-shadow: 0 0 2px white;
+  margin-bottom: 10px;
 }
 
 /* PC表示では非表示 */
