@@ -46,14 +46,8 @@
 }
 
 .heroTheme {
-  font-size: 1rem;
-  font-weight: 700;
-  background: var(--color-yellow);
-  color: var(--color-text);
-  display: inline-block;
-  padding: var(--space-xs) var(--space-md);
-  border-radius: var(--radius-full);
-  margin-bottom: var(--space-md);
+  /* テーマ未定のため非表示 */
+  display: none;
 }
 
 .heroInfo {
@@ -100,6 +94,11 @@
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-text);
+}
+
+/* コンセプトセクション（未定のため非表示） */
+.conceptSection {
+  display: none;
 }
 
 /* セクション共通 */

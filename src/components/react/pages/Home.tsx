@@ -86,15 +86,12 @@ export function Home() {
         <div className={styles.heroContent}>
           <div className={styles.heroLogoArea}>
             {showGenkiFestaSpecial ? (
-              <Link to="/genki-festa-2026/" className={styles.heroLogoLink}>
+              <div className={styles.heroLogoStatic}>
                 <img src={logoImage} alt="げんきフェスタ2026 5/24 SUN" className={styles.heroLogo} />
-                <span className={styles.heroLogoBtn}>
-                  特設ページはこちら
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
+                <span className={`${styles.heroLogoBtn} ${styles.heroLogoBtnDisabled}`}>
+                  特設ページ準備中
                 </span>
-              </Link>
+              </div>
             ) : (
               <div className={styles.heroLogoStatic}>
                 <img src={logoImage} alt="げんき塾チーム" className={styles.heroLogo} />

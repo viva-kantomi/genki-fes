@@ -11,7 +11,6 @@ export function Footer() {
           <Link to="/">トップ</Link>
           <Link to="/events/">イベント詳細</Link>
           <Link to="/history/">これまでの活動</Link>
-          <Link to="/genki-festa-2026/">2026 げんきフェスタ<br/>特設ページ</Link>
           <Link to="/news/">お知らせ</Link>
           <Link to="/about/">私たちについて</Link>
         </nav>

@@ -125,8 +125,8 @@ export function Event2026() {
         </div>
       </section>
 
-      {/* コンセプト */}
-      <section className={styles.section}>
+      {/* コンセプト（テーマ未定のため非表示） */}
+      <section className={`${styles.section} ${styles.conceptSection}`}>
         <div className={styles.container}>
           <p className={styles.sectionLabel}>CONCEPT</p>
           <h2 className={styles.sectionTitle}>元気、無限大！</h2>
