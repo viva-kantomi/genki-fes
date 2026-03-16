@@ -21,7 +21,9 @@
       "Bash(pgrep:*)",
       "Bash(npx astro check:*)",
       "Bash(find:*)",
-      "Bash(du:*)"
+      "Bash(du:*)",
+      "Bash(cat:*)",
+      "Bash(git show:*)"
     ],
     "additionalDirectories": [
       "\\\\wsl.localhost\\Ubuntu-24.04\\home\\ichikawa\\projects\\genki-fes\\genki-fes\\src\\pages"
