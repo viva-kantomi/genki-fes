@@ -16,6 +16,7 @@ export function Footer() {
         </nav>
         <p className="copyright">&copy; 2026 げんき塾チーム</p>
         <p className="credits">icon by <a target="_blank" rel="noopener noreferrer" href="https://icons8.com">Icons8</a></p>
+        <p className="footer-debug"><Link to="/genki-festa-2026/">特設ページ（準備中）</Link></p>
       </div>
     </footer>
   );

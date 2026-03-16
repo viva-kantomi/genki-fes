@@ -697,6 +697,21 @@ main {
   color: var(--color-yellow);
 }
 
+.footer-debug {
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.3);
+  margin-top: var(--space-xs);
+}
+
+.footer-debug a {
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+}
+
+.footer-debug a:hover {
+  color: rgba(255,255,255,0.6);
+}
+
 /* ========== ユーティリティ ========== */
 a {
   color: var(--color-coral);
