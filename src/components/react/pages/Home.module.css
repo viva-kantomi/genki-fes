@@ -274,8 +274,7 @@
 
 .heroLogoBtnDisabled {
   background: #999;
-  cursor: not-allowed;
-  opacity: 0.7;
+  cursor: default;
   box-shadow: 2px 2px 0 var(--color-border);
 }
 

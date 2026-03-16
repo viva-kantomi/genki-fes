@@ -217,6 +217,20 @@
   transform: translate(3px, 3px);
 }
 
+.eventCardSpecialBtnDisabled {
+  display: inline-block;
+  padding: 4px var(--space-sm);
+  background: #999;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 2px solid var(--color-border);
+  box-shadow: 2px 2px 0 var(--color-border);
+  text-shadow: 1px 1px 0 var(--color-border);
+  margin-top: -2px;
+  cursor: default;
+}
+
 /* 下部：詳細情報 */
 .eventCardBody {
   padding: var(--space-md);

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import eventsData from '../../../data/events.json';
 import styles from './Events.module.css';
 
@@ -34,7 +33,7 @@ const basePath = import.meta.env.BASE_URL || '/';
 
 // イベントカードコンポーネント
 function EventCard({ event, colorClass }: { event: Event; colorClass: string }) {
-  const isGenkiFestaSpecial = event.id === 'genki-festa-2026' && showGenkiFestaSpecial && event.link;
+  const isGenkiFesta2026 = event.id === 'genki-festa-2026' && showGenkiFestaSpecial;
 
   return (
     <div className={`${styles.eventCard} ${styles.eventCardNoLink}`}>
@@ -59,16 +58,16 @@ function EventCard({ event, colorClass }: { event: Event; colorClass: string }) 
               <p className={styles.eventCardSchedule}>{event.schedule}</p>
             </div>
           )}
-          {/* 特設ページへのバナー（画像に重ねる） */}
-          {isGenkiFestaSpecial && (
-            <Link to={event.link!} className={styles.eventCardSpecialLink}>
+          {/* 特設ページへのバナー（準備中） */}
+          {isGenkiFesta2026 && (
+            <div className={styles.eventCardSpecialLink}>
               <img
                 src={`${basePath}images/top_logo_special.webp`}
                 alt="げんきフェスタ2026"
                 className={styles.eventCardSpecialImage}
               />
-              <span className={styles.eventCardSpecialBtn}>特設ページはコチラ</span>
-            </Link>
+              <span className={styles.eventCardSpecialBtnDisabled}>特設ページ準備中</span>
+            </div>
           )}
         </div>
 
