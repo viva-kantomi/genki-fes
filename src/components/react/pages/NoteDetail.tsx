@@ -19,7 +19,7 @@ export function NoteDetail() {
   useEffect(() => {
     if (!key) return;
 
-    fetch(`https://note.com/api/v2/notes/${key}`)
+    fetch(`https://note.com/api/v3/notes/${key}`)
       .then(res => res.json())
       .then(data => {
         if (data.data) {
