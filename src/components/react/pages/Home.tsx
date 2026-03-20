@@ -1,14 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import eventsData from '../../../data/events.json';
 import { Countdown } from '../Countdown';
 import styles from './Home.module.css';
-
-interface NoteArticle {
-  key: string;
-  title: string;
-  publishedAt: string;
-}
 
 interface Event {
   id: string;
@@ -27,7 +20,6 @@ interface Event {
 const showGenkiFestaSpecial = import.meta.env.PUBLIC_SHOW_GENKI_FESTA_SPECIAL === 'true';
 
 export function Home() {
-  const [noteArticles, setNoteArticles] = useState<NoteArticle[]>([]);
   const basePath = import.meta.env.BASE_URL || '/';
 
   // ロゴ画像を環境変数で切り替え
@@ -39,20 +31,6 @@ export function Home() {
   const topEvents = (eventsData as Event[])
     .sort((a, b) => a.order - b.order)
     .filter((event) => event.order <= 3);
-
-  useEffect(() => {
-    // ビルド時に生成されたJSONからデータ取得
-    fetch(`${basePath}data/note-articles.json`)
-      .then(res => res.json())
-      .then((data: Array<{ key: string; title: string; publishedAt: string }>) => {
-        setNoteArticles(data.slice(0, 3).map((item) => ({
-          key: item.key,
-          title: item.title,
-          publishedAt: item.publishedAt,
-        })));
-      })
-      .catch(err => console.error('Failed to fetch note articles:', err));
-  }, [basePath]);
 
   return (
     <>
@@ -182,34 +160,12 @@ export function Home() {
         </div>
       </section>
 
-      {/* お知らせ（noteから取得） */}
+      {/* お知らせ（準備中） */}
       <section className={styles.section}>
         <div className={styles.container}>
           <p className={styles.sectionLabel}>NEWS</p>
           <h2 className={styles.sectionTitle}>お知らせ</h2>
-          <ul className={styles.newsList}>
-            {noteArticles.map((article) => (
-              <li key={article.key}>
-                <Link to={`/note/${article.key}/`} className={styles.newsCard}>
-                  <time dateTime={new Date(article.publishedAt).toISOString()}>
-                    {new Date(article.publishedAt).toLocaleDateString('ja-JP', { month: '2-digit', day: '2-digit' })}
-                  </time>
-                  <span className={styles.newsTitle}>{article.title}</span>
-                  <svg className={styles.newsArrow} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M9 18l6-6-6-6"/>
-                  </svg>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className={styles.sectionAction}>
-            <a href="https://note.com/viva_kantomi" target="_blank" rel="noopener noreferrer" className={styles.btnOutline}>
-              お知らせ一覧
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
-          </div>
+          <p className={styles.preparingNotice}>準備中</p>
         </div>
       </section>
 
