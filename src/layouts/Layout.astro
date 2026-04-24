@@ -12,6 +12,7 @@ interface Props {
 
 const { title, description = '群馬県富岡市発！げんき塾チームが主催する「げんきフェスタ」公式サイト。地域を元気にするイベント・お祭りの企画運営。音楽、グルメ、ワークショップなど家族で楽しめるイベント情報をお届けします。', ogImage = '/images/og-default.png' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const enableAuth = import.meta.env.PUBLIC_ENABLE_AUTH === 'true';
 ---
 
 <!doctype html>
@@ -71,7 +72,27 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       "sameAs": []
     })} />
   </head>
-  <body>
+  <body style={enableAuth ? 'visibility:hidden;' : undefined}>
+    {enableAuth && (
+      <script is:inline>
+        (function() {
+          var AUTH_KEY = '__genki_auth';
+          if (sessionStorage.getItem(AUTH_KEY) === '1') {
+            document.body.style.visibility = 'visible';
+            return;
+          }
+          var id = prompt('ID を入力してください');
+          var pass = prompt('パスワードを入力してください');
+          if (id === 'genki' && pass === 'festa') {
+            sessionStorage.setItem(AUTH_KEY, '1');
+            document.body.style.visibility = 'visible';
+          } else {
+            document.body.innerHTML = '<p style="text-align:center;margin-top:40vh;font-size:1.2em;">認証に失敗しました。ページを再読み込みしてください。</p>';
+            document.body.style.visibility = 'visible';
+          }
+        })();
+      </script>
+    )}
     <!-- PC用3カラムレイアウト -->
     <div class="desktop-layout">
       <!-- 左サイドバー（カウントダウン・動画） -->
