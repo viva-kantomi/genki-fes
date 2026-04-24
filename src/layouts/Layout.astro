@@ -71,25 +71,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       "sameAs": []
     })} />
   </head>
-  <body style="visibility:hidden;">
-    <script is:inline>
-      (function() {
-        var AUTH_KEY = '__genki_auth';
-        if (sessionStorage.getItem(AUTH_KEY) === '1') {
-          document.body.style.visibility = 'visible';
-          return;
-        }
-        var id = prompt('ID を入力してください');
-        var pass = prompt('パスワードを入力してください');
-        if (id === 'genki' && pass === 'festa') {
-          sessionStorage.setItem(AUTH_KEY, '1');
-          document.body.style.visibility = 'visible';
-        } else {
-          document.body.innerHTML = '<p style="text-align:center;margin-top:40vh;font-size:1.2em;">認証に失敗しました。ページを再読み込みしてください。</p>';
-          document.body.style.visibility = 'visible';
-        }
-      })();
-    </script>
+  <body>
     <!-- PC用3カラムレイアウト -->
     <div class="desktop-layout">
       <!-- 左サイドバー（カウントダウン・動画） -->
