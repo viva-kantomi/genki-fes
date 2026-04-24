@@ -9,8 +9,6 @@ import { Events } from './pages/Events';
 import { About } from './pages/About';
 import { History } from './pages/History';
 import { NewsList } from './pages/NewsList';
-import { NewsDetail } from './pages/NewsDetail';
-import { NoteDetail } from './pages/NoteDetail';
 
 // ページ遷移時にスクロールをトップに戻す
 function ScrollToTop() {
@@ -73,8 +71,6 @@ export function App() {
           <Route path="/about/" element={<About />} />
           <Route path="/history/" element={<History />} />
           <Route path="/news/" element={<NewsList />} />
-          <Route path="/news/:slug/" element={<NewsDetail />} />
-          <Route path="/note/:key/" element={<NoteDetail />} />
         </Routes>
       </main>
       <Footer />
